@@ -4,8 +4,12 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	plugins: [sveltekit(), tailwindcss()],
+	resolve: {
+		conditions: ['browser']
+	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}'],
+		environment: 'jsdom',
 		coverage: {
 			provider: 'v8',
 			reporter: ['text', 'json', 'html', 'lcov'],
