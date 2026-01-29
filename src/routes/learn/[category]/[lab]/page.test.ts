@@ -10,6 +10,26 @@ vi.mock('$app/stores', () => ({
 	})
 }));
 
+vi.mock('$app/navigation', () => ({
+	goto: vi.fn()
+}));
+
+vi.mock('$lib/components/terminal/Terminal.svelte');
+
+Object.defineProperty(window, 'matchMedia', {
+	writable: true,
+	value: vi.fn().mockImplementation((query) => ({
+		matches: false,
+		media: query,
+		onchange: null,
+		addListener: vi.fn(),
+		removeListener: vi.fn(),
+		addEventListener: vi.fn(),
+		removeEventListener: vi.fn(),
+		dispatchEvent: vi.fn()
+	}))
+});
+
 describe('Lab Page', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
@@ -19,25 +39,23 @@ describe('Lab Page', () => {
 		cleanup();
 	});
 
-	it('renders lab title with category and lab id', () => {
+	it('renders lab title', () => {
 		render(LabPage);
-		expect(screen.getByRole('heading', { name: /intro lab/i })).toBeTruthy();
+		expect(screen.getByText(/intro lab/i)).toBeTruthy();
 	});
 
-	it('renders back link to category', () => {
+	it('renders category', () => {
 		render(LabPage);
-		const backLink = screen.getByRole('link', { name: /back to kubernetes labs/i });
-		expect(backLink).toBeTruthy();
-		expect(backLink.getAttribute('href')).toBe('/learn/kubernetes');
+		expect(screen.getByText('kubernetes')).toBeTruthy();
 	});
 
-	it('displays placeholder message', () => {
+	it('renders check solution button', () => {
 		render(LabPage);
-		expect(screen.getByText(/lab interface will be implemented in phase 3/i)).toBeTruthy();
+		expect(screen.getByRole('button', { name: /check solution/i })).toBeTruthy();
 	});
 
-	it('renders knowledge article button', () => {
+	it('renders knowledge button', () => {
 		render(LabPage);
-		expect(screen.getByRole('button', { name: /view knowledge article/i })).toBeTruthy();
+		expect(screen.getByRole('button', { name: /knowledge/i })).toBeTruthy();
 	});
 });
