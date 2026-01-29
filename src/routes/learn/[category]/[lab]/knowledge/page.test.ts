@@ -39,9 +39,7 @@ describe('Knowledge Page', () => {
 
 	it('displays placeholder content', () => {
 		render(KnowledgePage);
-		expect(
-			screen.getByText(/knowledge articles will be implemented in phase 3/i)
-		).toBeTruthy();
+		expect(screen.getByText(/knowledge articles will be implemented in phase 3/i)).toBeTruthy();
 	});
 
 	it('renders key concepts list', () => {
