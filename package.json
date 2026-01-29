@@ -37,7 +37,7 @@
 		"formsnap": "2.0.1",
 		"mode-watcher": "1.1.0",
 		"oxlint": "1.42.0",
-		"prettier": "3.4.2",
+		"prettier": "3.8.1",
 		"prettier-plugin-svelte": "3.3.3",
 		"prettier-plugin-tailwindcss": "0.7.2",
 		"svelte": "5.49.0",
