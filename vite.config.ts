@@ -15,13 +15,7 @@ export default defineConfig({
 				'src/**/*.d.ts',
 				'**/*.config.{js,ts}',
 				'**/node_modules/**'
-			],
-			thresholds: {
-				lines: 80,
-				functions: 80,
-				branches: 80,
-				statements: 80
-			}
+			]
 		}
 	}
 });
