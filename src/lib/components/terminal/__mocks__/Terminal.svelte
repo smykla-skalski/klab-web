@@ -13,6 +13,4 @@
 	export function focus() {}
 </script>
 
-<div data-testid="terminal-mock" class="h-full w-full bg-black text-green-400">
-	Mock Terminal
-</div>
+<div data-testid="terminal-mock" class="h-full w-full bg-black text-green-400">Mock Terminal</div>

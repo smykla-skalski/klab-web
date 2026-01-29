@@ -30,15 +30,17 @@ test.describe('Learn routes', () => {
 		await page.goto('/learn/kubernetes/intro');
 
 		await expect(page.locator('h1')).toContainText(/intro lab/i);
-		await expect(page.getByText(/lab interface will be implemented/i)).toBeVisible();
-		await expect(page.getByRole('button', { name: /view knowledge article/i })).toBeVisible();
+		await expect(page.getByRole('button', { name: /knowledge/i })).toBeVisible();
+		await expect(page.getByRole('button', { name: /check solution/i })).toBeVisible();
+		await expect(page.getByRole('button', { name: /give up/i })).toBeVisible();
 	});
 
-	test('lab page back link works', async ({ page }) => {
+	test('lab page actions work', async ({ page }) => {
 		await page.goto('/learn/kubernetes/intro');
 
-		const backLink = page.getByRole('link', { name: /back to kubernetes labs/i });
-		await expect(backLink).toHaveAttribute('href', '/learn/kubernetes');
+		const knowledgeButton = page.getByRole('button', { name: /knowledge/i });
+		await knowledgeButton.click();
+		await expect(page).toHaveURL('/learn/kubernetes/intro/knowledge');
 	});
 
 	test('knowledge page renders', async ({ page }) => {
