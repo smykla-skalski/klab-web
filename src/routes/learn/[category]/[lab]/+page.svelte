@@ -33,7 +33,7 @@
 		currentLab.set(mockLab);
 	});
 
-	let terminal: Terminal;
+	let terminal: Terminal = undefined!;
 	let validationStatus: 'idle' | 'validating' | 'success' | 'error' = $state('idle');
 	let validationMessage = $state('');
 	let validationTimeoutId: ReturnType<typeof setTimeout> | null = null;

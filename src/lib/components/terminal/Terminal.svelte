@@ -15,9 +15,9 @@
 
 	let { wsUrl, fontSize = 14, theme = 'dark', onData }: Props = $props();
 
-	let container: HTMLDivElement;
-	let terminal: Terminal;
-	let fitAddon: FitAddon;
+	let container: HTMLDivElement = undefined!;
+	let terminal: Terminal = undefined!;
+	let fitAddon: FitAddon = undefined!;
 	let ws: WebSocket | null = null;
 
 	const darkTheme = {
