@@ -39,7 +39,7 @@
 		"oxlint": "1.42.0",
 		"prettier": "3.4.2",
 		"prettier-plugin-svelte": "3.3.3",
-		"prettier-plugin-tailwindcss": "0.6.10",
+		"prettier-plugin-tailwindcss": "0.7.2",
 		"svelte": "5.49.0",
 		"svelte-check": "4.3.5",
 		"svelte-persisted-store": "0.12.0",
