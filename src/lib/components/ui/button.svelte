@@ -33,6 +33,7 @@
 		type?: 'button' | 'submit' | 'reset';
 		href?: string;
 		onclick?: (e: MouseEvent) => void;
+		'aria-label'?: string;
 		children?: Snippet;
 	};
 
