@@ -5,6 +5,7 @@
 
 	const category = $derived($page.params.category);
 
+	// Placeholder data - will be replaced with dynamic content from CMS in Phase 3
 	const labs = [
 		{
 			id: 'intro',

@@ -27,6 +27,8 @@
 					<li>
 						<a
 							href="https://github.com/klab"
+							target="_blank"
+							rel="noopener noreferrer"
 							class="hover:text-primary inline-flex items-center gap-2 transition-colors"
 						>
 							<Github class="h-4 w-4" />

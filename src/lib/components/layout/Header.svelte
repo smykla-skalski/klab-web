@@ -22,6 +22,7 @@
 			size="icon"
 			class="md:hidden"
 			onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+			aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
 		>
 			<Menu class="h-5 w-5" />
 		</Button>
@@ -31,9 +32,27 @@
 	{#if mobileMenuOpen}
 		<nav class="border-border bg-background border-t px-4 py-4 md:hidden">
 			<div class="flex flex-col gap-4">
-				<a href="/learn" class="hover:text-primary text-sm transition-colors">Learn</a>
-				<a href="/about" class="hover:text-primary text-sm transition-colors">About</a>
-				<a href="/docs" class="hover:text-primary text-sm transition-colors">Docs</a>
+				<a
+					href="/learn"
+					class="hover:text-primary text-sm transition-colors"
+					onclick={() => (mobileMenuOpen = false)}
+				>
+					Learn
+				</a>
+				<a
+					href="/about"
+					class="hover:text-primary text-sm transition-colors"
+					onclick={() => (mobileMenuOpen = false)}
+				>
+					About
+				</a>
+				<a
+					href="/docs"
+					class="hover:text-primary text-sm transition-colors"
+					onclick={() => (mobileMenuOpen = false)}
+				>
+					Docs
+				</a>
 			</div>
 		</nav>
 	{/if}

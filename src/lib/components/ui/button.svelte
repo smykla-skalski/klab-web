@@ -49,7 +49,7 @@
 </script>
 
 {#if href}
-	<a {href} class={cn(buttonVariants({ variant, size }), className)} {...rest}>
+	<a {href} class={cn(buttonVariants({ variant, size }), className)} {onclick} {...rest}>
 		{@render children?.()}
 	</a>
 {:else}
