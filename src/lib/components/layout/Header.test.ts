@@ -67,4 +67,21 @@ describe('Header', () => {
 		const allLinks = screen.getAllByRole('link', { name: /learn/i });
 		expect(allLinks.length).toBeGreaterThan(1);
 	});
+
+	it('mobile menu links have onclick handlers', async () => {
+		const user = userEvent.setup();
+		render(Header);
+
+		const menuButton = screen.getByRole('button');
+		await user.click(menuButton);
+
+		const mobileNav = document.querySelector('nav.md\\:hidden');
+		expect(mobileNav).toBeTruthy();
+
+		const mobileLinks = Array.from(mobileNav?.querySelectorAll('a') || []);
+		expect(mobileLinks.length).toBe(3);
+		mobileLinks.forEach((link) => {
+			expect(link.getAttribute('href')).toBeTruthy();
+		});
+	});
 });
