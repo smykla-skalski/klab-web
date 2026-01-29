@@ -27,8 +27,8 @@ importers:
         specifier: 0.52.2
         version: 0.52.2
       motion:
-        specifier: 11.18.0
-        version: 11.18.0
+        specifier: 11.18.2
+        version: 11.18.2
       zod:
         specifier: 3.24.1
         version: 3.24.1
@@ -1135,8 +1135,8 @@ packages:
   motion-utils@11.18.1:
     resolution: {integrity: sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==}
 
-  motion@11.18.0:
-    resolution: {integrity: sha512-uJ4zNXh/4K9C5wftxHKlXLHC0Rc9dHSHPyO1P6T9XE2bTn2z8C2lOZX/M8vAmFp0gtJTJ3aYkv44lTtJSfv6+A==}
+  motion@11.18.2:
+    resolution: {integrity: sha512-JLjvFDuFr42NFtcVoMAyC2sEjnpA8xpy6qWPyzQvCloznAyQ8FIXioxWfHiLtgYhoVpfUqSWpn1h9++skj9+Wg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2426,7 +2426,7 @@ snapshots:
 
   motion-utils@11.18.1: {}
 
-  motion@11.18.0:
+  motion@11.18.2:
     dependencies:
       framer-motion: 11.18.2
       tslib: 2.8.1
