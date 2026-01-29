@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
 	import type { Lab } from '$lib/stores/lab';
 	import type { Snippet } from 'svelte';
 	import { PanelLeftClose, PanelLeft } from 'lucide-svelte';
@@ -16,6 +17,7 @@
 	let sidebarOpen = $state(true);
 	let sidebarWidth = $state(320);
 	let resizing = $state(false);
+	let originalBodyOverflow = '';
 
 	function toggleSidebar() {
 		sidebarOpen = !sidebarOpen;
@@ -42,6 +44,33 @@
 		document.removeEventListener('mousemove', handleResize);
 		document.removeEventListener('mouseup', stopResize);
 	}
+
+	function handleResizeKeydown(e: KeyboardEvent) {
+		if (e.key === 'ArrowLeft') {
+			e.preventDefault();
+			const newWidth = sidebarWidth - 10;
+			if (newWidth >= 280) {
+				sidebarWidth = newWidth;
+			}
+		} else if (e.key === 'ArrowRight') {
+			e.preventDefault();
+			const newWidth = sidebarWidth + 10;
+			if (newWidth <= 600) {
+				sidebarWidth = newWidth;
+			}
+		}
+	}
+
+	onMount(() => {
+		originalBodyOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+	});
+
+	onDestroy(() => {
+		document.body.style.overflow = originalBodyOverflow;
+		document.removeEventListener('mousemove', handleResize);
+		document.removeEventListener('mouseup', stopResize);
+	});
 </script>
 
 <div class="flex h-screen flex-col">
@@ -82,6 +111,7 @@
 			<button
 				class="group bg-border hover:bg-primary relative w-1 cursor-col-resize border-0 p-0 transition-colors"
 				onmousedown={startResize}
+				onkeydown={handleResizeKeydown}
 				aria-label="Resize sidebar"
 				type="button"
 			>
@@ -96,8 +126,3 @@
 	</div>
 </div>
 
-<style>
-	:global(body) {
-		overflow: hidden;
-	}
-</style>

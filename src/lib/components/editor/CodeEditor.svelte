@@ -27,6 +27,53 @@
 	let container: HTMLDivElement;
 	let editor: monaco.editor.IStandaloneCodeEditor | monaco.editor.IStandaloneDiffEditor;
 
+	$effect(() => {
+		if (!editor) return;
+		if (!diffMode) {
+			const standaloneEditor = editor as monaco.editor.IStandaloneCodeEditor;
+			const currentValue = standaloneEditor.getValue();
+			if (currentValue !== value) {
+				standaloneEditor.setValue(value);
+			}
+		}
+	});
+
+	$effect(() => {
+		if (!editor) return;
+		if (!diffMode) {
+			const standaloneEditor = editor as monaco.editor.IStandaloneCodeEditor;
+			const model = standaloneEditor.getModel();
+			if (model) {
+				monaco.editor.setModelLanguage(model, language);
+			}
+		}
+	});
+
+	$effect(() => {
+		if (!editor) return;
+		monaco.editor.setTheme(theme === 'vs-dark' ? 'klab-dark' : theme);
+	});
+
+	$effect(() => {
+		if (!editor) return;
+		if (!diffMode) {
+			const standaloneEditor = editor as monaco.editor.IStandaloneCodeEditor;
+			standaloneEditor.updateOptions({ readOnly: readonly });
+		} else {
+			const diffEditor = editor as monaco.editor.IStandaloneDiffEditor;
+			diffEditor.updateOptions({ readOnly: readonly });
+		}
+	});
+
+	$effect(() => {
+		if (!editor || !diffMode) return;
+		const diffEditor = editor as monaco.editor.IStandaloneDiffEditor;
+		const originalModel = diffEditor.getModel()?.original;
+		if (originalModel && originalModel.getValue() !== originalValue) {
+			originalModel.setValue(originalValue);
+		}
+	});
+
 	onMount(() => {
 		monaco.editor.defineTheme('klab-dark', {
 			base: 'vs-dark',
@@ -95,17 +142,19 @@
 	});
 
 	export function getValue(): string {
+		if (!editor) return '';
 		if (diffMode) {
 			const diffEditor = editor as monaco.editor.IStandaloneDiffEditor;
-			return diffEditor.getModifiedEditor().getValue();
+			return diffEditor.getModifiedEditor()?.getValue() ?? '';
 		}
 		return (editor as monaco.editor.IStandaloneCodeEditor).getValue();
 	}
 
 	export function setValue(newValue: string) {
+		if (!editor) return;
 		if (diffMode) {
 			const diffEditor = editor as monaco.editor.IStandaloneDiffEditor;
-			diffEditor.getModifiedEditor().setValue(newValue);
+			diffEditor.getModifiedEditor()?.setValue(newValue);
 		} else {
 			(editor as monaco.editor.IStandaloneCodeEditor).setValue(newValue);
 		}

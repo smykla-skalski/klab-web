@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { onDestroy } from 'svelte';
 	import Button from '$lib/components/ui/button.svelte';
+	import ConfirmModal from '$lib/components/ui/confirm-modal.svelte';
 	import { Terminal } from '$lib/components/terminal';
 	import { LabContainer, LabSidebar, ValidationStatus } from '$lib/components/lab';
 	import { BookOpen, CheckCircle } from 'lucide-svelte';
@@ -34,29 +36,44 @@
 	let terminal: Terminal;
 	let validationStatus: 'idle' | 'validating' | 'success' | 'error' = $state('idle');
 	let validationMessage = $state('');
+	let validationTimeoutId: ReturnType<typeof setTimeout> | null = null;
+	let showConfirmModal = $state(false);
 
-	async function validateSolution() {
+	function validateSolution() {
 		validationStatus = 'validating';
 		validationMessage = 'Checking your solution...';
 
-		setTimeout(() => {
+		validationTimeoutId = setTimeout(() => {
 			const success = Math.random() > 0.5;
 			validationStatus = success ? 'success' : 'error';
 			validationMessage = success
 				? 'All checks passed! Your deployment is correctly configured.'
 				: 'Some checks failed. Make sure your deployment has 3 replicas and the service is of type LoadBalancer.';
+			validationTimeoutId = null;
 		}, 2000);
 	}
 
 	function showSolution() {
-		if (confirm('Are you sure you want to reveal the solution? This will end the lab.')) {
-			terminal?.write(`\r\n$ ${mockLab.solution}\r\n`);
-		}
+		showConfirmModal = true;
+	}
+
+	function handleConfirmSolution() {
+		terminal?.write(`\r\n$ ${mockLab.solution}\r\n`);
+	}
+
+	function handleCancelSolution() {
+		// Modal closes automatically
 	}
 
 	function viewKnowledge() {
 		goto(`/learn/${category}/${labId}/knowledge`);
 	}
+
+	onDestroy(() => {
+		if (validationTimeoutId !== null) {
+			clearTimeout(validationTimeoutId);
+		}
+	});
 </script>
 
 <svelte:head>
@@ -93,3 +110,12 @@
 		<Button variant="ghost" onclick={showSolution}>Give Up</Button>
 	{/snippet}
 </LabContainer>
+
+<ConfirmModal
+	bind:open={showConfirmModal}
+	title="Reveal Solution"
+	message="Are you sure you want to reveal the solution? This will end the lab."
+	confirmLabel="Reveal"
+	onConfirm={handleConfirmSolution}
+	onCancel={handleCancelSolution}
+/>

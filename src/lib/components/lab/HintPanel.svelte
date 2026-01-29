@@ -14,7 +14,7 @@
 	function revealNextHint() {
 		if (revealedCount < hints.length) {
 			revealedCount++;
-			expandedHints.add(revealedCount - 1);
+			expandedHints = new Set(expandedHints).add(revealedCount - 1);
 		}
 	}
 
@@ -51,6 +51,9 @@
 					<button
 						class="hover:bg-accent flex w-full items-center gap-2 p-3 text-left transition-colors"
 						onclick={() => toggleHint(index)}
+						aria-expanded={expandedHints.has(index)}
+						aria-controls="hint-content-{index}"
+						id="hint-button-{index}"
 					>
 						{#if expandedHints.has(index)}
 							<ChevronDown class="text-muted-foreground h-4 w-4" />
@@ -60,7 +63,7 @@
 						<span class="text-sm font-medium">Hint {index + 1}</span>
 					</button>
 					{#if expandedHints.has(index)}
-						<div class="border-border border-t p-3">
+						<div class="border-border border-t p-3" id="hint-content-{index}" role="region" aria-labelledby="hint-button-{index}">
 							<p class="text-sm leading-relaxed">{hint}</p>
 						</div>
 					{/if}
