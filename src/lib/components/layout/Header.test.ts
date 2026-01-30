@@ -84,4 +84,64 @@ describe('Header', () => {
 			expect(link.getAttribute('href')).toBeTruthy();
 		});
 	});
+
+	it('closes mobile menu when Learn link clicked', async () => {
+		const user = userEvent.setup();
+		render(Header);
+
+		const menuButton = screen.getByRole('button');
+		await user.click(menuButton);
+
+		const mobileNav = document.querySelector('nav.md\\:hidden');
+		expect(mobileNav).toBeTruthy();
+
+		const mobileLinks = Array.from(mobileNav?.querySelectorAll('a') || []);
+		const learnLink = mobileLinks.find((link) => link.getAttribute('href') === '/learn');
+		expect(learnLink).toBeTruthy();
+
+		await user.click(learnLink as HTMLElement);
+
+		const mobileNavAfterClick = document.querySelector('nav.md\\:hidden');
+		expect(mobileNavAfterClick).toBeNull();
+	});
+
+	it('closes mobile menu when About link clicked', async () => {
+		const user = userEvent.setup();
+		render(Header);
+
+		const menuButton = screen.getByRole('button');
+		await user.click(menuButton);
+
+		const mobileNav = document.querySelector('nav.md\\:hidden');
+		expect(mobileNav).toBeTruthy();
+
+		const mobileLinks = Array.from(mobileNav?.querySelectorAll('a') || []);
+		const aboutLink = mobileLinks.find((link) => link.getAttribute('href') === '/about');
+		expect(aboutLink).toBeTruthy();
+
+		await user.click(aboutLink as HTMLElement);
+
+		const mobileNavAfterClick = document.querySelector('nav.md\\:hidden');
+		expect(mobileNavAfterClick).toBeNull();
+	});
+
+	it('closes mobile menu when Docs link clicked', async () => {
+		const user = userEvent.setup();
+		render(Header);
+
+		const menuButton = screen.getByRole('button');
+		await user.click(menuButton);
+
+		const mobileNav = document.querySelector('nav.md\\:hidden');
+		expect(mobileNav).toBeTruthy();
+
+		const mobileLinks = Array.from(mobileNav?.querySelectorAll('a') || []);
+		const docsLink = mobileLinks.find((link) => link.getAttribute('href') === '/docs');
+		expect(docsLink).toBeTruthy();
+
+		await user.click(docsLink as HTMLElement);
+
+		const mobileNavAfterClick = document.querySelector('nav.md\\:hidden');
+		expect(mobileNavAfterClick).toBeNull();
+	});
 });

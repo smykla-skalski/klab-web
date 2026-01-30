@@ -90,18 +90,18 @@ src/
 - [ ] Create base layout components (Header, Footer, Nav)
 - [ ] Set up route structure
 
-### Phase 2: Core Components
+### Phase 2: Core Components ✅
 
-- [ ] Terminal component (xterm.js wrapper)
+- [x] Terminal component (xterm.js wrapper)
   - WebSocket connection to backend
   - Fit addon for responsive sizing
   - Copy/paste support
   - Custom theme matching design system
-- [ ] Code editor component (Monaco wrapper)
+- [x] Code editor component (Monaco wrapper)
   - Syntax highlighting for bash, yaml, json
   - Read-only mode for solutions
   - Diff view for comparing user vs expected
-- [ ] Lab container layout
+- [x] Lab container layout
   - Split pane (resizable)
   - Knowledge panel
   - Hints drawer
