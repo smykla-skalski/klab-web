@@ -120,7 +120,6 @@ describe('knowledge-loader', () => {
 
 		it('handles invalid language gracefully', async () => {
 			const hljs = await import('highlight.js');
-			const code = 'some code';
 			const invalidLang = 'notareallanguage';
 
 			const hasLanguage = hljs.default.getLanguage(invalidLang);

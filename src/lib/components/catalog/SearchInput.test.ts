@@ -48,7 +48,7 @@ describe('SearchInput', () => {
 		vi.useFakeTimers();
 		const user = userEvent.setup({ delay: null });
 
-		const { component } = render(SearchInput, { props: { value: '' } });
+		render(SearchInput, { props: { value: '' } });
 
 		const input = screen.getByPlaceholderText('Search labs...') as HTMLInputElement;
 		await user.type(input, 'test');
