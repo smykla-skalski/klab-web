@@ -2,6 +2,13 @@
 @import 'highlight.js/styles/github-dark.css';
 
 @theme {
+	/* Typography */
+	--font-family-sans: 'Inter', system-ui, sans-serif;
+	--font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+	/* Radius */
+	--radius: 0.5rem;
+
 	/* Colors - Dark theme default */
 	--color-background: oklch(15% 0.02 240);
 	--color-foreground: oklch(91% 0.01 213);
@@ -23,13 +30,30 @@
 	--color-terminal-bg: oklch(0% 0 0);
 	--color-terminal-fg: oklch(60% 0.25 142);
 	--color-terminal-cursor: oklch(60% 0.25 142);
+}
 
-	/* Typography */
-	--font-family-sans: 'Inter', system-ui, sans-serif;
-	--font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
+/* Light theme */
+[data-theme='light'] {
+	--color-background: oklch(98% 0.01 240);
+	--color-foreground: oklch(20% 0.02 240);
+	--color-primary: oklch(25% 0.02 240);
+	--color-primary-foreground: oklch(98% 0.01 210);
+	--color-secondary: oklch(95% 0.01 223);
+	--color-secondary-foreground: oklch(11% 0.02 222);
+	--color-muted: oklch(95% 0.01 223);
+	--color-muted-foreground: oklch(43% 0.02 215);
+	--color-accent: oklch(93% 0.02 216);
+	--color-accent-foreground: oklch(11% 0.02 222);
+	--color-destructive: oklch(50% 0.15 25);
+	--color-destructive-foreground: oklch(98% 0.01 210);
+	--color-border: oklch(88% 0.02 216);
+	--color-input: oklch(88% 0.02 216);
+	--color-ring: oklch(43% 0.02 215);
 
-	/* Radius */
-	--radius: 0.5rem;
+	/* Terminal */
+	--color-terminal-bg: oklch(100% 0 0);
+	--color-terminal-fg: oklch(40% 0.25 142);
+	--color-terminal-cursor: oklch(40% 0.25 220);
 }
 
 * {
@@ -37,6 +61,11 @@
 }
 
 body {
-	@apply bg-background text-foreground;
+	@apply bg-background text-foreground transition-colors duration-200;
 	font-family: var(--font-family-sans);
+}
+
+/* Enhanced focus indicators */
+*:focus-visible {
+	@apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
 }

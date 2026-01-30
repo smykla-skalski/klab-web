@@ -13,20 +13,20 @@
 	} = $props();
 
 	const difficultyColors = {
-		Beginner: 'bg-green-100 text-green-800',
-		Intermediate: 'bg-yellow-100 text-yellow-800',
-		Advanced: 'bg-red-100 text-red-800'
+		Beginner: 'bg-muted/50 text-green-600 dark:text-green-400',
+		Intermediate: 'bg-muted/50 text-yellow-600 dark:text-yellow-400',
+		Advanced: 'bg-muted/50 text-red-600 dark:text-red-400'
 	};
 </script>
 
 <button
 	{onclick}
 	aria-label="Open {lab.title} lab"
-	class="group relative block w-full rounded-lg border border-gray-200 bg-white p-6 text-left shadow-sm transition-all hover:border-blue-500 hover:shadow-md"
+	class="group relative block w-full rounded-lg border-border bg-background p-6 text-left shadow-sm transition-all hover:border-primary hover:shadow-md"
 >
 	{#if isCompleted}
 		<div class="absolute top-4 right-4" aria-label="Completed">
-			<CheckCircle2 class="h-6 w-6 text-green-500" />
+			<CheckCircle2 class="h-6 w-6 text-green-600 dark:text-green-400" />
 		</div>
 	{/if}
 
@@ -40,23 +40,23 @@
 		</span>
 	</div>
 
-	<h3 class="mb-2 text-lg font-semibold text-gray-900 group-hover:text-blue-600">
+	<h3 class="mb-2 text-lg font-semibold text-foreground group-hover:text-primary">
 		{lab.title}
 	</h3>
 
-	<p class="mb-4 line-clamp-2 text-sm text-gray-600">
+	<p class="mb-4 line-clamp-2 text-sm text-muted-foreground">
 		{lab.description}
 	</p>
 
 	<div class="flex items-center justify-between">
-		<div class="flex items-center gap-1 text-sm text-gray-500">
+		<div class="flex items-center gap-1 text-sm text-muted-foreground">
 			<Clock class="h-4 w-4" />
 			<span>{lab.duration}</span>
 		</div>
 
 		<div class="flex flex-wrap gap-1">
 			{#each lab.tags.slice(0, 3) as tag}
-				<span class="rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+				<span class="rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
 					{tag}
 				</span>
 			{/each}

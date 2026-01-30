@@ -88,7 +88,8 @@ describe('Lab Page', () => {
 
 	it('shows terminal loading state', () => {
 		renderLabPage();
-		expect(screen.getByText('Loading terminal...')).toBeTruthy();
+		const skeletons = document.querySelectorAll('.animate-pulse');
+		expect(skeletons.length).toBeGreaterThan(0);
 	});
 
 	it('validates solution and shows success', async () => {

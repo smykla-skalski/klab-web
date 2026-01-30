@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import * as monaco from 'monaco-editor';
+	import { mode } from '$lib/stores/theme';
 
 	interface Props {
 		value?: string;
 		language?: 'bash' | 'yaml' | 'json' | 'typescript' | 'javascript' | 'markdown';
 		readonly?: boolean;
-		theme?: 'vs-dark' | 'vs-light';
 		height?: string;
 		onChange?: (value: string) => void;
 		diffMode?: boolean;
@@ -17,7 +17,6 @@
 		value = '',
 		language = 'bash',
 		readonly = false,
-		theme = 'vs-dark',
 		height = '400px',
 		onChange,
 		diffMode = false,
@@ -52,7 +51,7 @@
 
 	$effect(() => {
 		if (!editor) return;
-		monaco.editor.setTheme(theme === 'vs-dark' ? 'klab-dark' : theme);
+		monaco.editor.setTheme(mode.current === 'dark' ? 'klab-dark' : 'klab-light');
 	});
 
 	$effect(() => {
@@ -89,7 +88,20 @@
 			}
 		});
 
-		monaco.editor.setTheme(theme === 'vs-dark' ? 'klab-dark' : theme);
+		monaco.editor.defineTheme('klab-light', {
+			base: 'vs',
+			inherit: true,
+			rules: [],
+			colors: {
+				'editor.background': '#ffffff',
+				'editor.foreground': '#000000',
+				'editorLineNumber.foreground': '#999999',
+				'editor.selectionBackground': '#add6ff',
+				'editor.inactiveSelectionBackground': '#e5ebf1'
+			}
+		});
+
+		monaco.editor.setTheme(mode.current === 'dark' ? 'klab-dark' : 'klab-light');
 
 		if (diffMode) {
 			const diffEditor = monaco.editor.createDiffEditor(container, {

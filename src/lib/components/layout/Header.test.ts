@@ -27,8 +27,8 @@ describe('Header', () => {
 
 	it('renders mobile menu button', () => {
 		render(Header);
-		const menuButton = screen.getByRole('button');
-		expect(menuButton).toBeTruthy();
+		const buttons = screen.getAllByRole('button');
+		expect(buttons.length).toBeGreaterThan(0);
 	});
 
 	it('toggles mobile menu on button click', async () => {
@@ -38,7 +38,7 @@ describe('Header', () => {
 		const mobileNav = document.querySelector('nav.md\\:hidden');
 		expect(mobileNav).toBeNull();
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 
 		const mobileNavAfterClick = document.querySelector('nav.md\\:hidden');
@@ -49,7 +49,7 @@ describe('Header', () => {
 		const user = userEvent.setup();
 		render(Header);
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 		await user.click(menuButton);
 
@@ -61,7 +61,7 @@ describe('Header', () => {
 		const user = userEvent.setup();
 		render(Header);
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 
 		const allLinks = screen.getAllByRole('link', { name: /learn/i });
@@ -72,7 +72,7 @@ describe('Header', () => {
 		const user = userEvent.setup();
 		render(Header);
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 
 		const mobileNav = document.querySelector('nav.md\\:hidden');
@@ -89,7 +89,7 @@ describe('Header', () => {
 		const user = userEvent.setup();
 		render(Header);
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 
 		const mobileNav = document.querySelector('nav.md\\:hidden');
@@ -109,7 +109,7 @@ describe('Header', () => {
 		const user = userEvent.setup();
 		render(Header);
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 
 		const mobileNav = document.querySelector('nav.md\\:hidden');
@@ -129,7 +129,7 @@ describe('Header', () => {
 		const user = userEvent.setup();
 		render(Header);
 
-		const menuButton = screen.getByRole('button');
+		const menuButton = screen.getByLabelText(/open menu/i);
 		await user.click(menuButton);
 
 		const mobileNav = document.querySelector('nav.md\\:hidden');

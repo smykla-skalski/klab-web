@@ -5,20 +5,22 @@
 	import { WebLinksAddon } from '@xterm/addon-web-links';
 	import '@xterm/xterm/css/xterm.css';
 	import { terminalSession } from '$lib/stores/terminal';
+	import { mode } from '$lib/stores/theme';
+	import { toast } from 'svelte-sonner';
 
 	interface Props {
 		wsUrl?: string;
 		fontSize?: number;
-		theme?: 'dark' | 'light';
 		onData?: (data: string) => void;
 	}
 
-	let { wsUrl, fontSize = 14, theme = 'dark', onData }: Props = $props();
+	let { wsUrl, fontSize = 14, onData }: Props = $props();
 
 	let container: HTMLDivElement = undefined!;
 	let terminal: Terminal = undefined!;
 	let fitAddon: FitAddon = undefined!;
 	let ws: WebSocket | null = null;
+	let connectionError = $state(false);
 
 	const darkTheme = {
 		background: '#000000',
@@ -74,7 +76,7 @@
 		terminal = new Terminal({
 			fontSize,
 			fontFamily: "var(--font-family-mono), 'Courier New', monospace",
-			theme: theme === 'dark' ? darkTheme : lightTheme,
+			theme: mode.current === 'dark' ? darkTheme : lightTheme,
 			cursorBlink: true,
 			allowProposedApi: true
 		});
@@ -85,6 +87,13 @@
 
 		terminal.open(container);
 		fitAddon.fit();
+
+		// Update theme when mode changes
+		$effect(() => {
+			if (terminal) {
+				terminal.options.theme = mode.current === 'dark' ? darkTheme : lightTheme;
+			}
+		});
 
 		terminal.onData((data) => {
 			if (ws && ws.readyState === WebSocket.OPEN) {
@@ -113,8 +122,10 @@
 
 	function connectWebSocket(url: string) {
 		ws = new WebSocket(url);
+		connectionError = false;
 
 		ws.onopen = () => {
+			connectionError = false;
 			terminalSession.set({ id: url, connected: true, url });
 			terminal.write('\r\n*** Connected to lab terminal ***\r\n\r\n');
 		};
@@ -125,13 +136,29 @@
 
 		ws.onerror = (error) => {
 			console.error('WebSocket error:', error);
+			connectionError = true;
 			terminal.write('\r\n*** Connection error ***\r\n');
+			toast.error('Terminal disconnected', {
+				description: 'Click reconnect to try again',
+				action: {
+					label: 'Reconnect',
+					onClick: () => reconnect()
+				}
+			});
 		};
 
 		ws.onclose = () => {
 			terminalSession.set({ id: url, connected: false, url });
-			terminal.write('\r\n*** Disconnected from lab terminal ***\r\n');
+			if (!connectionError) {
+				terminal.write('\r\n*** Disconnected from lab terminal ***\r\n');
+			}
 		};
+	}
+
+	export function reconnect() {
+		if (wsUrl) {
+			connectWebSocket(wsUrl);
+		}
 	}
 
 	export function write(data: string) {

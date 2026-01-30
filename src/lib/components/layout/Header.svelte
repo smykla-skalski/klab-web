@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { Menu } from 'lucide-svelte';
+	import { Menu, Sun, Moon } from 'lucide-svelte';
 	import Button from '$lib/components/ui/button.svelte';
+	import { mode, toggleMode } from '$lib/stores/theme';
 
 	let mobileMenuOpen = $state(false);
 </script>
@@ -14,6 +15,13 @@
 			<a href="/learn" class="hover:text-primary text-sm transition-colors">Learn</a>
 			<a href="/about" class="hover:text-primary text-sm transition-colors">About</a>
 			<a href="/docs" class="hover:text-primary text-sm transition-colors">Docs</a>
+			<Button variant="ghost" size="icon" onclick={toggleMode} aria-label="Toggle theme">
+				{#if mode.current === 'dark'}
+					<Sun class="h-5 w-5" />
+				{:else}
+					<Moon class="h-5 w-5" />
+				{/if}
+			</Button>
 		</nav>
 
 		<!-- Mobile Menu Button -->
@@ -53,6 +61,15 @@
 				>
 					Docs
 				</a>
+				<Button variant="ghost" size="sm" onclick={toggleMode} class="justify-start">
+					{#if mode.current === 'dark'}
+						<Sun class="mr-2 h-4 w-4" />
+						Light mode
+					{:else}
+						<Moon class="mr-2 h-4 w-4" />
+						Dark mode
+					{/if}
+				</Button>
 			</div>
 		</nav>
 	{/if}

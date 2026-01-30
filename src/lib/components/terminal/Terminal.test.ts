@@ -2,6 +2,26 @@ import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import { render, cleanup } from '@testing-library/svelte';
 import Terminal from './Terminal.svelte';
 
+vi.mock('mode-watcher', () => ({
+	mode: { current: 'dark' },
+	toggleMode: vi.fn(),
+	setMode: vi.fn()
+}));
+
+vi.mock('svelte-sonner', () => ({
+	toast: {
+		error: vi.fn(),
+		success: vi.fn()
+	}
+}));
+
+vi.mock('$lib/stores/terminal', () => ({
+	terminalSession: {
+		set: vi.fn(),
+		subscribe: vi.fn()
+	}
+}));
+
 const mockTerminal = {
 	write: vi.fn(),
 	clear: vi.fn(),
@@ -13,6 +33,9 @@ const mockTerminal = {
 	}),
 	dispose: vi.fn(),
 	loadAddon: vi.fn(),
+	options: {
+		theme: null as any
+	},
 	_onDataCallback: null as ((data: string) => void) | null,
 	_options: null as any
 };
@@ -127,17 +150,6 @@ describe('Terminal', () => {
 		});
 	});
 
-	it('applies light theme when specified', () => {
-		render(Terminal, {
-			props: {
-				theme: 'light'
-			}
-		});
-		expect(mockTerminal._options.theme).toMatchObject({
-			background: '#ffffff',
-			foreground: '#000000'
-		});
-	});
 
 	it('fits terminal to container', () => {
 		render(Terminal, {

@@ -5,17 +5,20 @@
 	import { browser } from '$app/environment';
 	import Button from '$lib/components/ui/button.svelte';
 	import ConfirmModal from '$lib/components/ui/confirm-modal.svelte';
+	import Skeleton from '$lib/components/ui/skeleton.svelte';
 	import { LabContainer, LabSidebar, ValidationStatus } from '$lib/components/lab';
 	import { BookOpen, CheckCircle } from 'lucide-svelte';
 	import { currentLab } from '$lib/stores/lab';
 	import { progress } from '$lib/stores/progress';
 	import { toast } from 'svelte-sonner';
+	import { registerShortcut } from '$lib/utils/keyboard-shortcuts';
 	import type { PageData } from './$types';
 	import type TerminalType from '$lib/components/terminal/Terminal.svelte';
 
 	let { data }: { data: PageData } = $props();
 
 	let Terminal: any = $state(null);
+	let sidebarOpen = $state(true);
 
 	onMount(async () => {
 		if (browser) {
@@ -26,6 +29,19 @@
 				console.error('Failed to load Terminal component:', error);
 			}
 		}
+	});
+
+	onMount(() => {
+		// Register keyboard shortcuts
+		const cleanups = [
+			registerShortcut('ctrl+enter', validateSolution),
+			registerShortcut('ctrl+\\', () => terminal?.focus()),
+			registerShortcut('ctrl+b', () => (sidebarOpen = !sidebarOpen))
+		];
+
+		return () => {
+			cleanups.forEach((cleanup) => cleanup());
+		};
 	});
 
 	const category = $derived(data.lab.category);
@@ -89,7 +105,7 @@
 	<title>{data.lab.title} - klab</title>
 </svelte:head>
 
-<LabContainer lab={data.lab}>
+<LabContainer lab={data.lab} bind:sidebarOpen>
 	{#snippet sidebar()}
 		<LabSidebar lab={data.lab} />
 	{/snippet}
@@ -98,10 +114,13 @@
 		<div class="flex h-full flex-col">
 			<div class="flex-1 p-4">
 				{#if Terminal}
-					<Terminal bind:this={terminal} theme="dark" fontSize={14} />
+					<Terminal bind:this={terminal} fontSize={14} />
 				{:else}
-					<div class="text-muted-foreground flex h-full items-center justify-center">
-						Loading terminal...
+					<div class="flex h-full flex-col gap-2">
+						<Skeleton width="100%" height="40px" />
+						<Skeleton width="80%" height="20px" />
+						<Skeleton width="60%" height="20px" />
+						<Skeleton width="90%" height="20px" />
 					</div>
 				{/if}
 			</div>
@@ -118,7 +137,7 @@
 			<BookOpen class="mr-2 h-4 w-4" />
 			Knowledge
 		</Button>
-		<Button onclick={validateSolution}>
+		<Button onclick={validateSolution} title="Check Solution (Ctrl+Enter)">
 			<CheckCircle class="mr-2 h-4 w-4" />
 			Check Solution
 		</Button>

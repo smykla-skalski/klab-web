@@ -168,24 +168,18 @@ describe('CodeEditor', () => {
 		);
 	});
 
-	it('applies klab-dark theme for vs-dark', async () => {
+	it('defines light theme on mount', async () => {
 		render(CodeEditor, {
-			props: {
-				theme: 'vs-dark'
-			}
+			props: {}
 		});
 		const monaco = await import('monaco-editor');
-		expect(monaco.editor.setTheme).toHaveBeenCalledWith('klab-dark');
-	});
-
-	it('applies vs-light theme', async () => {
-		render(CodeEditor, {
-			props: {
-				theme: 'vs-light'
-			}
-		});
-		const monaco = await import('monaco-editor');
-		expect(monaco.editor.setTheme).toHaveBeenCalledWith('vs-light');
+		expect(monaco.editor.defineTheme).toHaveBeenCalledWith(
+			'klab-light',
+			expect.objectContaining({
+				base: 'vs',
+				inherit: true
+			})
+		);
 	});
 
 	it('creates diff editor in diff mode', async () => {
