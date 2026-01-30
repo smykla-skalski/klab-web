@@ -13,7 +13,8 @@ const mockTerminal = {
 	}),
 	dispose: vi.fn(),
 	loadAddon: vi.fn(),
-	_onDataCallback: null as ((data: string) => void) | null
+	_onDataCallback: null as ((data: string) => void) | null,
+	_options: null as any
 };
 
 const mockFitAddon = {

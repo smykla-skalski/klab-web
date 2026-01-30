@@ -22,7 +22,8 @@ const mockStandaloneEditor = {
 		return { dispose: vi.fn() };
 	}),
 	dispose: vi.fn(),
-	_onChangeCallback: null as (() => void) | null
+	_onChangeCallback: null as (() => void) | null,
+	_options: null as any
 };
 
 const mockModifiedEditor = {
@@ -38,7 +39,8 @@ const mockDiffEditor = {
 	getModifiedEditor: vi.fn(() => mockModifiedEditor),
 	setModel: vi.fn(),
 	updateOptions: vi.fn(),
-	dispose: vi.fn()
+	dispose: vi.fn(),
+	_options: null as any
 };
 
 vi.mock('monaco-editor', () => ({

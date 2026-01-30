@@ -9,7 +9,7 @@
 	import { BookOpen, CheckCircle } from 'lucide-svelte';
 	import { currentLab } from '$lib/stores/lab';
 	import type { Lab } from '$lib/stores/lab';
-	import type { Terminal as TerminalType } from '$lib/components/terminal/Terminal.svelte';
+	import type TerminalType from '$lib/components/terminal/Terminal.svelte';
 
 	let Terminal: any = $state(null);
 

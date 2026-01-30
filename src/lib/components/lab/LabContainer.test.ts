@@ -9,13 +9,8 @@ const mockLab: Lab = {
 	id: 'intro',
 	title: 'Introduction to Kubernetes',
 	category: 'kubernetes',
-	description: 'Learn the basics',
 	objective: 'Complete the lab',
-	hints: [],
-	validation: {
-		type: 'command',
-		commands: []
-	}
+	hints: []
 };
 
 describe('LabContainer', () => {
