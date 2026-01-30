@@ -88,7 +88,7 @@ describe('Lab Page', () => {
 
 	it('shows terminal loading state', () => {
 		renderLabPage();
-		const skeletons = document.querySelectorAll('.animate-pulse');
+		const skeletons = document.querySelectorAll('.bg-muted.rounded-md');
 		expect(skeletons.length).toBeGreaterThan(0);
 	});
 
