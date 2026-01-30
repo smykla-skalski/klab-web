@@ -21,8 +21,13 @@ const rawLabs = [
 	dockerDockerfileCreation
 ];
 
+let cachedLabs: Lab[] | null = null;
+
 export function getAllLabs(): Lab[] {
-	return rawLabs.map((lab) => labSchema.parse(lab));
+	if (cachedLabs === null) {
+		cachedLabs = rawLabs.map((lab) => labSchema.parse(lab));
+	}
+	return cachedLabs;
 }
 
 export function getLabsByCategory(category: string): Lab[] {

@@ -1,4 +1,5 @@
 import { persisted } from 'svelte-persisted-store';
+import { get } from 'svelte/store';
 
 type ProgressData = Record<string, boolean>;
 
@@ -16,19 +17,14 @@ function createProgressStore() {
 			}));
 		},
 		isLabComplete: (category: string, labId: string) => {
-			let isComplete = false;
-			store.subscribe((data) => {
-				isComplete = data[`${category}/${labId}`] === true;
-			})();
-			return isComplete;
+			const data = get(store);
+			return data[`${category}/${labId}`] === true;
 		},
 		getCategoryProgress: (category: string, totalLabs: number) => {
-			let completed = 0;
-			store.subscribe((data) => {
-				completed = Object.keys(data).filter(
-					(key) => key.startsWith(`${category}/`) && data[key]
-				).length;
-			})();
+			const data = get(store);
+			const completed = Object.keys(data).filter(
+				(key) => key.startsWith(`${category}/`) && data[key]
+			).length;
 			return totalLabs > 0 ? Math.round((completed / totalLabs) * 100) : 0;
 		}
 	};

@@ -4,12 +4,18 @@ import { writable } from 'svelte/store';
 import LearnPage from './+page.svelte';
 import { getAllLabs, getCategories } from '$lib/services/lab-loader';
 
-vi.mock('$app/stores', () => ({
-	page: writable({
-		params: {},
-		url: new URL('http://localhost/learn')
-	})
-}));
+vi.mock('$app/stores', () => {
+	const url = new URL('http://localhost/learn');
+	return {
+		page: writable({
+			params: {},
+			url: {
+				...url,
+				searchParams: new URLSearchParams()
+			}
+		})
+	};
+});
 
 vi.mock('$app/navigation', () => ({
 	goto: vi.fn()

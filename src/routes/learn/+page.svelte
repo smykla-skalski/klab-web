@@ -18,14 +18,21 @@
 
 	let { data }: { data: PageData } = $props();
 
-	// Initialize filters from URL params
+	let isInitializing = $state(true);
+
+	// Initialize filters from URL params (once)
 	$effect(() => {
-		initializeFiltersFromURL($page.url.searchParams);
+		if (isInitializing) {
+			initializeFiltersFromURL($page.url.searchParams);
+			isInitializing = false;
+		}
 	});
 
-	// Sync filters to URL when they change
+	// Sync filters to URL when they change (skip during initialization)
 	$effect(() => {
-		syncFiltersToURL($filters, $sortBy);
+		if (!isInitializing) {
+			syncFiltersToURL($filters, $sortBy);
+		}
 	});
 
 	// Get completed lab IDs
@@ -72,7 +79,7 @@
 
 			<FilterChipGroup
 				label="Category"
-				options={data.categories.map((c) => c.name)}
+				options={data.categories.map((c) => c.id)}
 				bind:selected={$selectedCategories}
 			/>
 		</div>

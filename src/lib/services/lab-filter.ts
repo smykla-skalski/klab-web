@@ -68,8 +68,10 @@ export function sortLabs(labs: Lab[], sortBy: SortOption): Lab[] {
 
 		case 'duration':
 			return sorted.sort((a, b) => {
-				const aDuration = parseInt(a.duration);
-				const bDuration = parseInt(b.duration);
+				const aMatch = a.duration.match(/(\d+)/);
+				const bMatch = b.duration.match(/(\d+)/);
+				const aDuration = aMatch ? parseInt(aMatch[1]) : 0;
+				const bDuration = bMatch ? parseInt(bMatch[1]) : 0;
 				return aDuration - bDuration;
 			});
 

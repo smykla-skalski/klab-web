@@ -17,6 +17,10 @@
 		debounceTimer = setTimeout(() => {
 			value = inputValue;
 		}, 300);
+
+		return () => {
+			if (debounceTimer) clearTimeout(debounceTimer);
+		};
 	});
 </script>
 
