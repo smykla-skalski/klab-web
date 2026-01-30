@@ -80,7 +80,7 @@ describe('Layout', () => {
 		const cleanup1 = vi.fn();
 		const cleanup2 = vi.fn();
 
-		mockRegisterShortcut.mockReturnValueOnce(cleanup1).mockReturnValueOnce(cleanup2);
+		(mockRegisterShortcut as any).mockReturnValueOnce(cleanup1).mockReturnValueOnce(cleanup2);
 
 		const { unmount } = render(Layout);
 

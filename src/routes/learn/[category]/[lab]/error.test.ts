@@ -1,9 +1,11 @@
 import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/svelte';
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 import userEvent from '@testing-library/user-event';
 import ErrorPage from './+error.svelte';
 import { page as mockPage } from '$app/stores';
+
+const mockPageWritable = mockPage as unknown as Writable<any>;
 
 vi.mock('$app/stores', () => ({
 	page: writable({
@@ -15,7 +17,7 @@ vi.mock('$app/stores', () => ({
 
 describe('Lab Error Page', () => {
 	beforeEach(() => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: { message: 'Connection failed' },
 			params: { category: 'kubernetes', lab: 'intro' }
@@ -27,7 +29,7 @@ describe('Lab Error Page', () => {
 	});
 
 	it('renders 404 error for missing lab', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 404,
 			error: null,
 			params: { category: 'kubernetes', lab: 'missing' }
@@ -42,7 +44,7 @@ describe('Lab Error Page', () => {
 	});
 
 	it('renders connection error', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: { message: 'Connection failed' },
 			params: { category: 'kubernetes', lab: 'intro' }
@@ -55,7 +57,7 @@ describe('Lab Error Page', () => {
 	});
 
 	it('shows default error message when no message provided', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: null,
 			params: { category: 'kubernetes', lab: 'intro' }
@@ -77,7 +79,7 @@ describe('Lab Error Page', () => {
 	});
 
 	it('renders retry button for non-404 errors', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: { message: 'Connection failed' },
 			params: { category: 'kubernetes', lab: 'intro' }
@@ -90,7 +92,7 @@ describe('Lab Error Page', () => {
 	});
 
 	it('does not render retry button for 404 errors', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 404,
 			error: null,
 			params: { category: 'kubernetes', lab: 'missing' }
@@ -103,7 +105,7 @@ describe('Lab Error Page', () => {
 	});
 
 	it('renders knowledge base button with correct link', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: { message: 'Connection failed' },
 			params: { category: 'kubernetes', lab: 'intro' }

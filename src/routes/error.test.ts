@@ -1,9 +1,11 @@
 import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/svelte';
-import { writable } from 'svelte/store';
+import { writable, type Writable } from 'svelte/store';
 import userEvent from '@testing-library/user-event';
 import ErrorPage from './+error.svelte';
 import { page as mockPage } from '$app/stores';
+
+const mockPageWritable = mockPage as unknown as Writable<any>;
 
 vi.mock('$app/stores', () => ({
 	page: writable({
@@ -14,7 +16,7 @@ vi.mock('$app/stores', () => ({
 
 describe('Error Page', () => {
 	beforeEach(() => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: { message: 'Test error' }
 		});
@@ -25,7 +27,7 @@ describe('Error Page', () => {
 	});
 
 	it('renders 404 error page', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 404,
 			error: null
 		});
@@ -38,7 +40,7 @@ describe('Error Page', () => {
 	});
 
 	it('renders generic error page', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: { message: 'Test error' }
 		});
@@ -51,7 +53,7 @@ describe('Error Page', () => {
 	});
 
 	it('shows default error message when no message provided', () => {
-		mockPage.set({
+		mockPageWritable.set({
 			status: 500,
 			error: null
 		});

@@ -107,7 +107,7 @@ describe('Learn Page', () => {
 		searchQuery.set('test');
 		selectedDifficulties.set(['Beginner']);
 		selectedCategories.set(['kubernetes']);
-		completionFilter.set('completed');
+		completionFilter.set(true);
 
 		await vi.waitFor(() => {
 			const clearButton = screen.queryByRole('button', { name: /clear all filters/i });
