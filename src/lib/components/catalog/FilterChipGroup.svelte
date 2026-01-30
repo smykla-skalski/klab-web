@@ -26,11 +26,11 @@
 
 <div class="space-y-2">
 	<div class="flex items-center justify-between">
-		<div class="text-sm font-medium text-gray-700">{label}</div>
+		<div class="text-sm font-medium text-foreground">{label}</div>
 		{#if selected.length > 0}
 			<button
 				onclick={clearAll}
-				class="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700"
+				class="flex items-center gap-1 text-xs text-primary hover:text-primary/80"
 			>
 				<X class="h-3 w-3" />
 				Clear
@@ -44,8 +44,8 @@
 				class="rounded-full px-3 py-1 text-sm font-medium transition-colors {selected.includes(
 					option
 				)
-					? 'bg-blue-600 text-white'
-					: 'bg-gray-100 text-gray-700 hover:bg-gray-200'}"
+					? 'bg-primary text-primary-foreground'
+					: 'bg-secondary text-secondary-foreground hover:bg-secondary/80'}"
 			>
 				{option}
 			</button>

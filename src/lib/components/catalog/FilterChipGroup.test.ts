@@ -46,10 +46,10 @@ describe('FilterChipGroup', () => {
 		const beginnerButton = screen.getByRole('button', { name: 'Beginner' });
 		const intermediateButton = screen.getByRole('button', { name: 'Intermediate' });
 
-		expect(beginnerButton.className).toContain('bg-blue-600');
-		expect(beginnerButton.className).toContain('text-white');
-		expect(intermediateButton.className).toContain('bg-gray-100');
-		expect(intermediateButton.className).toContain('text-gray-700');
+		expect(beginnerButton.className).toContain('bg-primary');
+		expect(beginnerButton.className).toContain('text-primary-foreground');
+		expect(intermediateButton.className).toContain('bg-secondary');
+		expect(intermediateButton.className).toContain('text-secondary-foreground');
 	});
 
 	it('toggles option on click', async () => {
@@ -66,12 +66,12 @@ describe('FilterChipGroup', () => {
 		const beginnerButton = screen.getByRole('button', { name: 'Beginner' });
 
 		// Initially should not be highlighted
-		expect(beginnerButton.className).toContain('bg-gray-100');
+		expect(beginnerButton.className).toContain('bg-secondary');
 
 		await user.click(beginnerButton);
 
 		// After click should be highlighted
-		expect(beginnerButton.className).toContain('bg-blue-600');
+		expect(beginnerButton.className).toContain('bg-primary');
 	});
 
 	it('can toggle option off', async () => {
@@ -86,12 +86,12 @@ describe('FilterChipGroup', () => {
 		});
 
 		const beginnerButton = screen.getByRole('button', { name: 'Beginner' });
-		expect(beginnerButton.className).toContain('bg-blue-600');
+		expect(beginnerButton.className).toContain('bg-primary');
 
 		await user.click(beginnerButton);
 
 		// Check if the button is now unhighlighted
-		expect(beginnerButton.className).toContain('bg-gray-100');
+		expect(beginnerButton.className).toContain('bg-secondary');
 	});
 
 	it('shows clear button when options are selected', () => {
@@ -136,8 +136,8 @@ describe('FilterChipGroup', () => {
 		// Check buttons are highlighted initially
 		const beginnerButton = screen.getByRole('button', { name: 'Beginner' });
 		const advancedButton = screen.getByRole('button', { name: 'Advanced' });
-		expect(beginnerButton.className).toContain('bg-blue-600');
-		expect(advancedButton.className).toContain('bg-blue-600');
+		expect(beginnerButton.className).toContain('bg-primary');
+		expect(advancedButton.className).toContain('bg-primary');
 
 		await user.click(clearButton);
 
@@ -145,8 +145,8 @@ describe('FilterChipGroup', () => {
 		expect(screen.queryByRole('button', { name: /clear/i })).toBeFalsy();
 
 		// All option buttons should be unhighlighted
-		expect(beginnerButton.className).toContain('bg-gray-100');
-		expect(advancedButton.className).toContain('bg-gray-100');
+		expect(beginnerButton.className).toContain('bg-secondary');
+		expect(advancedButton.className).toContain('bg-secondary');
 	});
 
 	it('handles multiple selections', async () => {
@@ -164,11 +164,11 @@ describe('FilterChipGroup', () => {
 		const advancedButton = screen.getByRole('button', { name: 'Advanced' });
 
 		await user.click(beginnerButton);
-		expect(beginnerButton.className).toContain('bg-blue-600');
+		expect(beginnerButton.className).toContain('bg-primary');
 
 		await user.click(advancedButton);
-		expect(beginnerButton.className).toContain('bg-blue-600');
-		expect(advancedButton.className).toContain('bg-blue-600');
+		expect(beginnerButton.className).toContain('bg-primary');
+		expect(advancedButton.className).toContain('bg-primary');
 	});
 
 	it('renders with empty options array', () => {
