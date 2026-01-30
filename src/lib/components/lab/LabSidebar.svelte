@@ -14,7 +14,7 @@
 
 	$effect(() => {
 		if (hintPanelRef && onRevealHint) {
-			onRevealHint(() => hintPanelRef.revealNextHint());
+			onRevealHint(() => hintPanelRef?.revealNextHint());
 		}
 	});
 </script>
