@@ -26,7 +26,7 @@
 				<ul class="text-muted-foreground space-y-2 text-sm">
 					<li>
 						<a
-							href="https://github.com/klab"
+							href="https://github.com/smykla-skalski"
 							target="_blank"
 							rel="noopener noreferrer"
 							class="hover:text-primary inline-flex items-center gap-2 transition-colors"

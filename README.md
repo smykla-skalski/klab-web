@@ -16,7 +16,10 @@ Interactive learning platform built with SvelteKit + Tailwind v4.
 # Install dependencies
 pnpm install
 
-# Start dev server
+# Start dev server with mocks (recommended)
+mise dev
+
+# Or start dev server without mocks
 pnpm dev
 
 # Build for production
