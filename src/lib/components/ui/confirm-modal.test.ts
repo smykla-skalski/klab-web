@@ -223,6 +223,26 @@ describe('ConfirmModal', () => {
 		expect(onConfirm).not.toHaveBeenCalled();
 	});
 
+	it('handles keydown event with non-Escape key', async () => {
+		const onConfirm = vi.fn();
+		const onCancel = vi.fn();
+
+		render(ConfirmModal, {
+			props: {
+				open: true,
+				message: 'Are you sure?',
+				onConfirm,
+				onCancel
+			}
+		});
+
+		const dialog = screen.getByRole('dialog');
+		dialog.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+		expect(onCancel).not.toHaveBeenCalled();
+		expect(onConfirm).not.toHaveBeenCalled();
+	});
+
 	it('has correct aria attributes', () => {
 		render(ConfirmModal, {
 			props: {

@@ -298,6 +298,8 @@ describe('LabContainer', () => {
 		expect(addEventListenerSpy).toHaveBeenCalledWith('mousemove', expect.any(Function));
 		expect(addEventListenerSpy).toHaveBeenCalledWith('mouseup', expect.any(Function));
 
+		document.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, clientX: 400 }));
+
 		document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
 
 		addEventListenerSpy.mockRestore();
