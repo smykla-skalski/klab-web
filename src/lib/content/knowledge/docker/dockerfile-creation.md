@@ -6,7 +6,7 @@ A **Dockerfile** is a text file containing instructions to build a Docker image.
 
 ```dockerfile
 # Syntax: instruction arguments
-FROM node:18-alpine
+FROM node:24-alpine
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
@@ -23,7 +23,7 @@ Every Dockerfile starts with a base image:
 
 ```dockerfile
 FROM ubuntu:22.04                # Specific version
-FROM node:18-alpine              # Alpine variant (smaller)
+FROM node:24-alpine              # Alpine variant (smaller)
 FROM python:3.14-slim            # Slim variant
 FROM scratch                     # Empty image (for static binaries)
 ```
@@ -31,10 +31,10 @@ FROM scratch                     # Empty image (for static binaries)
 **Multi-stage builds:**
 
 ```dockerfile
-FROM node:18 AS builder
+FROM node:24 AS builder
 # Build steps...
 
-FROM node:18-alpine
+FROM node:24-alpine
 COPY --from=builder /app/dist ./dist
 ```
 
@@ -182,7 +182,7 @@ LABEL description="My application"
 ### Node.js Application
 
 ```dockerfile
-FROM node:18-alpine
+FROM node:24-alpine
 
 WORKDIR /app
 
@@ -309,11 +309,11 @@ USER appuser
 
 ```dockerfile
 # Build dependencies in one stage
-FROM node:18 AS builder
+FROM node:24 AS builder
 RUN npm run build
 
 # Runtime with minimal dependencies
-FROM node:18-alpine
+FROM node:24-alpine
 COPY --from=builder /app/dist ./dist
 ```
 
@@ -399,7 +399,7 @@ DOCKER_BUILDKIT=1 docker build .
 
 ```dockerfile
 # syntax=docker/dockerfile:1
-FROM node:18
+FROM node:24
 ```
 
 ### Build Secrets
