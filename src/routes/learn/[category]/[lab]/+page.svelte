@@ -19,6 +19,7 @@
 
 	let Terminal: any = $state(null);
 	let sidebarOpen = $state(true);
+	let revealHintHandler: (() => void) | undefined = $state(undefined);
 
 	onMount(async () => {
 		if (browser) {
@@ -36,7 +37,8 @@
 		const cleanups = [
 			registerShortcut('ctrl+enter', validateSolution),
 			registerShortcut('ctrl+\\', () => terminal?.focus()),
-			registerShortcut('ctrl+b', () => (sidebarOpen = !sidebarOpen))
+			registerShortcut('ctrl+b', () => (sidebarOpen = !sidebarOpen)),
+			registerShortcut('ctrl+h', () => revealHintHandler?.())
 		];
 
 		return () => {
@@ -107,7 +109,12 @@
 
 <LabContainer lab={data.lab} bind:sidebarOpen>
 	{#snippet sidebar()}
-		<LabSidebar lab={data.lab} />
+		<LabSidebar
+			lab={data.lab}
+			onRevealHint={(handler) => {
+				revealHintHandler = handler;
+			}}
+		/>
 	{/snippet}
 
 	{#snippet main()}

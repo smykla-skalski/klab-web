@@ -19,9 +19,9 @@ describe('registerShortcut', () => {
 
 	it('registers and triggers keyboard shortcut', () => {
 		const handler = vi.fn();
-		cleanup = registerShortcut('?', handler);
+		cleanup = registerShortcut('shift+/', handler);
 
-		const event = new KeyboardEvent('keydown', { key: '?' });
+		const event = new KeyboardEvent('keydown', { key: '/', shiftKey: true });
 		window.dispatchEvent(event);
 
 		expect(handler).toHaveBeenCalledOnce();
@@ -103,13 +103,13 @@ describe('registerShortcut', () => {
 
 	it('ignores shortcut when typing in input field', () => {
 		const handler = vi.fn();
-		cleanup = registerShortcut('?', handler);
+		cleanup = registerShortcut('shift+/', handler);
 
 		const input = document.createElement('input');
 		document.body.appendChild(input);
 		input.focus();
 
-		const event = new KeyboardEvent('keydown', { key: '?', bubbles: true });
+		const event = new KeyboardEvent('keydown', { key: '/', shiftKey: true, bubbles: true });
 		Object.defineProperty(event, 'target', { value: input, enumerable: true });
 		input.dispatchEvent(event);
 
@@ -118,13 +118,13 @@ describe('registerShortcut', () => {
 
 	it('ignores shortcut when typing in textarea', () => {
 		const handler = vi.fn();
-		cleanup = registerShortcut('?', handler);
+		cleanup = registerShortcut('shift+/', handler);
 
 		const textarea = document.createElement('textarea');
 		document.body.appendChild(textarea);
 		textarea.focus();
 
-		const event = new KeyboardEvent('keydown', { key: '?', bubbles: true });
+		const event = new KeyboardEvent('keydown', { key: '/', shiftKey: true, bubbles: true });
 		Object.defineProperty(event, 'target', { value: textarea, enumerable: true });
 		textarea.dispatchEvent(event);
 
@@ -156,10 +156,10 @@ describe('registerShortcut', () => {
 
 	it('cleans up event listener when cleanup function is called', () => {
 		const handler = vi.fn();
-		const cleanupFn = registerShortcut('?', handler);
+		const cleanupFn = registerShortcut('shift+/', handler);
 
 		// Trigger once
-		let event = new KeyboardEvent('keydown', { key: '?' });
+		let event = new KeyboardEvent('keydown', { key: '/', shiftKey: true });
 		window.dispatchEvent(event);
 		expect(handler).toHaveBeenCalledOnce();
 
@@ -167,7 +167,7 @@ describe('registerShortcut', () => {
 		cleanupFn();
 
 		// Try to trigger again
-		event = new KeyboardEvent('keydown', { key: '?' });
+		event = new KeyboardEvent('keydown', { key: '/', shiftKey: true });
 		window.dispatchEvent(event);
 
 		// Should still be called only once

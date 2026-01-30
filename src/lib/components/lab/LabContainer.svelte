@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { createFocusTrap } from 'focus-trap';
 	import type { Lab } from '$lib/stores/lab';
 	import type { Snippet } from 'svelte';
 	import { PanelLeftClose, PanelLeft, X } from 'lucide-svelte';
@@ -18,6 +19,8 @@
 	let sidebarWidth = $state(320);
 	let resizing = $state(false);
 	let originalBodyOverflow = '';
+	let drawerElement = $state<HTMLElement>(undefined!);
+	let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
 
 	function toggleSidebar() {
 		sidebarOpen = !sidebarOpen;
@@ -70,10 +73,27 @@
 		document.body.style.overflow = 'hidden';
 	});
 
+	$effect(() => {
+		if (mobileDrawerOpen && drawerElement) {
+			focusTrap = createFocusTrap(drawerElement, {
+				initialFocus: drawerElement,
+				escapeDeactivates: false,
+				clickOutsideDeactivates: false
+			});
+			focusTrap.activate();
+		} else if (!mobileDrawerOpen && focusTrap) {
+			focusTrap.deactivate();
+			focusTrap = null;
+		}
+	});
+
 	onDestroy(() => {
 		document.body.style.overflow = originalBodyOverflow;
 		document.removeEventListener('mousemove', handleResize);
 		document.removeEventListener('mouseup', stopResize);
+		if (focusTrap) {
+			focusTrap.deactivate();
+		}
 	});
 </script>
 
@@ -82,7 +102,7 @@
 	<div class="border-border bg-background flex items-center justify-between border-b px-4 py-3">
 		<div class="flex items-center gap-4">
 			<!-- Desktop sidebar toggle -->
-			<Button variant="ghost" size="sm" onclick={toggleSidebar} class="hidden md:flex">
+			<Button variant="ghost" size="sm" onclick={toggleSidebar} class="hidden md:flex" aria-label="Toggle sidebar">
 				{#if sidebarOpen}
 					<PanelLeftClose class="h-4 w-4" />
 				{:else}
@@ -90,7 +110,7 @@
 				{/if}
 			</Button>
 			<!-- Mobile drawer toggle -->
-			<Button variant="ghost" size="sm" onclick={toggleMobileDrawer} class="md:hidden">
+			<Button variant="ghost" size="sm" onclick={toggleMobileDrawer} class="md:hidden" aria-label="Open sidebar">
 				<PanelLeft class="h-4 w-4" />
 			</Button>
 			<div>
@@ -144,10 +164,17 @@
 		></button>
 
 		<!-- Drawer -->
-		<div class="border-border bg-secondary fixed inset-y-0 left-0 z-50 w-80 border-r md:hidden">
+		<div
+			bind:this={drawerElement}
+			class="border-border bg-secondary fixed inset-y-0 left-0 z-50 w-80 border-r md:hidden"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="drawer-title"
+			tabindex="-1"
+		>
 			<div class="flex items-center justify-between border-b border-border p-4">
-				<h2 class="font-semibold">Lab Info</h2>
-				<Button variant="ghost" size="sm" onclick={toggleMobileDrawer}>
+				<h2 id="drawer-title" class="font-semibold">Lab Info</h2>
+				<Button variant="ghost" size="sm" onclick={toggleMobileDrawer} aria-label="Close sidebar">
 					<X class="h-4 w-4" />
 				</Button>
 			</div>

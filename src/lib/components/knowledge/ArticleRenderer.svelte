@@ -6,6 +6,6 @@
 	const sanitizedHtml = $derived(DOMPurify.sanitize(html));
 </script>
 
-<article class="prose prose-invert prose-lg max-w-none dark:prose-invert">
+<article class="prose prose-invert prose-lg max-w-none">
 	{@html sanitizedHtml}
 </article>

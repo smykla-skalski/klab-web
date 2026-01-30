@@ -22,6 +22,13 @@
 	let ws: WebSocket | null = null;
 	let connectionError = $state(false);
 
+	// Update theme when mode changes
+	$effect(() => {
+		if (terminal) {
+			terminal.options.theme = mode.current === 'dark' ? darkTheme : lightTheme;
+		}
+	});
+
 	const darkTheme = {
 		background: '#000000',
 		foreground: '#7ade7a',
@@ -88,13 +95,6 @@
 		terminal.open(container);
 		fitAddon.fit();
 
-		// Update theme when mode changes
-		$effect(() => {
-			if (terminal) {
-				terminal.options.theme = mode.current === 'dark' ? darkTheme : lightTheme;
-			}
-		});
-
 		terminal.onData((data) => {
 			if (ws && ws.readyState === WebSocket.OPEN) {
 				ws.send(data);
@@ -156,6 +156,9 @@
 	}
 
 	export function reconnect() {
+		if (ws) {
+			ws.close();
+		}
 		if (wsUrl) {
 			connectWebSocket(wsUrl);
 		}

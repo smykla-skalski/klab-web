@@ -5,14 +5,23 @@
 
 	interface Props {
 		lab: Lab;
+		onRevealHint?: (handler: () => void) => void;
 	}
 
-	let { lab }: Props = $props();
+	let { lab, onRevealHint }: Props = $props();
+
+	let hintPanelRef: HintPanel;
+
+	$effect(() => {
+		if (hintPanelRef && onRevealHint) {
+			onRevealHint(() => hintPanelRef.revealNextHint());
+		}
+	});
 </script>
 
 <div class="flex h-full flex-col gap-4 overflow-y-auto p-4">
 	<div class="space-y-4">
 		<LabObjective {lab} />
-		<HintPanel hints={lab.hints} />
+		<HintPanel bind:this={hintPanelRef} hints={lab.hints} />
 	</div>
 </div>

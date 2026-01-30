@@ -34,16 +34,11 @@ export function registerShortcut(
 		const keyPressed = e.key.toLowerCase();
 
 		if (
-			(needsCtrl === ctrlPressed || !needsCtrl) &&
-			(needsShift === shiftPressed || !needsShift) &&
-			(needsAlt === altPressed || !needsAlt) &&
+			needsCtrl === ctrlPressed &&
+			needsShift === shiftPressed &&
+			needsAlt === altPressed &&
 			keyPressed === keyName
 		) {
-			// Additional check: ensure required modifiers are present
-			if (needsCtrl && !ctrlPressed) return;
-			if (needsShift && !shiftPressed) return;
-			if (needsAlt && !altPressed) return;
-
 			if (preventDefault) {
 				e.preventDefault();
 			}

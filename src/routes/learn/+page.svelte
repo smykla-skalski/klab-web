@@ -76,6 +76,8 @@
 		<button
 			onclick={() => (filtersExpanded = !filtersExpanded)}
 			class="flex w-full items-center justify-between text-sm font-medium md:hidden"
+			aria-expanded={filtersExpanded}
+			aria-label="Toggle filters"
 		>
 			<span>
 				Filters
