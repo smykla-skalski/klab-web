@@ -11,7 +11,7 @@
 	import type { Lab } from '$lib/stores/lab';
 	import type { Terminal as TerminalType } from '$lib/components/terminal/Terminal.svelte';
 
-	let Terminal: any = null;
+	let Terminal: any = $state(null);
 
 	onMount(async () => {
 		if (browser) {
@@ -43,7 +43,7 @@
 		currentLab.set(mockLab);
 	});
 
-	let terminal: TerminalType = undefined!;
+	let terminal: TerminalType = $state(undefined!);
 	let validationStatus: 'idle' | 'validating' | 'success' | 'error' = $state('idle');
 	let validationMessage = $state('');
 	let validationTimeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -99,7 +99,7 @@
 		<div class="flex h-full flex-col">
 			<div class="flex-1 p-4">
 				{#if Terminal}
-					<svelte:component this={Terminal} bind:this={terminal} theme="dark" fontSize={14} />
+					<Terminal bind:this={terminal} theme="dark" fontSize={14} />
 				{:else}
 					<div class="text-muted-foreground flex h-full items-center justify-center">
 						Loading terminal...

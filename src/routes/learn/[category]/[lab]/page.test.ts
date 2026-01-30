@@ -69,9 +69,9 @@ describe('Lab Page', () => {
 		expect(screen.getByRole('button', { name: /give up/i })).toBeTruthy();
 	});
 
-	it('renders terminal component', () => {
+	it('shows terminal loading state', () => {
 		render(LabPage);
-		expect(screen.getByTestId('terminal-mock')).toBeTruthy();
+		expect(screen.getByText('Loading terminal...')).toBeTruthy();
 	});
 
 	it('validates solution and shows success', async () => {
