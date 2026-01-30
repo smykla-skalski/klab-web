@@ -1,20 +1,4 @@
 @import 'tailwindcss';
-@import 'highlight.js/styles/github.css' layer(hljs-light);
-@import 'highlight.js/styles/github-dark.css' layer(hljs-dark);
-
-@layer hljs-light {
-	[data-theme='dark'] .hljs,
-	[data-theme='dark'] .hljs * {
-		all: unset;
-	}
-}
-
-@layer hljs-dark {
-	[data-theme='light'] .hljs,
-	[data-theme='light'] .hljs * {
-		all: unset;
-	}
-}
 
 @theme {
 	/* Typography */
@@ -83,4 +67,169 @@ body {
 /* Enhanced focus indicators */
 *:focus-visible {
 	@apply ring-ring ring-offset-background ring-2 ring-offset-2 outline-none;
+}
+
+/* Syntax highlighting */
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	background: oklch(98% 0.01 240);
+	color: oklch(10% 0.02 240);
+}
+
+[data-theme='dark'] .hljs {
+	background: oklch(15% 0.02 240);
+	color: oklch(91% 0.01 213);
+}
+
+/* Light theme syntax colors */
+.hljs-comment,
+.hljs-quote {
+	color: oklch(50% 0.01 215);
+	font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+	color: oklch(35% 0.15 330);
+	font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+	color: oklch(40% 0.15 25);
+}
+
+.hljs-string,
+.hljs-doctag {
+	color: oklch(35% 0.12 142);
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+	color: oklch(35% 0.15 260);
+	font-weight: bold;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+	color: oklch(38% 0.12 85);
+	font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+	color: oklch(28% 0.15 260);
+}
+
+.hljs-regexp,
+.hljs-link {
+	color: oklch(35% 0.12 180);
+}
+
+.hljs-symbol,
+.hljs-bullet {
+	color: oklch(40% 0.12 300);
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+	color: oklch(35% 0.12 220);
+}
+
+.hljs-meta {
+	color: oklch(45% 0.08 215);
+	font-weight: bold;
+}
+
+.hljs-deletion {
+	background: oklch(92% 0.08 25);
+}
+
+.hljs-addition {
+	background: oklch(92% 0.08 142);
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+
+/* Dark theme syntax colors */
+[data-theme='dark'] .hljs-comment,
+[data-theme='dark'] .hljs-quote {
+	color: oklch(60% 0.01 215);
+}
+
+[data-theme='dark'] .hljs-keyword,
+[data-theme='dark'] .hljs-selector-tag,
+[data-theme='dark'] .hljs-subst {
+	color: oklch(75% 0.15 330);
+}
+
+[data-theme='dark'] .hljs-number,
+[data-theme='dark'] .hljs-literal,
+[data-theme='dark'] .hljs-variable,
+[data-theme='dark'] .hljs-template-variable,
+[data-theme='dark'] .hljs-tag .hljs-attr {
+	color: oklch(75% 0.15 25);
+}
+
+[data-theme='dark'] .hljs-string,
+[data-theme='dark'] .hljs-doctag {
+	color: oklch(70% 0.12 142);
+}
+
+[data-theme='dark'] .hljs-title,
+[data-theme='dark'] .hljs-section,
+[data-theme='dark'] .hljs-selector-id {
+	color: oklch(75% 0.15 260);
+}
+
+[data-theme='dark'] .hljs-type,
+[data-theme='dark'] .hljs-class .hljs-title {
+	color: oklch(72% 0.12 85);
+}
+
+[data-theme='dark'] .hljs-tag,
+[data-theme='dark'] .hljs-name,
+[data-theme='dark'] .hljs-attribute {
+	color: oklch(70% 0.15 260);
+}
+
+[data-theme='dark'] .hljs-regexp,
+[data-theme='dark'] .hljs-link {
+	color: oklch(70% 0.12 180);
+}
+
+[data-theme='dark'] .hljs-symbol,
+[data-theme='dark'] .hljs-bullet {
+	color: oklch(72% 0.12 300);
+}
+
+[data-theme='dark'] .hljs-built_in,
+[data-theme='dark'] .hljs-builtin-name {
+	color: oklch(70% 0.12 220);
+}
+
+[data-theme='dark'] .hljs-meta {
+	color: oklch(65% 0.08 215);
+}
+
+[data-theme='dark'] .hljs-deletion {
+	background: oklch(25% 0.08 25);
+}
+
+[data-theme='dark'] .hljs-addition {
+	background: oklch(25% 0.08 142);
 }
