@@ -20,7 +20,9 @@ const server = createServer((req, res) => {
 	// Validation endpoint
 	if (req.url.startsWith('/api/validate') && req.method === 'POST') {
 		let body = '';
-		req.on('data', chunk => { body += chunk; });
+		req.on('data', (chunk) => {
+			body += chunk;
+		});
 		req.on('end', () => {
 			const data = JSON.parse(body);
 			console.log('Validation request:', data);
@@ -29,13 +31,15 @@ const server = createServer((req, res) => {
 			const success = Math.random() > 0.3;
 
 			res.writeHead(200, { 'Content-Type': 'application/json' });
-			res.end(JSON.stringify({
-				success,
-				message: success
-					? 'Great job! Your solution is correct.'
-					: 'Not quite right. Check your configuration and try again.',
-				hints: success ? [] : ['Check the service port', 'Verify the selector labels']
-			}));
+			res.end(
+				JSON.stringify({
+					success,
+					message: success
+						? 'Great job! Your solution is correct.'
+						: 'Not quite right. Check your configuration and try again.',
+					hints: success ? [] : ['Check the service port', 'Verify the selector labels']
+				})
+			);
 		});
 		return;
 	}

@@ -22,11 +22,13 @@ Development mock servers for local testing.
 ## Usage
 
 Run via mise:
+
 ```bash
 mise dev
 ```
 
 Or manually:
+
 ```bash
 node mocks/ws-server.js &
 node mocks/api-server.js &
