@@ -10,7 +10,7 @@
 	} = $props();
 
 	let inputValue = $state(value);
-	let debounceTimer = $state<ReturnType<typeof setTimeout> | null>(null);
+	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
 	$effect(() => {
 		if (debounceTimer) clearTimeout(debounceTimer);

@@ -1,5 +1,4 @@
 import { persisted } from 'svelte-persisted-store';
-import { derived } from 'svelte/store';
 
 type ProgressData = Record<string, boolean>;
 
