@@ -273,4 +273,93 @@ describe('Terminal', () => {
 		expect(mockTerminal.dispose).toHaveBeenCalled();
 		expect(mockWebSocket.close).toHaveBeenCalled();
 	});
+
+	it('exports reconnect function', () => {
+		const component = render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+		expect(component.component.reconnect).toBeDefined();
+	});
+
+	it('reconnects to WebSocket when reconnect called', () => {
+		const component = render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		vi.clearAllMocks();
+
+		component.component.reconnect();
+
+		expect(mockWebSocket.close).toHaveBeenCalled();
+		expect(mockWebSocket.url).toBe('ws://localhost:8080');
+	});
+
+	it('handles reconnect without existing WebSocket', () => {
+		const component = render(Terminal, {
+			props: {}
+		});
+
+		expect(() => component.component.reconnect()).not.toThrow();
+	});
+
+	it('does not send data to closed WebSocket', () => {
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		mockWebSocket.readyState = 3;
+		vi.clearAllMocks();
+
+		mockTerminal._onDataCallback?.('test input');
+
+		expect(mockWebSocket.send).not.toHaveBeenCalled();
+	});
+
+	it('shows toast on WebSocket error with reconnect action', async () => {
+		const { toast } = await import('svelte-sonner');
+
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		mockWebSocket.onerror?.(new Event('error'));
+
+		expect(toast.error).toHaveBeenCalledWith(
+			'Terminal disconnected',
+			expect.objectContaining({
+				description: 'Click reconnect to try again',
+				action: expect.objectContaining({
+					label: 'Reconnect'
+				})
+			})
+		);
+	});
+
+	it('does not write disconnect message on error close', () => {
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		mockWebSocket.onerror?.(new Event('error'));
+		vi.clearAllMocks();
+
+		mockWebSocket.onclose?.(new CloseEvent('close'));
+
+		const writeCalls = mockTerminal.write.mock.calls;
+		const disconnectMessages = writeCalls.filter(call =>
+			call[0].includes('Disconnected from lab terminal')
+		);
+
+		expect(disconnectMessages.length).toBe(0);
+	});
 });
