@@ -4,3 +4,26 @@ pnpm = "10.28.2"
 
 [env]
 _.file = ".env"
+
+[tasks.dev]
+description = "Start app with mock servers"
+run = """
+#!/bin/bash
+set -e
+
+echo "Starting mock servers..."
+node mocks/ws-server.js &
+WS_PID=$!
+node mocks/api-server.js &
+API_PID=$!
+
+cleanup() {
+  echo "Stopping mock servers..."
+  kill $WS_PID $API_PID 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+sleep 1
+echo "Starting vite dev server..."
+pnpm dev
+"""

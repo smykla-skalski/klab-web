@@ -44,7 +44,7 @@ describe('Footer', () => {
 	it('renders GitHub link', () => {
 		render(Footer);
 		const githubLink = screen.getByRole('link', { name: /github/i });
-		expect(githubLink.getAttribute('href')).toBe('https://github.com/klab');
+		expect(githubLink.getAttribute('href')).toBe('https://github.com/smykla-skalski');
 	});
 
 	it('displays current year in copyright', () => {
