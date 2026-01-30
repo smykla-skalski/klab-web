@@ -12,8 +12,10 @@
 
 		<!-- Desktop Navigation -->
 		<nav class="hidden items-center gap-6 md:flex">
-			<a href="/learn" class="text-foreground hover:text-primary text-sm transition-colors">Learn</a>
-			<a href="/about" class="text-foreground hover:text-primary text-sm transition-colors">About</a>
+			<a href="/learn" class="text-foreground hover:text-primary text-sm transition-colors">Learn</a
+			>
+			<a href="/about" class="text-foreground hover:text-primary text-sm transition-colors">About</a
+			>
 			<a href="/docs" class="text-foreground hover:text-primary text-sm transition-colors">Docs</a>
 			<Button variant="ghost" size="icon" onclick={toggleMode} aria-label="Toggle theme">
 				{#if mode.current === 'dark'}
