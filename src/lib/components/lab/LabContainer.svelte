@@ -102,7 +102,13 @@
 	<div class="border-border bg-background flex items-center justify-between border-b px-4 py-3">
 		<div class="flex items-center gap-4">
 			<!-- Desktop sidebar toggle -->
-			<Button variant="ghost" size="sm" onclick={toggleSidebar} class="hidden md:flex" aria-label="Toggle sidebar">
+			<Button
+				variant="ghost"
+				size="sm"
+				onclick={toggleSidebar}
+				class="hidden md:flex"
+				aria-label="Toggle sidebar"
+			>
 				{#if sidebarOpen}
 					<PanelLeftClose class="h-4 w-4" />
 				{:else}
@@ -110,7 +116,13 @@
 				{/if}
 			</Button>
 			<!-- Mobile drawer toggle -->
-			<Button variant="ghost" size="sm" onclick={toggleMobileDrawer} class="md:hidden" aria-label="Open sidebar">
+			<Button
+				variant="ghost"
+				size="sm"
+				onclick={toggleMobileDrawer}
+				class="md:hidden"
+				aria-label="Open sidebar"
+			>
 				<PanelLeft class="h-4 w-4" />
 			</Button>
 			<div>
@@ -172,7 +184,7 @@
 			aria-labelledby="drawer-title"
 			tabindex="-1"
 		>
-			<div class="flex items-center justify-between border-b border-border p-4">
+			<div class="border-border flex items-center justify-between border-b p-4">
 				<h2 id="drawer-title" class="font-semibold">Lab Info</h2>
 				<Button variant="ghost" size="sm" onclick={toggleMobileDrawer} aria-label="Close sidebar">
 					<X class="h-4 w-4" />

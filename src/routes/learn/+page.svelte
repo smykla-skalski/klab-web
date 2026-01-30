@@ -64,11 +64,11 @@
 <div class="container mx-auto px-4 py-12">
 	<div class="mb-12 text-center">
 		<h1 class="mb-4 text-4xl font-bold">Interactive Labs</h1>
-		<p class="text-lg text-muted-foreground">Master new skills through hands-on practice</p>
+		<p class="text-muted-foreground text-lg">Master new skills through hands-on practice</p>
 	</div>
 
 	<!-- Search and Filter Section -->
-	<div class="mb-8 space-y-6 rounded-lg border-border bg-background p-6 shadow-sm">
+	<div class="border-border bg-background mb-8 space-y-6 rounded-lg p-6 shadow-sm">
 		<!-- Search -->
 		<SearchInput bind:value={$searchQuery} />
 
@@ -82,7 +82,7 @@
 			<span>
 				Filters
 				{#if $selectedDifficulties.length + $selectedCategories.length > 0}
-					<span class="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs text-primary-foreground">
+					<span class="bg-primary text-primary-foreground ml-2 rounded-full px-2 py-0.5 text-xs">
 						{$selectedDifficulties.length + $selectedCategories.length}
 					</span>
 				{/if}
@@ -110,8 +110,8 @@
 		</div>
 
 		<!-- Sort and Stats -->
-		<div class="flex items-center justify-between border-t border-border pt-4">
-			<div class="text-sm text-muted-foreground">
+		<div class="border-border flex items-center justify-between border-t pt-4">
+			<div class="text-muted-foreground text-sm">
 				Showing {sortedLabs.length} of {data.labs.length} labs
 			</div>
 			<SortDropdown bind:value={$sortBy} />
@@ -123,7 +123,7 @@
 		<!-- Loading skeletons -->
 		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{#each Array(6) as _, i (i)}
-				<div class="rounded-lg border-border bg-background p-6">
+				<div class="border-border bg-background rounded-lg p-6">
 					<Skeleton className="mb-3" width="80px" height="20px" />
 					<Skeleton className="mb-2" width="100%" height="28px" />
 					<Skeleton className="mb-4" width="100%" height="40px" />
@@ -149,8 +149,8 @@
 				{/each}
 			</div>
 		{:else}
-			<div class="rounded-lg border-border bg-background p-12 text-center">
-				<p class="text-lg text-muted-foreground">No labs match your filters</p>
+			<div class="border-border bg-background rounded-lg p-12 text-center">
+				<p class="text-muted-foreground text-lg">No labs match your filters</p>
 				<button
 					onclick={() => {
 						$searchQuery = '';
@@ -158,7 +158,7 @@
 						$selectedCategories = [];
 						$completionFilter = null;
 					}}
-					class="mt-4 text-sm text-primary hover:underline"
+					class="text-primary mt-4 text-sm hover:underline"
 				>
 					Clear all filters
 				</button>

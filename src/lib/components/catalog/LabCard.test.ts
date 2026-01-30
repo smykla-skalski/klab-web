@@ -55,7 +55,7 @@ describe('LabCard', () => {
 		render(LabCard, { props: { lab: mockLab } });
 		const badge = screen.getByText('Beginner');
 		expect(badge.className).toContain('bg-muted/50');
-		expect(badge.className).toContain('text-green-600');
+		expect(badge.className).toContain('text-green-800');
 	});
 
 	it('applies correct difficulty color for Intermediate', () => {
@@ -63,7 +63,7 @@ describe('LabCard', () => {
 		render(LabCard, { props: { lab: intermediateLab } });
 		const badge = screen.getByText('Intermediate');
 		expect(badge.className).toContain('bg-muted/50');
-		expect(badge.className).toContain('text-yellow-600');
+		expect(badge.className).toContain('text-yellow-800');
 	});
 
 	it('applies correct difficulty color for Advanced', () => {
@@ -71,7 +71,7 @@ describe('LabCard', () => {
 		render(LabCard, { props: { lab: advancedLab } });
 		const badge = screen.getByText('Advanced');
 		expect(badge.className).toContain('bg-muted/50');
-		expect(badge.className).toContain('text-red-600');
+		expect(badge.className).toContain('text-red-800');
 	});
 
 	it('shows completion icon when completed', () => {

@@ -8,16 +8,16 @@
 	<title>Error - klab</title>
 </svelte:head>
 
-<main class="flex min-h-screen items-center justify-center bg-background px-4">
+<main class="bg-background flex min-h-screen items-center justify-center px-4">
 	<div class="text-center">
 		{#if $page.status === 404}
-			<h1 class="mb-4 text-6xl font-bold text-foreground">404</h1>
-			<h2 class="mb-4 text-2xl font-semibold text-foreground">Page Not Found</h2>
-			<p class="mb-8 text-muted-foreground">The page you're looking for doesn't exist.</p>
+			<h1 class="text-foreground mb-4 text-6xl font-bold">404</h1>
+			<h2 class="text-foreground mb-4 text-2xl font-semibold">Page Not Found</h2>
+			<p class="text-muted-foreground mb-8">The page you're looking for doesn't exist.</p>
 		{:else}
-			<h1 class="mb-4 text-6xl font-bold text-foreground">{$page.status}</h1>
-			<h2 class="mb-4 text-2xl font-semibold text-foreground">Something went wrong</h2>
-			<p class="mb-8 text-muted-foreground">
+			<h1 class="text-foreground mb-4 text-6xl font-bold">{$page.status}</h1>
+			<h2 class="text-foreground mb-4 text-2xl font-semibold">Something went wrong</h2>
+			<p class="text-muted-foreground mb-8">
 				{$page.error?.message || 'An unexpected error occurred'}
 			</p>
 		{/if}

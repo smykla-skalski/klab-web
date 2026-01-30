@@ -131,7 +131,6 @@ describe('registerShortcut', () => {
 		expect(handler).not.toHaveBeenCalled();
 	});
 
-
 	it('does not trigger when wrong modifier is pressed', () => {
 		const handler = vi.fn();
 		cleanup = registerShortcut('Ctrl+s', handler);

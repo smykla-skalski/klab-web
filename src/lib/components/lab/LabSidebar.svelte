@@ -10,7 +10,7 @@
 
 	let { lab, onRevealHint }: Props = $props();
 
-	let hintPanelRef: HintPanel;
+	let hintPanelRef: HintPanel | undefined = undefined;
 
 	$effect(() => {
 		if (hintPanelRef && onRevealHint) {

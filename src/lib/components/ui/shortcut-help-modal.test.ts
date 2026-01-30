@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import { render, screen, cleanup } from '@testing-library/svelte';
+import { render, screen, cleanup, waitFor } from '@testing-library/svelte';
 import userEvent from '@testing-library/user-event';
 import ShortcutHelpModal from './shortcut-help-modal.svelte';
 
@@ -41,7 +41,7 @@ describe('ShortcutHelpModal', () => {
 		expect(screen.getByText('Toggle theme')).toBeTruthy();
 		expect(screen.getByText('Show keyboard shortcuts')).toBeTruthy();
 		expect(screen.getByText('Ctrl+Shift+T')).toBeTruthy();
-		expect(screen.getByText('?')).toBeTruthy();
+		expect(screen.getByText('Shift+/')).toBeTruthy();
 	});
 
 	it('displays lab shortcuts', () => {
@@ -70,7 +70,7 @@ describe('ShortcutHelpModal', () => {
 			}
 		});
 
-		const closeButton = screen.getByRole('button', { name: /close/i });
+		const closeButton = screen.getByRole('button', { name: 'Close shortcuts help' });
 		await user.click(closeButton);
 
 		// Check that the open state changed by verifying dialog is not visible
@@ -86,10 +86,12 @@ describe('ShortcutHelpModal', () => {
 			}
 		});
 
-		const backdrop = screen.getByLabelText('Close');
+		const backdrop = screen.getByRole('dialog');
 		await user.click(backdrop);
 
-		expect(component.container.querySelector('[role="dialog"]')).toBeNull();
+		await waitFor(() => {
+			expect(component.container.querySelector('[role="dialog"]')).toBeNull();
+		});
 	});
 
 	it('has proper accessibility attributes', () => {
@@ -99,10 +101,10 @@ describe('ShortcutHelpModal', () => {
 			}
 		});
 
-		const dialog = screen.getByRole('dialog');
-		expect(dialog.getAttribute('aria-modal')).toBe('true');
-		expect(dialog.getAttribute('aria-labelledby')).toBe('shortcut-title');
-		expect(dialog.getAttribute('tabindex')).toBe('-1');
+		const backdrop = screen.getByRole('dialog');
+		expect(backdrop.getAttribute('aria-modal')).toBe('true');
+		expect(backdrop.getAttribute('aria-labelledby')).toBe('shortcut-title');
+		expect(backdrop.getAttribute('tabindex')).toBe('-1');
 	});
 
 	it('renders keyboard shortcuts as kbd elements', () => {

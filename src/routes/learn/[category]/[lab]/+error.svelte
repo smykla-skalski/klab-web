@@ -8,16 +8,16 @@
 	<title>Error - klab</title>
 </svelte:head>
 
-<main class="flex min-h-screen items-center justify-center bg-background px-4">
+<main class="bg-background flex min-h-screen items-center justify-center px-4">
 	<div class="text-center">
 		{#if $page.status === 404}
-			<h1 class="mb-4 text-4xl font-bold text-foreground">Lab Not Found</h1>
-			<p class="mb-8 text-muted-foreground">
+			<h1 class="text-foreground mb-4 text-4xl font-bold">Lab Not Found</h1>
+			<p class="text-muted-foreground mb-8">
 				The lab you're looking for doesn't exist or has been moved.
 			</p>
 		{:else}
-			<h1 class="mb-4 text-4xl font-bold text-foreground">Connection Error</h1>
-			<p class="mb-8 text-muted-foreground">
+			<h1 class="text-foreground mb-4 text-4xl font-bold">Connection Error</h1>
+			<p class="text-muted-foreground mb-8">
 				{$page.error?.message || 'Failed to connect to lab environment. Please try again.'}
 			</p>
 		{/if}
@@ -32,10 +32,7 @@
 					Retry
 				</Button>
 			{/if}
-			<Button
-				href="/learn/{$page.params.category}/{$page.params.lab}/knowledge"
-				variant="ghost"
-			>
+			<Button href="/learn/{$page.params.category}/{$page.params.lab}/knowledge" variant="ghost">
 				<BookOpen class="mr-2 h-4 w-4" />
 				View Knowledge Base
 			</Button>

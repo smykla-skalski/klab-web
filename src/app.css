@@ -35,20 +35,20 @@
 /* Light theme */
 [data-theme='light'] {
 	--color-background: oklch(98% 0.01 240);
-	--color-foreground: oklch(20% 0.02 240);
-	--color-primary: oklch(25% 0.02 240);
+	--color-foreground: oklch(10% 0.02 240);
+	--color-primary: oklch(15% 0.02 240);
 	--color-primary-foreground: oklch(98% 0.01 210);
 	--color-secondary: oklch(95% 0.01 223);
 	--color-secondary-foreground: oklch(11% 0.02 222);
 	--color-muted: oklch(95% 0.01 223);
-	--color-muted-foreground: oklch(43% 0.02 215);
+	--color-muted-foreground: oklch(30% 0.02 215);
 	--color-accent: oklch(93% 0.02 216);
 	--color-accent-foreground: oklch(11% 0.02 222);
 	--color-destructive: oklch(50% 0.15 25);
 	--color-destructive-foreground: oklch(98% 0.01 210);
 	--color-border: oklch(88% 0.02 216);
 	--color-input: oklch(88% 0.02 216);
-	--color-ring: oklch(43% 0.02 215);
+	--color-ring: oklch(30% 0.02 215);
 
 	/* Terminal */
 	--color-terminal-bg: oklch(100% 0 0);
@@ -67,5 +67,5 @@ body {
 
 /* Enhanced focus indicators */
 *:focus-visible {
-	@apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+	@apply ring-ring ring-offset-background ring-2 ring-offset-2 outline-none;
 }

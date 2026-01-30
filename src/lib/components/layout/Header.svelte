@@ -8,13 +8,13 @@
 
 <header class="border-border bg-background border-b">
 	<div class="container mx-auto flex h-16 items-center justify-between px-4">
-		<a href="/" class="text-xl font-bold">klab</a>
+		<a href="/" class="text-foreground text-xl font-bold">klab</a>
 
 		<!-- Desktop Navigation -->
 		<nav class="hidden items-center gap-6 md:flex">
-			<a href="/learn" class="hover:text-primary text-sm transition-colors">Learn</a>
-			<a href="/about" class="hover:text-primary text-sm transition-colors">About</a>
-			<a href="/docs" class="hover:text-primary text-sm transition-colors">Docs</a>
+			<a href="/learn" class="text-foreground hover:text-primary text-sm transition-colors">Learn</a>
+			<a href="/about" class="text-foreground hover:text-primary text-sm transition-colors">About</a>
+			<a href="/docs" class="text-foreground hover:text-primary text-sm transition-colors">Docs</a>
 			<Button variant="ghost" size="icon" onclick={toggleMode} aria-label="Toggle theme">
 				{#if mode.current === 'dark'}
 					<Sun class="h-5 w-5" />
@@ -42,21 +42,21 @@
 			<div class="flex flex-col gap-4">
 				<a
 					href="/learn"
-					class="hover:text-primary text-sm transition-colors"
+					class="text-foreground hover:text-primary text-sm transition-colors"
 					onclick={() => (mobileMenuOpen = false)}
 				>
 					Learn
 				</a>
 				<a
 					href="/about"
-					class="hover:text-primary text-sm transition-colors"
+					class="text-foreground hover:text-primary text-sm transition-colors"
 					onclick={() => (mobileMenuOpen = false)}
 				>
 					About
 				</a>
 				<a
 					href="/docs"
-					class="hover:text-primary text-sm transition-colors"
+					class="text-foreground hover:text-primary text-sm transition-colors"
 					onclick={() => (mobileMenuOpen = false)}
 				>
 					Docs

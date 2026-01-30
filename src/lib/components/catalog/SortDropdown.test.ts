@@ -63,7 +63,7 @@ describe('SortDropdown', () => {
 
 		expect(select.className).toContain('rounded-lg');
 		expect(select.className).toContain('border');
-		expect(select.className).toContain('focus:border-blue-500');
+		expect(select.className).toContain('focus:ring-2');
 	});
 
 	it('options have correct values', () => {

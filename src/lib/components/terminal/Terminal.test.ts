@@ -150,7 +150,6 @@ describe('Terminal', () => {
 		});
 	});
 
-
 	it('fits terminal to container', () => {
 		render(Terminal, {
 			props: {}

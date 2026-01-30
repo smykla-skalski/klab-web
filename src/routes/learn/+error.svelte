@@ -8,10 +8,10 @@
 	<title>Error - klab</title>
 </svelte:head>
 
-<main class="flex min-h-screen items-center justify-center bg-background px-4">
+<main class="bg-background flex min-h-screen items-center justify-center px-4">
 	<div class="text-center">
-		<h1 class="mb-4 text-4xl font-bold text-foreground">Unable to load labs</h1>
-		<p class="mb-8 text-muted-foreground">
+		<h1 class="text-foreground mb-4 text-4xl font-bold">Unable to load labs</h1>
+		<p class="text-muted-foreground mb-8">
 			{$page.error?.message || 'Failed to fetch lab catalog. Please try again.'}
 		</p>
 		<div class="flex justify-center gap-4">

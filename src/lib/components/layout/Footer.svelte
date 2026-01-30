@@ -6,14 +6,14 @@
 	<div class="container mx-auto px-4 py-8">
 		<div class="grid gap-8 md:grid-cols-3">
 			<div>
-				<h3 class="mb-4 text-sm font-semibold">klab</h3>
+				<h3 class="text-foreground mb-4 text-sm font-semibold">klab</h3>
 				<p class="text-muted-foreground text-sm">
 					Interactive learning platform for hands-on technical education.
 				</p>
 			</div>
 
 			<div>
-				<h3 class="mb-4 text-sm font-semibold">Resources</h3>
+				<h3 class="text-foreground mb-4 text-sm font-semibold">Resources</h3>
 				<ul class="text-muted-foreground space-y-2 text-sm">
 					<li><a href="/learn" class="hover:text-primary transition-colors">Browse Labs</a></li>
 					<li><a href="/docs" class="hover:text-primary transition-colors">Documentation</a></li>
@@ -22,7 +22,7 @@
 			</div>
 
 			<div>
-				<h3 class="mb-4 text-sm font-semibold">Community</h3>
+				<h3 class="text-foreground mb-4 text-sm font-semibold">Community</h3>
 				<ul class="text-muted-foreground space-y-2 text-sm">
 					<li>
 						<a
