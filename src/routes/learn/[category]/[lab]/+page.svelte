@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
+	import { env } from '$env/dynamic/public';
 	import Button from '$lib/components/ui/button.svelte';
 	import ConfirmModal from '$lib/components/ui/confirm-modal.svelte';
 	import Skeleton from '$lib/components/ui/skeleton.svelte';
@@ -121,7 +122,7 @@
 		<div class="flex h-full flex-col">
 			<div class="flex-1 p-4">
 				{#if Terminal}
-					<Terminal bind:this={terminal} fontSize={14} />
+					<Terminal bind:this={terminal} wsUrl={env.PUBLIC_WS_URL} fontSize={14} />
 				{:else}
 					<div class="flex h-full flex-col gap-2">
 						<Skeleton width="100%" height="40px" />
