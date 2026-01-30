@@ -1,37 +1,27 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { ArrowLeft } from 'lucide-svelte';
+	import { ArticleRenderer } from '$lib/components/knowledge';
+	import type { PageData } from './$types';
 
-	const category = $derived($page.params.category);
-	const labId = $derived($page.params.lab);
+	let { data }: { data: PageData } = $props();
 </script>
 
 <svelte:head>
-	<title>Knowledge - {category}/{labId} - klab</title>
+	<title>Knowledge - {data.labId} - klab</title>
 </svelte:head>
 
 <div class="container mx-auto px-4 py-12">
 	<div class="mb-8">
-		<a href="/learn/{category}/{labId}" class="text-muted-foreground hover:text-primary text-sm">
-			← Back to lab
+		<a
+			href="/learn/{data.category}/{data.labId}"
+			class="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
+		>
+			<ArrowLeft class="h-4 w-4" />
+			Back to lab
 		</a>
 	</div>
 
-	<article class="prose prose-invert mx-auto max-w-3xl">
-		<h1 class="capitalize">{labId} Knowledge Article</h1>
-
-		<p>
-			This knowledge article will contain detailed explanations, concepts, and references for the {labId}
-			lab.
-		</p>
-
-		<h2>Overview</h2>
-		<p>Knowledge articles will be implemented in Phase 3 with markdown rendering support.</p>
-
-		<h2>Key Concepts</h2>
-		<ul>
-			<li>Concept 1</li>
-			<li>Concept 2</li>
-			<li>Concept 3</li>
-		</ul>
-	</article>
+	<div class="mx-auto max-w-4xl rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+		<ArticleRenderer html={data.html} />
+	</div>
 </div>

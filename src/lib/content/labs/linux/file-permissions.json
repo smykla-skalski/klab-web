@@ -1,0 +1,18 @@
+{
+	"id": "file-permissions",
+	"title": "Linux File Permissions",
+	"category": "linux",
+	"description": "Master Unix file permissions and ownership using chmod and chown",
+	"objective": "Create a script file and set it to be executable only by the owner",
+	"difficulty": "Beginner",
+	"duration": "10 min",
+	"tags": ["permissions", "chmod", "ownership", "security"],
+	"hints": [
+		"Use 'touch' to create a file",
+		"chmod changes file permissions",
+		"Owner execute permission is represented by 'u+x'",
+		"Numeric mode 700 gives rwx to owner only"
+	],
+	"solution": "touch script.sh && chmod 700 script.sh",
+	"knowledgeArticle": "file-permissions"
+}

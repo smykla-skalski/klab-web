@@ -8,8 +8,12 @@
 	import { LabContainer, LabSidebar, ValidationStatus } from '$lib/components/lab';
 	import { BookOpen, CheckCircle } from 'lucide-svelte';
 	import { currentLab } from '$lib/stores/lab';
-	import type { Lab } from '$lib/stores/lab';
+	import { progress } from '$lib/stores/progress';
+	import { toast } from 'svelte-sonner';
+	import type { PageData } from './$types';
 	import type TerminalType from '$lib/components/terminal/Terminal.svelte';
+
+	let { data }: { data: PageData } = $props();
 
 	let Terminal: any = $state(null);
 
@@ -24,27 +28,11 @@
 		}
 	});
 
-	const category = $derived($page.params.category ?? 'kubernetes');
-	const labId = $derived($page.params.lab ?? 'basic-deployment');
-
-	const mockLab = $derived.by<Lab>(() => ({
-		id: labId,
-		title: `${labId.charAt(0).toUpperCase() + labId.slice(1).replace(/-/g, ' ')} Lab`,
-		category: category,
-		objective:
-			'Configure a basic Kubernetes deployment with 3 replicas and expose it via a LoadBalancer service. Verify the deployment is healthy and accessible.',
-		hints: [
-			'Start by creating a deployment YAML file with the kubectl create command and --dry-run=client flag.',
-			'Use kubectl expose to create a service for your deployment. Remember to specify the type as LoadBalancer.',
-			'Check the status of your pods with kubectl get pods. All 3 replicas should be in Running state.',
-			'Get the external IP of your service with kubectl get svc. It may take a moment to provision.'
-		],
-		solution:
-			'kubectl create deployment nginx --image=nginx --replicas=3 && kubectl expose deployment nginx --port=80 --type=LoadBalancer'
-	}));
+	const category = $derived(data.lab.category);
+	const labId = $derived(data.lab.id);
 
 	$effect(() => {
-		currentLab.set(mockLab);
+		currentLab.set(data.lab);
 	});
 
 	let terminal: TerminalType = $state(undefined!);
@@ -64,6 +52,13 @@
 				? 'All checks passed! Your deployment is correctly configured.'
 				: 'Some checks failed. Make sure your deployment has 3 replicas and the service is of type LoadBalancer.';
 			validationTimeoutId = null;
+
+			if (success) {
+				progress.markLabComplete(category, labId);
+				toast.success('Lab completed!', {
+					description: `You've mastered ${data.lab.title}`
+				});
+			}
 		}, 2000);
 	}
 
@@ -72,7 +67,7 @@
 	}
 
 	function handleConfirmSolution() {
-		terminal?.write(`\r\n$ ${mockLab.solution}\r\n`);
+		terminal?.write(`\r\n$ ${data.lab.solution}\r\n`);
 	}
 
 	function handleCancelSolution() {
@@ -91,12 +86,12 @@
 </script>
 
 <svelte:head>
-	<title>{mockLab.title} - klab</title>
+	<title>{data.lab.title} - klab</title>
 </svelte:head>
 
-<LabContainer lab={mockLab}>
+<LabContainer lab={data.lab}>
 	{#snippet sidebar()}
-		<LabSidebar lab={mockLab} />
+		<LabSidebar lab={data.lab} />
 	{/snippet}
 
 	{#snippet main()}

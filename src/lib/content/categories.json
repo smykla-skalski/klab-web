@@ -1,0 +1,20 @@
+[
+	{
+		"id": "kubernetes",
+		"name": "Kubernetes",
+		"description": "Container orchestration platform",
+		"icon": "⚓"
+	},
+	{
+		"id": "linux",
+		"name": "Linux",
+		"description": "Unix-like operating system",
+		"icon": "🐧"
+	},
+	{
+		"id": "docker",
+		"name": "Docker",
+		"description": "Container platform",
+		"icon": "🐳"
+	}
+]
