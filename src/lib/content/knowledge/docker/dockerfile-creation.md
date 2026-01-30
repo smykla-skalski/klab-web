@@ -24,7 +24,7 @@ Every Dockerfile starts with a base image:
 ```dockerfile
 FROM ubuntu:22.04                # Specific version
 FROM node:18-alpine              # Alpine variant (smaller)
-FROM python:3.11-slim            # Slim variant
+FROM python:3.14-slim            # Slim variant
 FROM scratch                     # Empty image (for static binaries)
 ```
 
@@ -209,7 +209,7 @@ CMD ["node", "server.js"]
 ### Python Application
 
 ```dockerfile
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
