@@ -1,0 +1,18 @@
+{
+	"id": "service-networking",
+	"title": "Kubernetes Service Networking",
+	"category": "kubernetes",
+	"description": "Expose applications using Kubernetes Services and understand service types",
+	"objective": "Create a ClusterIP service to expose an nginx deployment",
+	"difficulty": "Intermediate",
+	"duration": "20 min",
+	"tags": ["service", "networking", "clusterip", "expose"],
+	"hints": [
+		"Use 'kubectl expose deployment' to create a service",
+		"Specify --port and --target-port for the service",
+		"ClusterIP is the default service type",
+		"Test connectivity with 'kubectl run' to create a test pod"
+	],
+	"solution": "kubectl expose deployment nginx-deployment --port=80 --target-port=80 --name=nginx-service",
+	"knowledgeArticle": "service-networking"
+}

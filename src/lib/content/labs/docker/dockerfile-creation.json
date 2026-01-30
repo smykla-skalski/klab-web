@@ -1,0 +1,19 @@
+{
+	"id": "dockerfile-creation",
+	"title": "Dockerfile Creation",
+	"category": "docker",
+	"description": "Build custom Docker images using Dockerfile instructions",
+	"objective": "Create a Dockerfile for a Node.js application and build an image",
+	"difficulty": "Intermediate",
+	"duration": "20 min",
+	"tags": ["dockerfile", "build", "images", "nodejs"],
+	"hints": [
+		"Start with a base image using FROM",
+		"Use WORKDIR to set the working directory",
+		"COPY transfers files into the image",
+		"RUN executes commands during build",
+		"CMD defines the default command"
+	],
+	"solution": "cat > Dockerfile << EOF\nFROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nCMD [\"npm\", \"start\"]\nEOF\n\ndocker build -t my-node-app .",
+	"knowledgeArticle": "dockerfile-creation"
+}

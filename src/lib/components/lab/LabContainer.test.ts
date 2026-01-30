@@ -9,8 +9,14 @@ const mockLab: Lab = {
 	id: 'intro',
 	title: 'Introduction to Kubernetes',
 	category: 'kubernetes',
+	description: 'Learn Kubernetes basics',
 	objective: 'Complete the lab',
-	hints: []
+	difficulty: 'Beginner',
+	duration: '15 min',
+	tags: ['kubernetes', 'beginner'],
+	hints: [],
+	solution: 'kubectl get pods',
+	knowledgeArticle: 'intro'
 };
 
 describe('LabContainer', () => {

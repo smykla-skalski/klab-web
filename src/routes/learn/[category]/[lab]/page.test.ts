@@ -4,6 +4,21 @@ import userEvent from '@testing-library/user-event';
 import { writable } from 'svelte/store';
 import LabPage from './+page.svelte';
 import { goto } from '$app/navigation';
+import type { Lab } from '$lib/stores/lab';
+
+const mockLab: Lab = {
+	id: 'intro',
+	title: 'Introduction to Kubernetes',
+	category: 'kubernetes',
+	description: 'Learn Kubernetes basics',
+	objective: 'Complete the lab',
+	difficulty: 'Beginner',
+	duration: '15 min',
+	tags: ['kubernetes', 'beginner'],
+	hints: ['Hint 1', 'Hint 2'],
+	solution: 'kubectl get pods',
+	knowledgeArticle: 'intro'
+};
 
 vi.mock('$app/stores', () => ({
 	page: writable({
@@ -33,6 +48,8 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 describe('Lab Page', () => {
+	const renderLabPage = () => render(LabPage, { props: { data: { lab: mockLab } } });
+
 	beforeEach(() => {
 		vi.clearAllMocks();
 		vi.useFakeTimers();
@@ -45,32 +62,32 @@ describe('Lab Page', () => {
 	});
 
 	it('renders lab title', () => {
-		render(LabPage);
-		expect(screen.getByText(/intro lab/i)).toBeTruthy();
+		renderLabPage();
+		expect(screen.getByText(/Introduction to Kubernetes/i)).toBeTruthy();
 	});
 
 	it('renders category', () => {
-		render(LabPage);
+		renderLabPage();
 		expect(screen.getByText('kubernetes')).toBeTruthy();
 	});
 
 	it('renders check solution button', () => {
-		render(LabPage);
+		renderLabPage();
 		expect(screen.getByRole('button', { name: /check solution/i })).toBeTruthy();
 	});
 
 	it('renders knowledge button', () => {
-		render(LabPage);
+		renderLabPage();
 		expect(screen.getByRole('button', { name: /knowledge/i })).toBeTruthy();
 	});
 
 	it('renders give up button', () => {
-		render(LabPage);
+		renderLabPage();
 		expect(screen.getByRole('button', { name: /give up/i })).toBeTruthy();
 	});
 
 	it('shows terminal loading state', () => {
-		render(LabPage);
+		renderLabPage();
 		expect(screen.getByText('Loading terminal...')).toBeTruthy();
 	});
 
@@ -78,7 +95,7 @@ describe('Lab Page', () => {
 		const user = userEvent.setup({ delay: null });
 		vi.spyOn(Math, 'random').mockReturnValue(0.9);
 
-		render(LabPage);
+		renderLabPage();
 
 		const checkButton = screen.getByRole('button', { name: /check solution/i });
 		await user.click(checkButton);
@@ -98,7 +115,7 @@ describe('Lab Page', () => {
 		const user = userEvent.setup({ delay: null });
 		vi.spyOn(Math, 'random').mockReturnValue(0.1);
 
-		render(LabPage);
+		renderLabPage();
 
 		const checkButton = screen.getByRole('button', { name: /check solution/i });
 		await user.click(checkButton);
@@ -117,7 +134,7 @@ describe('Lab Page', () => {
 	it('opens confirm modal when give up button clicked', async () => {
 		const user = userEvent.setup({ delay: null });
 
-		render(LabPage);
+		renderLabPage();
 
 		const giveUpButton = screen.getByRole('button', { name: /give up/i });
 		await user.click(giveUpButton);
@@ -131,7 +148,7 @@ describe('Lab Page', () => {
 	it('closes modal when cancel is clicked', async () => {
 		const user = userEvent.setup({ delay: null });
 
-		render(LabPage);
+		renderLabPage();
 
 		const giveUpButton = screen.getByRole('button', { name: /give up/i });
 		await user.click(giveUpButton);
@@ -151,7 +168,7 @@ describe('Lab Page', () => {
 	it('writes solution to terminal when confirmed', async () => {
 		const user = userEvent.setup({ delay: null });
 
-		const { component: _component } = render(LabPage);
+		const { component: _component } = renderLabPage();
 
 		const giveUpButton = screen.getByRole('button', { name: /give up/i });
 		await user.click(giveUpButton);
@@ -173,7 +190,7 @@ describe('Lab Page', () => {
 	it('navigates to knowledge page when knowledge button clicked', async () => {
 		const user = userEvent.setup({ delay: null });
 
-		render(LabPage);
+		renderLabPage();
 
 		const knowledgeButton = screen.getByRole('button', { name: /knowledge/i });
 		await user.click(knowledgeButton);
@@ -185,7 +202,7 @@ describe('Lab Page', () => {
 		const user = userEvent.setup({ delay: null });
 		const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
 
-		const { unmount } = render(LabPage);
+		const { unmount } = renderLabPage();
 
 		const checkButton = screen.getByRole('button', { name: /check solution/i });
 		await user.click(checkButton);
@@ -200,7 +217,7 @@ describe('Lab Page', () => {
 	it('does not clear timeout on unmount if no validation in progress', () => {
 		const clearTimeoutSpy = vi.spyOn(global, 'clearTimeout');
 
-		const { unmount } = render(LabPage);
+		const { unmount } = renderLabPage();
 		const callCountBefore = clearTimeoutSpy.mock.calls.length;
 
 		unmount();
