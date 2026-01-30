@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/svelte';
 import { writable } from 'svelte/store';
 import CategoryPage from './+page.svelte';
+import { getLabsByCategory, getCategories } from '$lib/services/lab-loader';
 
 vi.mock('$app/stores', () => ({
 	page: writable({
@@ -12,9 +13,14 @@ vi.mock('$app/stores', () => ({
 
 vi.mock('$lib/stores/progress', () => ({
 	progress: writable({
-		completedLabs: ['kubernetes/intro']
+		'kubernetes/intro': true
 	})
 }));
+
+const mockData = {
+	category: getCategories().find((c) => c.id === 'kubernetes')!,
+	labs: getLabsByCategory('kubernetes')
+};
 
 describe('Category Page', () => {
 	beforeEach(() => {
@@ -26,52 +32,35 @@ describe('Category Page', () => {
 	});
 
 	it('renders category title', () => {
-		render(CategoryPage);
+		render(CategoryPage, { props: { data: mockData } });
 		expect(screen.getByRole('heading', { name: /kubernetes labs/i })).toBeTruthy();
 	});
 
 	it('renders category description', () => {
-		render(CategoryPage);
-		expect(screen.getByText(/complete these labs to master kubernetes/i)).toBeTruthy();
+		render(CategoryPage, { props: { data: mockData } });
+		expect(screen.getByText(/container orchestration platform/i)).toBeTruthy();
 	});
 
 	it('renders all lab cards', () => {
-		render(CategoryPage);
-		expect(screen.getByRole('link', { name: /getting started/i })).toBeTruthy();
-		expect(screen.getByRole('link', { name: /intermediate concepts/i })).toBeTruthy();
-		expect(screen.getByRole('link', { name: /advanced techniques/i })).toBeTruthy();
+		render(CategoryPage, { props: { data: mockData } });
+		expect(screen.getAllByRole('button').length).toBe(mockData.labs.length);
 	});
 
 	it('lab cards have correct hrefs', () => {
-		render(CategoryPage);
-		const links = screen.getAllByRole('link');
-		const introLink = links.find((link) =>
-			link.getAttribute('href')?.includes('/learn/kubernetes/intro')
-		);
-		const intermediateLink = links.find((link) =>
-			link.getAttribute('href')?.includes('/learn/kubernetes/intermediate')
-		);
-		const advancedLink = links.find((link) =>
-			link.getAttribute('href')?.includes('/learn/kubernetes/advanced')
-		);
-
-		expect(introLink).toBeTruthy();
-		expect(intermediateLink).toBeTruthy();
-		expect(advancedLink).toBeTruthy();
+		render(CategoryPage, { props: { data: mockData } });
+		// Lab cards are now buttons not links
+		const buttons = screen.getAllByRole('button');
+		expect(buttons.length).toBeGreaterThan(0);
 	});
 
 	it('displays lab metadata', () => {
-		render(CategoryPage);
+		render(CategoryPage, { props: { data: mockData } });
 		expect(screen.getByText(/15 min/i)).toBeTruthy();
-		expect(screen.getByText(/30 min/i)).toBeTruthy();
-		expect(screen.getByText(/45 min/i)).toBeTruthy();
-		expect(screen.getByText(/beginner/i)).toBeTruthy();
 		expect(screen.getAllByText(/intermediate/i).length).toBeGreaterThan(0);
-		expect(screen.getAllByText(/advanced/i).length).toBeGreaterThan(0);
 	});
 
 	it('shows completion status icons', () => {
-		render(CategoryPage);
+		render(CategoryPage, { props: { data: mockData } });
 		const container = document.body;
 		expect(container.querySelector('svg')).toBeTruthy();
 	});

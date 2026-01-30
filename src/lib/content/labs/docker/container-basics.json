@@ -1,0 +1,18 @@
+{
+	"id": "container-basics",
+	"title": "Docker Container Basics",
+	"category": "docker",
+	"description": "Start your container journey by running and managing Docker containers",
+	"objective": "Run an nginx container in detached mode and expose it on port 8080",
+	"difficulty": "Beginner",
+	"duration": "10 min",
+	"tags": ["containers", "docker run", "ports", "nginx"],
+	"hints": [
+		"Use 'docker run' to start a container",
+		"The -d flag runs the container in detached mode",
+		"The -p flag maps host port to container port (host:container)",
+		"nginx listens on port 80 by default"
+	],
+	"solution": "docker run -d -p 8080:80 nginx",
+	"knowledgeArticle": "container-basics"
+}

@@ -1,0 +1,18 @@
+{
+	"id": "basic-deployment",
+	"title": "Basic Kubernetes Deployment",
+	"category": "kubernetes",
+	"description": "Learn to create and manage Kubernetes deployments with replicas and labels",
+	"objective": "Create a deployment with 3 nginx replicas and verify it's running",
+	"difficulty": "Beginner",
+	"duration": "15 min",
+	"tags": ["deployment", "pods", "replicas", "nginx"],
+	"hints": [
+		"Use 'kubectl create deployment' to create a deployment",
+		"The --replicas flag sets the number of pod replicas",
+		"Use 'kubectl get deployments' to verify creation",
+		"Check pods with 'kubectl get pods'"
+	],
+	"solution": "kubectl create deployment nginx-deployment --image=nginx --replicas=3",
+	"knowledgeArticle": "basic-deployment"
+}

@@ -1,0 +1,18 @@
+{
+	"id": "process-management",
+	"title": "Process Management",
+	"category": "linux",
+	"description": "Learn to monitor and control Linux processes using ps, top, and kill",
+	"objective": "Find a running process by name and gracefully terminate it",
+	"difficulty": "Beginner",
+	"duration": "15 min",
+	"tags": ["processes", "ps", "kill", "signals"],
+	"hints": [
+		"Use 'ps aux | grep <name>' to find processes",
+		"The PID (Process ID) is in the second column",
+		"kill -15 sends SIGTERM for graceful shutdown",
+		"killall can terminate processes by name"
+	],
+	"solution": "killall -15 <process-name>",
+	"knowledgeArticle": "process-management"
+}
