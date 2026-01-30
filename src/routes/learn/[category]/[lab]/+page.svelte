@@ -15,8 +15,12 @@
 
 	onMount(async () => {
 		if (browser) {
-			const module = await import('$lib/components/terminal');
-			Terminal = module.Terminal;
+			try {
+				const module = await import('$lib/components/terminal');
+				Terminal = module.Terminal;
+			} catch (error) {
+				console.error('Failed to load Terminal component:', error);
+			}
 		}
 	});
 
