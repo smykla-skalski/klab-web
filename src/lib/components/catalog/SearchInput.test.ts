@@ -104,7 +104,7 @@ describe('SearchInput', () => {
 
 		expect(input.className).toContain('rounded-lg');
 		expect(input.className).toContain('border');
-		expect(input.className).toContain('focus:border-blue-500');
+		expect(input.className).toContain('focus:ring-2');
 	});
 
 	it('allows clearing input', async () => {

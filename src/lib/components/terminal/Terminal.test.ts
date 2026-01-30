@@ -2,6 +2,26 @@ import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import { render, cleanup } from '@testing-library/svelte';
 import Terminal from './Terminal.svelte';
 
+vi.mock('mode-watcher', () => ({
+	mode: { current: 'dark' },
+	toggleMode: vi.fn(),
+	setMode: vi.fn()
+}));
+
+vi.mock('svelte-sonner', () => ({
+	toast: {
+		error: vi.fn(),
+		success: vi.fn()
+	}
+}));
+
+vi.mock('$lib/stores/terminal', () => ({
+	terminalSession: {
+		set: vi.fn(),
+		subscribe: vi.fn()
+	}
+}));
+
 const mockTerminal = {
 	write: vi.fn(),
 	clear: vi.fn(),
@@ -13,6 +33,9 @@ const mockTerminal = {
 	}),
 	dispose: vi.fn(),
 	loadAddon: vi.fn(),
+	options: {
+		theme: null as any
+	},
 	_onDataCallback: null as ((data: string) => void) | null,
 	_options: null as any
 };
@@ -124,18 +147,6 @@ describe('Terminal', () => {
 		expect(mockTerminal._options.theme).toMatchObject({
 			background: '#000000',
 			foreground: '#7ade7a'
-		});
-	});
-
-	it('applies light theme when specified', () => {
-		render(Terminal, {
-			props: {
-				theme: 'light'
-			}
-		});
-		expect(mockTerminal._options.theme).toMatchObject({
-			background: '#ffffff',
-			foreground: '#000000'
 		});
 	});
 
@@ -261,5 +272,94 @@ describe('Terminal', () => {
 		unmount();
 		expect(mockTerminal.dispose).toHaveBeenCalled();
 		expect(mockWebSocket.close).toHaveBeenCalled();
+	});
+
+	it('exports reconnect function', () => {
+		const component = render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+		expect(component.component.reconnect).toBeDefined();
+	});
+
+	it('reconnects to WebSocket when reconnect called', () => {
+		const component = render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		vi.clearAllMocks();
+
+		component.component.reconnect();
+
+		expect(mockWebSocket.close).toHaveBeenCalled();
+		expect(mockWebSocket.url).toBe('ws://localhost:8080');
+	});
+
+	it('handles reconnect without existing WebSocket', () => {
+		const component = render(Terminal, {
+			props: {}
+		});
+
+		expect(() => component.component.reconnect()).not.toThrow();
+	});
+
+	it('does not send data to closed WebSocket', () => {
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		mockWebSocket.readyState = 3;
+		vi.clearAllMocks();
+
+		mockTerminal._onDataCallback?.('test input');
+
+		expect(mockWebSocket.send).not.toHaveBeenCalled();
+	});
+
+	it('shows toast on WebSocket error with reconnect action', async () => {
+		const { toast } = await import('svelte-sonner');
+
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		mockWebSocket.onerror?.(new Event('error'));
+
+		expect(toast.error).toHaveBeenCalledWith(
+			'Terminal disconnected',
+			expect.objectContaining({
+				description: 'Click reconnect to try again',
+				action: expect.objectContaining({
+					label: 'Reconnect'
+				})
+			})
+		);
+	});
+
+	it('does not write disconnect message on error close', () => {
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+
+		mockWebSocket.onerror?.(new Event('error'));
+		vi.clearAllMocks();
+
+		mockWebSocket.onclose?.(new CloseEvent('close'));
+
+		const writeCalls = mockTerminal.write.mock.calls;
+		const disconnectMessages = writeCalls.filter((call) =>
+			call[0].includes('Disconnected from lab terminal')
+		);
+
+		expect(disconnectMessages.length).toBe(0);
 	});
 });

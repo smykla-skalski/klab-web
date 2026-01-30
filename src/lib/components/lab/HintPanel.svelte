@@ -11,7 +11,7 @@
 	let revealedCount = $state(0);
 	let expandedHints = $state<Set<number>>(new Set());
 
-	function revealNextHint() {
+	export function revealNextHint() {
 		if (revealedCount < hints.length) {
 			revealedCount++;
 			expandedHints = new Set(expandedHints).add(revealedCount - 1);

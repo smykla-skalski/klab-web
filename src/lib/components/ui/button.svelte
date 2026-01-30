@@ -34,6 +34,7 @@
 		href?: string;
 		onclick?: (e: MouseEvent) => void;
 		'aria-label'?: string;
+		title?: string;
 		children?: Snippet;
 	};
 

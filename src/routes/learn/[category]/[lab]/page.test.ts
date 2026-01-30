@@ -88,7 +88,8 @@ describe('Lab Page', () => {
 
 	it('shows terminal loading state', () => {
 		renderLabPage();
-		expect(screen.getByText('Loading terminal...')).toBeTruthy();
+		const skeletons = document.querySelectorAll('.bg-muted.rounded-md');
+		expect(skeletons.length).toBeGreaterThan(0);
 	});
 
 	it('validates solution and shows success', async () => {

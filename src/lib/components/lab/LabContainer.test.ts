@@ -477,4 +477,86 @@ describe('LabContainer', () => {
 
 		removeEventListenerSpy.mockRestore();
 	});
+
+	it('opens mobile drawer when mobile toggle clicked', async () => {
+		Object.defineProperty(window, 'innerWidth', {
+			writable: true,
+			configurable: true,
+			value: 375
+		});
+
+		const user = userEvent.setup();
+		const sidebar = createRawSnippet(() => ({
+			render: () => `<div>Mobile Sidebar</div>`
+		}));
+		const main = createRawSnippet(() => ({
+			render: () => `<div>Main</div>`
+		}));
+
+		render(LabContainer, {
+			props: {
+				lab: mockLab,
+				sidebar,
+				main
+			}
+		});
+
+		const mobileToggle = screen.getByRole('button', { name: /open sidebar/i });
+		await user.click(mobileToggle);
+
+		expect(screen.getByRole('dialog')).toBeTruthy();
+		expect(screen.getByText('Lab Info')).toBeTruthy();
+	});
+
+	it('closes mobile drawer when close button clicked', async () => {
+		const user = userEvent.setup();
+		const sidebar = createRawSnippet(() => ({
+			render: () => `<div>Mobile Sidebar</div>`
+		}));
+		const main = createRawSnippet(() => ({
+			render: () => `<div>Main</div>`
+		}));
+
+		render(LabContainer, {
+			props: {
+				lab: mockLab,
+				sidebar,
+				main
+			}
+		});
+
+		const mobileToggle = screen.getByRole('button', { name: /open sidebar/i });
+		await user.click(mobileToggle);
+
+		const closeButton = screen.getByRole('button', { name: /close sidebar/i });
+		await user.click(closeButton);
+
+		expect(screen.queryByRole('dialog')).toBeNull();
+	});
+
+	it('closes mobile drawer when backdrop clicked', async () => {
+		const user = userEvent.setup();
+		const sidebar = createRawSnippet(() => ({
+			render: () => `<div>Mobile Sidebar</div>`
+		}));
+		const main = createRawSnippet(() => ({
+			render: () => `<div>Main</div>`
+		}));
+
+		render(LabContainer, {
+			props: {
+				lab: mockLab,
+				sidebar,
+				main
+			}
+		});
+
+		const mobileToggle = screen.getByRole('button', { name: /open sidebar/i });
+		await user.click(mobileToggle);
+
+		const backdrop = screen.getByRole('button', { name: /close drawer/i });
+		await user.click(backdrop);
+
+		expect(screen.queryByRole('dialog')).toBeNull();
+	});
 });

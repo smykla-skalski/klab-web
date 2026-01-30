@@ -26,7 +26,7 @@
 
 <div class="space-y-2">
 	<div class="flex items-center justify-between">
-		<label class="text-sm font-medium text-gray-700">{label}</label>
+		<div class="text-sm font-medium text-gray-700">{label}</div>
 		{#if selected.length > 0}
 			<button
 				onclick={clearAll}
