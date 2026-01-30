@@ -6,9 +6,9 @@ test.describe('Learn routes', () => {
 
 		await expect(page.locator('h1')).toContainText('Interactive Labs');
 		// Categories are displayed as lab cards, check for category names in the content
-		await expect(page.getByText(/kubernetes/i)).toBeVisible();
-		await expect(page.getByText(/linux/i)).toBeVisible();
-		await expect(page.getByText(/docker/i)).toBeVisible();
+		await expect(page.getByText(/kubernetes/i).first()).toBeVisible();
+		await expect(page.getByText(/linux/i).first()).toBeVisible();
+		await expect(page.getByText(/docker/i).first()).toBeVisible();
 	});
 
 	test('category page displays labs', async ({ page }) => {

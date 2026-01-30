@@ -5,12 +5,14 @@ Containers are lightweight, isolated environments that package applications with
 ## What is a Container?
 
 A container is a runnable instance of an image. It includes:
+
 - Application code
 - Runtime environment
 - System tools and libraries
 - Settings
 
 **Containers vs VMs:**
+
 - Containers share the host OS kernel (lightweight)
 - VMs include full OS (heavy)
 - Containers start in seconds
@@ -48,12 +50,14 @@ docker run -d --env-file .env app
 ### Volume Mounts
 
 **Bind mounts** (host directory):
+
 ```bash
 docker run -d -v /host/path:/container/path nginx
 docker run -d -v $(pwd):/usr/share/nginx/html nginx
 ```
 
 **Named volumes** (Docker-managed):
+
 ```bash
 docker run -d -v my-volume:/data postgres
 ```

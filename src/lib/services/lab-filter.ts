@@ -62,9 +62,7 @@ export function sortLabs(labs: Lab[], sortBy: SortOption): Lab[] {
 			return sorted.sort((a, b) => a.title.localeCompare(b.title));
 
 		case 'difficulty':
-			return sorted.sort(
-				(a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]
-			);
+			return sorted.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
 
 		case 'duration':
 			return sorted.sort((a, b) => {

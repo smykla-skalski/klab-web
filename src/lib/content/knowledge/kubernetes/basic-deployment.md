@@ -5,13 +5,17 @@ A **Deployment** is a Kubernetes resource that manages a replicated set of Pods.
 ## Key Concepts
 
 ### Replicas
+
 Replicas define how many identical copies of a Pod should run simultaneously. This provides:
+
 - **High availability**: If one Pod fails, others continue serving traffic
 - **Load distribution**: Multiple Pods can handle more requests
 - **Rolling updates**: Update Pods gradually without downtime
 
 ### Labels and Selectors
+
 Deployments use labels to identify and manage their Pods:
+
 ```yaml
 metadata:
   labels:
@@ -21,11 +25,13 @@ metadata:
 ## Creating a Deployment
 
 ### Imperative Method
+
 ```bash
 kubectl create deployment nginx-deployment --image=nginx --replicas=3
 ```
 
 ### Declarative Method
+
 ```yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -42,13 +48,14 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
 ```
 
 Apply with:
+
 ```bash
 kubectl apply -f deployment.yaml
 ```
@@ -56,27 +63,32 @@ kubectl apply -f deployment.yaml
 ## Common Operations
 
 ### View Deployments
+
 ```bash
 kubectl get deployments
 kubectl describe deployment nginx-deployment
 ```
 
 ### Scale Replicas
+
 ```bash
 kubectl scale deployment nginx-deployment --replicas=5
 ```
 
 ### Update Image
+
 ```bash
 kubectl set image deployment/nginx-deployment nginx=nginx:1.21
 ```
 
 ### Check Rollout Status
+
 ```bash
 kubectl rollout status deployment/nginx-deployment
 ```
 
 ### Rollback
+
 ```bash
 kubectl rollout undo deployment/nginx-deployment
 ```
@@ -84,17 +96,19 @@ kubectl rollout undo deployment/nginx-deployment
 ## Best Practices
 
 1. **Always specify resource limits**
+
 ```yaml
 resources:
   limits:
-    cpu: "500m"
-    memory: "512Mi"
+    cpu: '500m'
+    memory: '512Mi'
   requests:
-    cpu: "250m"
-    memory: "256Mi"
+    cpu: '250m'
+    memory: '256Mi'
 ```
 
 2. **Use health checks**
+
 ```yaml
 livenessProbe:
   httpGet:

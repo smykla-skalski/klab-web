@@ -39,7 +39,8 @@ export function syncFiltersToURL(currentFilters: LabFilters, currentSort: SortOp
 	const params = new URLSearchParams();
 
 	if (currentFilters.search) params.set('search', currentFilters.search);
-	if (currentFilters.difficulty?.length) params.set('difficulty', currentFilters.difficulty.join(','));
+	if (currentFilters.difficulty?.length)
+		params.set('difficulty', currentFilters.difficulty.join(','));
 	if (currentFilters.category?.length) params.set('category', currentFilters.category.join(','));
 	if (currentFilters.completed !== null && currentFilters.completed !== undefined) {
 		params.set('completed', String(currentFilters.completed));

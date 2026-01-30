@@ -25,10 +25,7 @@ const knowledgeModules = import.meta.glob('/src/lib/content/knowledge/**/*.md', 
 	import: 'default'
 });
 
-export async function getKnowledgeArticle(
-	category: string,
-	labId: string
-): Promise<string | null> {
+export async function getKnowledgeArticle(category: string, labId: string): Promise<string | null> {
 	const path = `/src/lib/content/knowledge/${category}/${labId}.md`;
 	const module = knowledgeModules[path];
 

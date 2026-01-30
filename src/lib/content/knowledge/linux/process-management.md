@@ -7,6 +7,7 @@ A **process** is an instance of a running program. Linux provides powerful tools
 ### ps - Process Status
 
 **Basic usage:**
+
 ```bash
 ps              # Show processes in current shell
 ps -e           # Show all processes
@@ -16,6 +17,7 @@ ps aux          # BSD-style detailed view
 ```
 
 **Common combinations:**
+
 ```bash
 ps aux | grep nginx        # Find nginx processes
 ps -ef | grep python       # Find python processes
@@ -24,6 +26,7 @@ ps -p 1234                 # Specific process by PID
 ```
 
 **Output columns:**
+
 - **PID**: Process ID
 - **PPID**: Parent Process ID
 - **USER**: Process owner
@@ -42,6 +45,7 @@ htop             # Enhanced version (if installed)
 ```
 
 **Interactive commands:**
+
 - `k` - Kill a process
 - `r` - Renice (change priority)
 - `P` - Sort by CPU usage
@@ -70,14 +74,14 @@ Signals are messages sent to processes to trigger actions.
 
 ### Common Signals
 
-| Signal | Number | Description | Use Case |
-|--------|--------|-------------|----------|
-| SIGTERM | 15 | Terminate gracefully | Default kill |
-| SIGKILL | 9 | Force kill immediately | Unresponsive processes |
-| SIGHUP | 1 | Hang up, reload config | Restart services |
-| SIGINT | 2 | Interrupt (Ctrl+C) | Stop foreground process |
-| SIGSTOP | 19 | Pause process | Suspend execution |
-| SIGCONT | 18 | Resume process | Continue suspended process |
+| Signal  | Number | Description            | Use Case                   |
+| ------- | ------ | ---------------------- | -------------------------- |
+| SIGTERM | 15     | Terminate gracefully   | Default kill               |
+| SIGKILL | 9      | Force kill immediately | Unresponsive processes     |
+| SIGHUP  | 1      | Hang up, reload config | Restart services           |
+| SIGINT  | 2      | Interrupt (Ctrl+C)     | Stop foreground process    |
+| SIGSTOP | 19     | Pause process          | Suspend execution          |
+| SIGCONT | 18     | Resume process         | Continue suspended process |
 
 ## Terminating Processes
 
@@ -218,6 +222,7 @@ lsof /path/to/file      # Processes using file
 ## Practical Examples
 
 ### Find and kill unresponsive process
+
 ```bash
 ps aux | grep firefox
 kill -15 1234
@@ -226,12 +231,14 @@ kill -9 1234  # If still running
 ```
 
 ### Monitor resource-heavy processes
+
 ```bash
 ps aux --sort=-%mem | head -10    # Top 10 by memory
 ps aux --sort=-%cpu | head -10    # Top 10 by CPU
 ```
 
 ### Kill all processes for an application
+
 ```bash
 killall -15 chrome
 # Or
@@ -239,6 +246,7 @@ pkill -15 chrome
 ```
 
 ### Restart service gracefully
+
 ```bash
 kill -HUP $(pidof nginx)
 # Or

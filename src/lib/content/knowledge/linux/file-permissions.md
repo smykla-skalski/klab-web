@@ -25,11 +25,13 @@ ls -l file.txt
 ```
 
 Output:
+
 ```
 -rwxr-xr-- 1 user group 1234 Jan 30 10:00 file.txt
 ```
 
 Breaking down `-rwxr-xr--`:
+
 - First character: File type (`-` = regular file, `d` = directory, `l` = symlink)
 - Next 3 characters: User permissions (`rwx`)
 - Next 3 characters: Group permissions (`r-x`)
@@ -42,17 +44,20 @@ Breaking down `-rwxr-xr--`:
 **Syntax:** `chmod [who][operation][permissions] file`
 
 **Who:**
+
 - `u` = user
 - `g` = group
 - `o` = others
 - `a` = all
 
 **Operations:**
+
 - `+` = add permission
 - `-` = remove permission
 - `=` = set exact permission
 
 **Examples:**
+
 ```bash
 chmod u+x script.sh        # Add execute for user
 chmod g-w file.txt         # Remove write for group
@@ -66,11 +71,13 @@ chmod u+rwx,g+rx,o-rwx file.txt  # Multiple changes
 Permissions are represented as 3-digit octal numbers:
 
 **Permission values:**
+
 - `r` = 4
 - `w` = 2
 - `x` = 1
 
 **Common combinations:**
+
 - `7` = rwx (4+2+1)
 - `6` = rw- (4+2)
 - `5` = r-x (4+1)
@@ -78,6 +85,7 @@ Permissions are represented as 3-digit octal numbers:
 - `0` = --- (0)
 
 **Examples:**
+
 ```bash
 chmod 755 script.sh    # rwxr-xr-x
 chmod 644 file.txt     # rw-r--r--
@@ -89,6 +97,7 @@ chmod 777 public.txt   # rwxrwxrwx (dangerous!)
 ## Changing Ownership
 
 ### chown - Change Owner
+
 ```bash
 chown user file.txt           # Change user
 chown user:group file.txt     # Change user and group
@@ -96,6 +105,7 @@ chown -R user:group /dir      # Recursive
 ```
 
 ### chgrp - Change Group
+
 ```bash
 chgrp group file.txt          # Change group
 chgrp -R group /dir           # Recursive
@@ -104,22 +114,28 @@ chgrp -R group /dir           # Recursive
 ## Special Permissions
 
 ### Setuid (4000)
+
 Run executable with file owner's permissions:
+
 ```bash
 chmod u+s program
 chmod 4755 program
 ```
 
 ### Setgid (2000)
+
 - Files: Run with file group's permissions
 - Directories: New files inherit directory's group
+
 ```bash
 chmod g+s directory
 chmod 2755 directory
 ```
 
 ### Sticky Bit (1000)
+
 On directories, only file owner can delete their files:
+
 ```bash
 chmod +t /tmp
 chmod 1777 /tmp
@@ -128,6 +144,7 @@ chmod 1777 /tmp
 ## Common Scenarios
 
 ### Make script executable
+
 ```bash
 chmod u+x script.sh
 # or
@@ -135,17 +152,20 @@ chmod 755 script.sh
 ```
 
 ### Secure private file
+
 ```bash
 chmod 600 private_key.pem
 ```
 
 ### Web server files
+
 ```bash
 chmod 644 *.html          # Files readable by all
 chmod 755 /var/www/html   # Directory executable for all
 ```
 
 ### Shared directory
+
 ```bash
 chmod 2775 /shared
 chgrp team /shared
@@ -154,6 +174,7 @@ chgrp team /shared
 ## Default Permissions
 
 ### umask
+
 Controls default permissions for new files:
 
 ```bash
@@ -180,6 +201,7 @@ Calculation: `permissions = 666 - umask` (files) or `777 - umask` (directories)
 ## Troubleshooting
 
 **Permission denied errors:**
+
 ```bash
 ls -l file.txt              # Check permissions
 whoami                      # Check your user
@@ -187,11 +209,13 @@ groups                      # Check your groups
 ```
 
 **Cannot execute script:**
+
 ```bash
 chmod +x script.sh
 ```
 
 **Web server cannot read files:**
+
 ```bash
 chmod 644 *.html
 chmod 755 /var/www/html

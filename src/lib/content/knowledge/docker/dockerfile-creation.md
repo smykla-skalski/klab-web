@@ -29,6 +29,7 @@ FROM scratch                     # Empty image (for static binaries)
 ```
 
 **Multi-stage builds:**
+
 ```dockerfile
 FROM node:18 AS builder
 # Build steps...
@@ -76,12 +77,14 @@ RUN pip install -r requirements.txt
 ```
 
 **Shell form vs Exec form:**
+
 ```dockerfile
 RUN echo "Hello"                 # Shell form: /bin/sh -c
 RUN ["echo", "Hello"]            # Exec form: direct execution
 ```
 
 **Chain commands** to reduce layers:
+
 ```dockerfile
 RUN apt-get update && \
     apt-get install -y curl git && \
@@ -109,6 +112,7 @@ CMD ["postgres"]                 # Default arguments
 ```
 
 **Difference from CMD:**
+
 - ENTRYPOINT: The main executable (harder to override)
 - CMD: Default arguments (easily overridden)
 
@@ -146,6 +150,7 @@ RUN echo "Built on ${BUILD_DATE}"
 ```
 
 Build with arguments:
+
 ```bash
 docker build --build-arg VERSION=18 --build-arg BUILD_DATE=$(date) .
 ```
@@ -284,6 +289,7 @@ COPY . .
 ### 4. Use .dockerignore
 
 Create `.dockerignore`:
+
 ```
 node_modules
 .git
@@ -373,6 +379,7 @@ docker image inspect myapp:latest
 ```
 
 **Reduce size:**
+
 - Use alpine or slim base images
 - Multi-stage builds
 - Clean up in same RUN layer
@@ -383,11 +390,13 @@ docker image inspect myapp:latest
 ### BuildKit Features
 
 Enable BuildKit:
+
 ```bash
 DOCKER_BUILDKIT=1 docker build .
 ```
 
 **Syntax:**
+
 ```dockerfile
 # syntax=docker/dockerfile:1
 FROM node:18
@@ -400,6 +409,7 @@ RUN --mount=type=secret,id=npmrc,target=/root/.npmrc npm install
 ```
 
 Build:
+
 ```bash
 docker build --secret id=npmrc,src=$HOME/.npmrc .
 ```

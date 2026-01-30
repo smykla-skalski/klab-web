@@ -25,7 +25,7 @@
 	class="group relative block w-full rounded-lg border border-gray-200 bg-white p-6 text-left shadow-sm transition-all hover:border-blue-500 hover:shadow-md"
 >
 	{#if isCompleted}
-		<div class="absolute right-4 top-4" aria-label="Completed">
+		<div class="absolute top-4 right-4" aria-label="Completed">
 			<CheckCircle2 class="h-6 w-6 text-green-500" />
 		</div>
 	{/if}
