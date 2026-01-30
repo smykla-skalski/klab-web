@@ -22,7 +22,7 @@ CMD ["npm", "start"]
 Every Dockerfile starts with a base image:
 
 ```dockerfile
-FROM ubuntu:22.04                # Specific version
+FROM ubuntu:24.04                # Specific version
 FROM node:24-alpine              # Alpine variant (smaller)
 FROM python:3.14-slim            # Slim variant
 FROM scratch                     # Empty image (for static binaries)
