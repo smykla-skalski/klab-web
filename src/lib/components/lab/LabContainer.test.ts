@@ -391,7 +391,7 @@ describe('LabContainer', () => {
 	});
 
 	it('handles keyboard resize boundaries for left arrow', async () => {
-		const user = userEvent.setup();
+		const _user = userEvent.setup();
 		const sidebar = createRawSnippet(() => ({
 			render: () => `<div>Sidebar</div>`
 		}));
@@ -416,7 +416,7 @@ describe('LabContainer', () => {
 	});
 
 	it('handles keyboard resize boundaries for right arrow', async () => {
-		const user = userEvent.setup();
+		const _user = userEvent.setup();
 		const sidebar = createRawSnippet(() => ({
 			render: () => `<div>Sidebar</div>`
 		}));

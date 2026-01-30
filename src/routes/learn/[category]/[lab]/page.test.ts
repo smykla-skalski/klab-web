@@ -151,7 +151,7 @@ describe('Lab Page', () => {
 	it('writes solution to terminal when confirmed', async () => {
 		const user = userEvent.setup({ delay: null });
 
-		const { component } = render(LabPage);
+		const { component: _component } = render(LabPage);
 
 		const giveUpButton = screen.getByRole('button', { name: /give up/i });
 		await user.click(giveUpButton);

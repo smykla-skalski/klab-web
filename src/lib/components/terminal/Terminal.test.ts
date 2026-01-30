@@ -68,7 +68,7 @@ global.WebSocket = function WebSocket(url: string) {
 } as any;
 (global.WebSocket as any).OPEN = 1;
 
-global.ResizeObserver = function ResizeObserver(callback: ResizeObserverCallback) {
+global.ResizeObserver = function ResizeObserver(_callback: ResizeObserverCallback) {
 	return {
 		observe: vi.fn(),
 		disconnect: vi.fn(),

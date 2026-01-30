@@ -51,7 +51,7 @@ vi.mock('monaco-editor', () => ({
 			mockDiffEditor._options = options;
 			return mockDiffEditor;
 		}),
-		createModel: vi.fn((value: string, language: string) => {
+		createModel: vi.fn((value: string, _language: string) => {
 			const model = { ...mockModel };
 			model.getValue = vi.fn(() => value);
 			return model;
