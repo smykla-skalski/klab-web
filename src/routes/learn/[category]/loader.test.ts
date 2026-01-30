@@ -8,7 +8,7 @@ vi.mock('$lib/services/lab-loader', async () => {
 
 describe('Category page loader', () => {
 	it('loads valid category', () => {
-		const result = load({ params: { category: 'kubernetes' } } as any);
+		const result = load({ params: { category: 'kubernetes' } } as any) as any;
 
 		expect(result.category).toBeDefined();
 		expect(result.category.id).toBe('kubernetes');
@@ -17,7 +17,7 @@ describe('Category page loader', () => {
 	});
 
 	it('returns category data', () => {
-		const result = load({ params: { category: 'linux' } } as any);
+		const result = load({ params: { category: 'linux' } } as any) as any;
 
 		expect(result.category).toBeDefined();
 		expect(result.category.id).toBe('linux');
@@ -26,11 +26,11 @@ describe('Category page loader', () => {
 	});
 
 	it('returns labs for category', () => {
-		const result = load({ params: { category: 'kubernetes' } } as any);
+		const result = load({ params: { category: 'kubernetes' } } as any) as any;
 
 		expect(result.labs).toBeDefined();
 		expect(result.labs.length).toBeGreaterThan(0);
-		result.labs.forEach((lab) => {
+		result.labs.forEach((lab: any) => {
 			expect(lab.category).toBe('kubernetes');
 		});
 	});
@@ -58,7 +58,7 @@ describe('Category page loader', () => {
 		const validCategories = ['kubernetes', 'linux', 'docker'];
 
 		validCategories.forEach((category) => {
-			const result = load({ params: { category } } as any);
+			const result = load({ params: { category } } as any) as any;
 			expect(result.category.id).toBe(category);
 			expect(result.labs).toBeDefined();
 		});

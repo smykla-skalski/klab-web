@@ -16,9 +16,9 @@ vi.mock('$lib/services/knowledge-loader', () => ({
 
 describe('Knowledge page loader', () => {
 	it('loads valid knowledge article', async () => {
-		const result = await load({
+		const result = (await load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any)) as any;
 
 		expect(result.html).toBeDefined();
 		expect(result.html).toContain('<h1>');
@@ -27,18 +27,18 @@ describe('Knowledge page loader', () => {
 	});
 
 	it('returns category and labId in response', async () => {
-		const result = await load({
+		const result = (await load({
 			params: { category: 'linux', lab: 'file-permissions' }
-		} as any);
+		} as any)) as any;
 
 		expect(result.category).toBe('linux');
 		expect(result.labId).toBe('file-permissions');
 	});
 
 	it('returns HTML content', async () => {
-		const result = await load({
+		const result = (await load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any)) as any;
 
 		expect(typeof result.html).toBe('string');
 		expect(result.html.length).toBeGreaterThan(0);
@@ -67,13 +67,13 @@ describe('Knowledge page loader', () => {
 	});
 
 	it('handles different categories', async () => {
-		const k8sResult = await load({
+		const k8sResult = (await load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any)) as any;
 
-		const linuxResult = await load({
+		const linuxResult = (await load({
 			params: { category: 'linux', lab: 'file-permissions' }
-		} as any);
+		} as any)) as any;
 
 		expect(k8sResult.category).toBe('kubernetes');
 		expect(linuxResult.category).toBe('linux');

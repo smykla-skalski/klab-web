@@ -14,7 +14,7 @@ describe('Lab page loader', () => {
 	it('loads valid lab', () => {
 		const result = load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any) as any;
 
 		expect(result.lab).toBeDefined();
 		expect(result.lab.id).toBe('basic-deployment');
@@ -24,7 +24,7 @@ describe('Lab page loader', () => {
 	it('returns complete lab data', () => {
 		const result = load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any) as any;
 
 		expect(result.lab.title).toBeDefined();
 		expect(result.lab.description).toBeDefined();
@@ -72,10 +72,10 @@ describe('Lab page loader', () => {
 	it('loads different labs in same category', () => {
 		const lab1 = load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any) as any;
 		const lab2 = load({
 			params: { category: 'kubernetes', lab: 'service-networking' }
-		} as any);
+		} as any) as any;
 
 		expect(lab1.lab.id).toBe('basic-deployment');
 		expect(lab2.lab.id).toBe('service-networking');
@@ -85,10 +85,10 @@ describe('Lab page loader', () => {
 	it('loads labs from different categories', () => {
 		const k8sLab = load({
 			params: { category: 'kubernetes', lab: 'basic-deployment' }
-		} as any);
+		} as any) as any;
 		const linuxLab = load({
 			params: { category: 'linux', lab: 'file-permissions' }
-		} as any);
+		} as any) as any;
 
 		expect(k8sLab.lab.category).toBe('kubernetes');
 		expect(linuxLab.lab.category).toBe('linux');

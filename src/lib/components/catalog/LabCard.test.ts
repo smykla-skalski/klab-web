@@ -12,7 +12,10 @@ const mockLab: Lab = {
 	difficulty: 'Beginner',
 	duration: '30 minutes',
 	tags: ['docker', 'containers', 'orchestration', 'extra-tag'],
-	steps: []
+	objective: 'Learn to use containers',
+	hints: ['Hint 1', 'Hint 2'],
+	solution: 'kubectl apply -f deployment.yaml',
+	knowledgeArticle: 'test-article'
 };
 
 describe('LabCard', () => {

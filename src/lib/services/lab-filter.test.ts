@@ -11,7 +11,10 @@ const mockLabs: Lab[] = [
 		difficulty: 'Beginner',
 		duration: '30 minutes',
 		tags: ['containers', 'orchestration'],
-		steps: []
+		objective: 'Learn Kubernetes fundamentals',
+		hints: [],
+		solution: '',
+		knowledgeArticle: ''
 	},
 	{
 		id: 'lab2',
@@ -21,7 +24,10 @@ const mockLabs: Lab[] = [
 		difficulty: 'Advanced',
 		duration: '60 minutes',
 		tags: ['tcp', 'routing'],
-		steps: []
+		objective: 'Master networking',
+		hints: [],
+		solution: '',
+		knowledgeArticle: ''
 	},
 	{
 		id: 'lab3',
@@ -31,7 +37,10 @@ const mockLabs: Lab[] = [
 		difficulty: 'Intermediate',
 		duration: '45 minutes',
 		tags: ['bash', 'shell'],
-		steps: []
+		objective: 'Learn Linux CLI',
+		hints: [],
+		solution: '',
+		knowledgeArticle: ''
 	},
 	{
 		id: 'lab4',
@@ -41,7 +50,10 @@ const mockLabs: Lab[] = [
 		difficulty: 'Beginner',
 		duration: '20 minutes',
 		tags: ['docker', 'containers'],
-		steps: []
+		objective: 'Learn Docker basics',
+		hints: [],
+		solution: '',
+		knowledgeArticle: ''
 	}
 ];
 
