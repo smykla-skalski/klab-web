@@ -26,11 +26,11 @@
 
 <div class="space-y-2">
 	<div class="flex items-center justify-between">
-		<div class="text-sm font-medium text-foreground">{label}</div>
+		<div class="text-foreground text-sm font-medium">{label}</div>
 		{#if selected.length > 0}
 			<button
 				onclick={clearAll}
-				class="flex items-center gap-1 text-xs text-primary hover:text-primary/80"
+				class="text-primary hover:text-primary/80 flex items-center gap-1 text-xs"
 			>
 				<X class="h-3 w-3" />
 				Clear

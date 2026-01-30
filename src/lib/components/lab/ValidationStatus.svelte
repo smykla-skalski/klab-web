@@ -22,9 +22,15 @@
 	>
 		<div class="flex items-start gap-3">
 			{#if status === 'validating'}
-				<Loader2 class="mt-0.5 h-5 w-5 animate-spin text-blue-600 dark:text-blue-400" aria-hidden="true" />
+				<Loader2
+					class="mt-0.5 h-5 w-5 animate-spin text-blue-600 dark:text-blue-400"
+					aria-hidden="true"
+				/>
 			{:else if status === 'success'}
-				<CheckCircle2 class="mt-0.5 h-5 w-5 text-green-600 dark:text-green-400" aria-hidden="true" />
+				<CheckCircle2
+					class="mt-0.5 h-5 w-5 text-green-600 dark:text-green-400"
+					aria-hidden="true"
+				/>
 			{:else}
 				<XCircle class="mt-0.5 h-5 w-5 text-red-600 dark:text-red-400" aria-hidden="true" />
 			{/if}
