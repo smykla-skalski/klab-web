@@ -32,7 +32,11 @@
 	}
 </script>
 
-<div data-testid="code-editor-mock" style="height: {height}; width: 100%;" class="bg-gray-900 text-white p-4">
+<div
+	data-testid="code-editor-mock"
+	style="height: {height}; width: 100%;"
+	class="bg-gray-900 p-4 text-white"
+>
 	Mock CodeEditor
 	{#if diffMode}
 		<div>Diff Mode</div>

@@ -186,9 +186,7 @@ describe('Terminal', () => {
 		});
 		mockWebSocket.onerror?.(new Event('error'));
 		expect(consoleErrorSpy).toHaveBeenCalled();
-		expect(mockTerminal.write).toHaveBeenCalledWith(
-			expect.stringContaining('Connection error')
-		);
+		expect(mockTerminal.write).toHaveBeenCalledWith(expect.stringContaining('Connection error'));
 		consoleErrorSpy.mockRestore();
 	});
 

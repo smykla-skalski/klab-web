@@ -25,7 +25,8 @@
 	}: Props = $props();
 
 	let container: HTMLDivElement = undefined!;
-	let editor: monaco.editor.IStandaloneCodeEditor | monaco.editor.IStandaloneDiffEditor = undefined!;
+	let editor: monaco.editor.IStandaloneCodeEditor | monaco.editor.IStandaloneDiffEditor =
+		undefined!;
 
 	$effect(() => {
 		if (!editor) return;

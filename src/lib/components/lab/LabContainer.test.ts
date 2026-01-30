@@ -409,7 +409,11 @@ describe('LabContainer', () => {
 
 		const resizeHandle = screen.getByRole('button', { name: /resize sidebar/i });
 
-		const event = new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true });
+		const event = new KeyboardEvent('keydown', {
+			key: 'ArrowLeft',
+			bubbles: true,
+			cancelable: true
+		});
 		resizeHandle.dispatchEvent(event);
 
 		expect(event.defaultPrevented).toBe(true);
@@ -434,7 +438,11 @@ describe('LabContainer', () => {
 
 		const resizeHandle = screen.getByRole('button', { name: /resize sidebar/i });
 
-		const event = new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true });
+		const event = new KeyboardEvent('keydown', {
+			key: 'ArrowRight',
+			bubbles: true,
+			cancelable: true
+		});
 		resizeHandle.dispatchEvent(event);
 
 		expect(event.defaultPrevented).toBe(true);

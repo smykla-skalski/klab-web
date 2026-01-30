@@ -63,7 +63,12 @@
 						<span class="text-sm font-medium">Hint {index + 1}</span>
 					</button>
 					{#if expandedHints.has(index)}
-						<div class="border-border border-t p-3" id="hint-content-{index}" role="region" aria-labelledby="hint-button-{index}">
+						<div
+							class="border-border border-t p-3"
+							id="hint-content-{index}"
+							role="region"
+							aria-labelledby="hint-button-{index}"
+						>
 							<p class="text-sm leading-relaxed">{hint}</p>
 						</div>
 					{/if}
