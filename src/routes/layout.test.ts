@@ -20,7 +20,7 @@ describe('Layout', () => {
 	beforeAll(() => {
 		Object.defineProperty(window, 'matchMedia', {
 			writable: true,
-			value: vi.fn().mockImplementation(query => ({
+			value: vi.fn().mockImplementation((query) => ({
 				matches: false,
 				media: query,
 				onchange: null,
@@ -28,8 +28,8 @@ describe('Layout', () => {
 				removeListener: vi.fn(),
 				addEventListener: vi.fn(),
 				removeEventListener: vi.fn(),
-				dispatchEvent: vi.fn(),
-			})),
+				dispatchEvent: vi.fn()
+			}))
 		});
 	});
 
@@ -65,11 +65,9 @@ describe('Layout', () => {
 		render(Layout);
 
 		expect(mockRegisterShortcut).toHaveBeenCalledWith('ctrl+shift+t', mockToggleMode);
-		expect(mockRegisterShortcut).toHaveBeenCalledWith(
-			'shift+/',
-			expect.any(Function),
-			{ preventDefault: true }
-		);
+		expect(mockRegisterShortcut).toHaveBeenCalledWith('shift+/', expect.any(Function), {
+			preventDefault: true
+		});
 	});
 
 	it('renders with theme watcher', () => {

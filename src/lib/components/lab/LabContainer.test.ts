@@ -559,5 +559,4 @@ describe('LabContainer', () => {
 
 		expect(screen.queryByRole('dialog')).toBeNull();
 	});
-
 });

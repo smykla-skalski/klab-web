@@ -78,7 +78,27 @@
 			focusTrap = createFocusTrap(drawerElement, {
 				initialFocus: drawerElement,
 				escapeDeactivates: false,
-				clickOutsideDeactivates: false
+				allowOutsideClick: true,
+				clickOutsideDeactivates: false,
+				fallbackFocus: drawerElement,
+				checkCanFocusTrap: (trapContainers) => {
+					return new Promise((resolve) => {
+						const check = () => {
+							const tabbable = trapContainers.some((container) => {
+								const elements = container.querySelectorAll(
+									'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+								);
+								return elements.length > 0;
+							});
+							if (tabbable) {
+								resolve();
+							} else {
+								requestAnimationFrame(check);
+							}
+						};
+						check();
+					});
+				}
 			});
 			focusTrap.activate();
 		} else if (!mobileDrawerOpen && focusTrap) {

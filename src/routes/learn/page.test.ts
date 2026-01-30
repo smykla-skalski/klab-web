@@ -134,7 +134,9 @@ describe('Learn Page', () => {
 		render(LearnPage, { props: { data: mockData } });
 
 		const labCount = mockData.labs.length;
-		expect(screen.getByText(new RegExp(`showing ${labCount} of ${labCount} labs`, 'i'))).toBeTruthy();
+		expect(
+			screen.getByText(new RegExp(`showing ${labCount} of ${labCount} labs`, 'i'))
+		).toBeTruthy();
 	});
 
 	it('renders lab cards with click handlers', () => {

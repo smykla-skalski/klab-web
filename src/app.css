@@ -17,7 +17,7 @@
 	--color-secondary: oklch(20% 0.02 223);
 	--color-secondary-foreground: oklch(98% 0.01 210);
 	--color-muted: oklch(20% 0.02 223);
-	--color-muted-foreground: oklch(57% 0.01 215);
+	--color-muted-foreground: oklch(68% 0.02 215);
 	--color-accent: oklch(25% 0.02 216);
 	--color-accent-foreground: oklch(98% 0.01 210);
 	--color-destructive: oklch(40% 0.15 25);
@@ -40,14 +40,14 @@
 	--color-primary-foreground: oklch(98% 0.01 210);
 	--color-secondary: oklch(95% 0.01 223);
 	--color-secondary-foreground: oklch(11% 0.02 222);
-	--color-muted: oklch(95% 0.01 223);
-	--color-muted-foreground: oklch(30% 0.02 215);
+	--color-muted: oklch(90% 0.01 223);
+	--color-muted-foreground: oklch(40% 0.02 215);
 	--color-accent: oklch(93% 0.02 216);
 	--color-accent-foreground: oklch(11% 0.02 222);
 	--color-destructive: oklch(50% 0.15 25);
 	--color-destructive-foreground: oklch(98% 0.01 210);
-	--color-border: oklch(88% 0.02 216);
-	--color-input: oklch(88% 0.02 216);
+	--color-border: oklch(60% 0.02 216);
+	--color-input: oklch(60% 0.02 216);
 	--color-ring: oklch(30% 0.02 215);
 
 	/* Terminal */

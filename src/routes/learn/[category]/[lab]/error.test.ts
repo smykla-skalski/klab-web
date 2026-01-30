@@ -36,7 +36,9 @@ describe('Lab Error Page', () => {
 		render(ErrorPage);
 
 		expect(screen.getByText('Lab Not Found')).toBeTruthy();
-		expect(screen.getByText("The lab you're looking for doesn't exist or has been moved.")).toBeTruthy();
+		expect(
+			screen.getByText("The lab you're looking for doesn't exist or has been moved.")
+		).toBeTruthy();
 	});
 
 	it('renders connection error', () => {
@@ -61,7 +63,9 @@ describe('Lab Error Page', () => {
 
 		render(ErrorPage);
 
-		expect(screen.getByText('Failed to connect to lab environment. Please try again.')).toBeTruthy();
+		expect(
+			screen.getByText('Failed to connect to lab environment. Please try again.')
+		).toBeTruthy();
 	});
 
 	it('renders back to labs button', () => {

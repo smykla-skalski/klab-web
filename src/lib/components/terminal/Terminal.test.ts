@@ -356,7 +356,7 @@ describe('Terminal', () => {
 		mockWebSocket.onclose?.(new CloseEvent('close'));
 
 		const writeCalls = mockTerminal.write.mock.calls;
-		const disconnectMessages = writeCalls.filter(call =>
+		const disconnectMessages = writeCalls.filter((call) =>
 			call[0].includes('Disconnected from lab terminal')
 		);
 
