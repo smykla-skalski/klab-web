@@ -23,7 +23,7 @@
 	});
 </script>
 
-<ModeWatcher />
+<ModeWatcher themeColors={{ light: '#fafafa', dark: '#0a0a0a' }} />
 
 <a
 	href="#main-content"
@@ -32,7 +32,7 @@
 	Skip to main content
 </a>
 
-<div class="flex min-h-screen flex-col" data-theme={mode.current}>
+<div class="flex min-h-screen flex-col">
 	<Header />
 	<main id="main-content" class="flex-1">
 		<slot />
