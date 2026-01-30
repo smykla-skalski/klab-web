@@ -94,6 +94,7 @@
 
 		terminal.open(container);
 		fitAddon.fit();
+		terminal.focus();
 
 		terminal.onData((data) => {
 			if (ws && ws.readyState === WebSocket.OPEN) {
@@ -134,6 +135,7 @@
 			connectionError = false;
 			terminalSession.set({ id: url, connected: true, url });
 			terminal.write('\r\n*** Connected to lab terminal ***\r\n\r\n');
+			terminal.focus();
 		};
 
 		ws.onmessage = (event) => {
