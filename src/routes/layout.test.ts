@@ -2,7 +2,7 @@ import { describe, it, expect, afterEach, beforeAll, vi } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/svelte';
 import { writable } from 'svelte/store';
 import Layout from './+layout.svelte';
-import { mode, toggleMode as mockToggleMode } from '$lib/stores/theme';
+import { toggleMode as mockToggleMode } from '$lib/stores/theme';
 import { registerShortcut as mockRegisterShortcut } from '$lib/utils/keyboard-shortcuts';
 
 vi.mock('$lib/stores/theme', () => ({
