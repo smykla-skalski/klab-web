@@ -233,7 +233,7 @@ CMD ["python", "app.py"]
 
 ```dockerfile
 # Build stage
-FROM golang:1.21 AS builder
+FROM golang:1.25 AS builder
 
 WORKDIR /src
 COPY . .
