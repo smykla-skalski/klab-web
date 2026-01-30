@@ -1,14 +1,24 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
+	import { browser } from '$app/environment';
 	import Button from '$lib/components/ui/button.svelte';
 	import ConfirmModal from '$lib/components/ui/confirm-modal.svelte';
-	import { Terminal } from '$lib/components/terminal';
 	import { LabContainer, LabSidebar, ValidationStatus } from '$lib/components/lab';
 	import { BookOpen, CheckCircle } from 'lucide-svelte';
 	import { currentLab } from '$lib/stores/lab';
 	import type { Lab } from '$lib/stores/lab';
+	import type { Terminal as TerminalType } from '$lib/components/terminal/Terminal.svelte';
+
+	let Terminal: any = null;
+
+	onMount(async () => {
+		if (browser) {
+			const module = await import('$lib/components/terminal');
+			Terminal = module.Terminal;
+		}
+	});
 
 	const category = $derived($page.params.category ?? 'kubernetes');
 	const labId = $derived($page.params.lab ?? 'basic-deployment');
@@ -33,7 +43,7 @@
 		currentLab.set(mockLab);
 	});
 
-	let terminal: Terminal = undefined!;
+	let terminal: TerminalType = undefined!;
 	let validationStatus: 'idle' | 'validating' | 'success' | 'error' = $state('idle');
 	let validationMessage = $state('');
 	let validationTimeoutId: ReturnType<typeof setTimeout> | null = null;
@@ -88,7 +98,13 @@
 	{#snippet main()}
 		<div class="flex h-full flex-col">
 			<div class="flex-1 p-4">
-				<Terminal bind:this={terminal} theme="dark" fontSize={14} />
+				{#if Terminal}
+					<svelte:component this={Terminal} bind:this={terminal} theme="dark" fontSize={14} />
+				{:else}
+					<div class="text-muted-foreground flex h-full items-center justify-center">
+						Loading terminal...
+					</div>
+				{/if}
 			</div>
 			{#if validationStatus !== 'idle'}
 				<div class="border-border border-t p-4">
