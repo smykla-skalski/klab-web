@@ -7,7 +7,7 @@
 	<div class="mx-auto max-w-3xl">
 		<h1 class="mb-8 text-4xl font-bold">About klab</h1>
 
-		<div class="prose prose-invert">
+		<div class="prose dark:prose-invert">
 			<p class="text-muted-foreground text-lg">
 				klab is an interactive learning platform designed to help you master technical skills
 				through hands-on practice in real environments.

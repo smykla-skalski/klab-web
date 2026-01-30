@@ -14,14 +14,14 @@
 	<div class="mb-8">
 		<a
 			href="/learn/{data.category}/{data.labId}"
-			class="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
+			class="text-primary hover:text-primary/80 inline-flex items-center gap-2 text-sm"
 		>
 			<ArrowLeft class="h-4 w-4" />
 			Back to lab
 		</a>
 	</div>
 
-	<div class="mx-auto max-w-4xl rounded-lg border border-gray-200 bg-white p-8 shadow-sm">
+	<div class="border-border bg-background mx-auto max-w-4xl rounded-lg border p-8 shadow-sm">
 		<ArticleRenderer html={data.html} />
 	</div>
 </div>

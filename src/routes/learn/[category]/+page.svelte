@@ -27,7 +27,7 @@
 	<div class="mb-12">
 		<div class="mb-4 text-6xl">{data.category.icon}</div>
 		<h1 class="mb-4 text-4xl font-bold">{data.category.name} Labs</h1>
-		<p class="text-lg text-gray-600">
+		<p class="text-muted-foreground text-lg">
 			{data.category.description}
 		</p>
 	</div>

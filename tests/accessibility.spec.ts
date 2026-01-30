@@ -71,13 +71,16 @@ test.describe('Accessibility', () => {
 		await expect(themeToggle).toBeVisible();
 		await expect(themeToggle).toHaveAttribute('aria-label', 'Toggle theme');
 
+		// Get initial theme state
+		const htmlElement = page.locator('html');
+		const initialHasDark = await htmlElement.evaluate((el) => el.classList.contains('dark'));
+
 		// Click to toggle theme
 		await themeToggle.click();
 		await page.waitForTimeout(200);
 
 		// Verify theme changed
-		const root = page.locator('div[data-theme]').first();
-		const theme = await root.getAttribute('data-theme');
-		expect(['dark', 'light']).toContain(theme);
+		const afterHasDark = await htmlElement.evaluate((el) => el.classList.contains('dark'));
+		expect(afterHasDark).not.toBe(initialHasDark);
 	});
 });

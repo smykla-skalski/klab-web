@@ -4,14 +4,11 @@ import { writable, get } from 'svelte/store';
 import userEvent from '@testing-library/user-event';
 import LearnPage from './+page.svelte';
 import { getAllLabs, getCategories } from '$lib/services/lab-loader';
-import { goto } from '$app/navigation';
 import {
 	searchQuery,
 	selectedDifficulties,
 	selectedCategories,
-	completionFilter,
-	sortBy,
-	filters
+	completionFilter
 } from '$lib/stores/catalog-filters';
 
 vi.mock('$app/stores', () => {

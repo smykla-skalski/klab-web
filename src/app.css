@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'highlight.js/styles/github-dark.css';
 
 @theme {
 	/* Typography */
@@ -32,8 +31,8 @@
 	--color-terminal-cursor: oklch(60% 0.25 142);
 }
 
-/* Light theme */
-[data-theme='light'] {
+/* Light theme (default - no .dark class) */
+:root:not(.dark) {
 	--color-background: oklch(98% 0.01 240);
 	--color-foreground: oklch(10% 0.02 240);
 	--color-primary: oklch(15% 0.02 240);
@@ -68,4 +67,169 @@ body {
 /* Enhanced focus indicators */
 *:focus-visible {
 	@apply ring-ring ring-offset-background ring-2 ring-offset-2 outline-none;
+}
+
+/* Syntax highlighting */
+.hljs {
+	display: block;
+	overflow-x: auto;
+	padding: 0.5em;
+	background: oklch(98% 0.01 240);
+	color: oklch(10% 0.02 240);
+}
+
+.dark .hljs {
+	background: oklch(15% 0.02 240);
+	color: oklch(91% 0.01 213);
+}
+
+/* Light theme syntax colors */
+.hljs-comment,
+.hljs-quote {
+	color: oklch(50% 0.01 215);
+	font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+	color: oklch(35% 0.15 330);
+	font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+	color: oklch(40% 0.15 25);
+}
+
+.hljs-string,
+.hljs-doctag {
+	color: oklch(35% 0.12 142);
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+	color: oklch(35% 0.15 260);
+	font-weight: bold;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+	color: oklch(38% 0.12 85);
+	font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+	color: oklch(28% 0.15 260);
+}
+
+.hljs-regexp,
+.hljs-link {
+	color: oklch(35% 0.12 180);
+}
+
+.hljs-symbol,
+.hljs-bullet {
+	color: oklch(40% 0.12 300);
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+	color: oklch(35% 0.12 220);
+}
+
+.hljs-meta {
+	color: oklch(45% 0.08 215);
+	font-weight: bold;
+}
+
+.hljs-deletion {
+	background: oklch(92% 0.08 25);
+}
+
+.hljs-addition {
+	background: oklch(92% 0.08 142);
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+
+/* Dark theme syntax colors */
+.dark .hljs-comment,
+.dark .hljs-quote {
+	color: oklch(60% 0.01 215);
+}
+
+.dark .hljs-keyword,
+.dark .hljs-selector-tag,
+.dark .hljs-subst {
+	color: oklch(75% 0.15 330);
+}
+
+.dark .hljs-number,
+.dark .hljs-literal,
+.dark .hljs-variable,
+.dark .hljs-template-variable,
+.dark .hljs-tag .hljs-attr {
+	color: oklch(75% 0.15 25);
+}
+
+.dark .hljs-string,
+.dark .hljs-doctag {
+	color: oklch(70% 0.12 142);
+}
+
+.dark .hljs-title,
+.dark .hljs-section,
+.dark .hljs-selector-id {
+	color: oklch(75% 0.15 260);
+}
+
+.dark .hljs-type,
+.dark .hljs-class .hljs-title {
+	color: oklch(72% 0.12 85);
+}
+
+.dark .hljs-tag,
+.dark .hljs-name,
+.dark .hljs-attribute {
+	color: oklch(70% 0.15 260);
+}
+
+.dark .hljs-regexp,
+.dark .hljs-link {
+	color: oklch(70% 0.12 180);
+}
+
+.dark .hljs-symbol,
+.dark .hljs-bullet {
+	color: oklch(72% 0.12 300);
+}
+
+.dark .hljs-built_in,
+.dark .hljs-builtin-name {
+	color: oklch(70% 0.12 220);
+}
+
+.dark .hljs-meta {
+	color: oklch(65% 0.08 215);
+}
+
+.dark .hljs-deletion {
+	background: oklch(25% 0.08 25);
+}
+
+.dark .hljs-addition {
+	background: oklch(25% 0.08 142);
 }

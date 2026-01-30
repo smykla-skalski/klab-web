@@ -12,29 +12,35 @@
 {#if status !== 'idle'}
 	<div
 		class="rounded-lg border p-4 {status === 'validating'
-			? 'border-blue-500/50 bg-blue-950/20'
+			? 'border-blue-500/50 bg-blue-500/10 dark:bg-blue-950/20'
 			: status === 'success'
-				? 'border-green-500/50 bg-green-950/20'
-				: 'border-red-500/50 bg-red-950/20'}"
+				? 'border-green-500/50 bg-green-500/10 dark:bg-green-950/20'
+				: 'border-red-500/50 bg-red-500/10 dark:bg-red-950/20'}"
 		role="status"
 		aria-live="polite"
 		aria-atomic="true"
 	>
 		<div class="flex items-start gap-3">
 			{#if status === 'validating'}
-				<Loader2 class="mt-0.5 h-5 w-5 animate-spin text-blue-400" aria-hidden="true" />
+				<Loader2
+					class="mt-0.5 h-5 w-5 animate-spin text-blue-600 dark:text-blue-400"
+					aria-hidden="true"
+				/>
 			{:else if status === 'success'}
-				<CheckCircle2 class="mt-0.5 h-5 w-5 text-green-400" aria-hidden="true" />
+				<CheckCircle2
+					class="mt-0.5 h-5 w-5 text-green-600 dark:text-green-400"
+					aria-hidden="true"
+				/>
 			{:else}
-				<XCircle class="mt-0.5 h-5 w-5 text-red-400" aria-hidden="true" />
+				<XCircle class="mt-0.5 h-5 w-5 text-red-600 dark:text-red-400" aria-hidden="true" />
 			{/if}
 			<div class="flex-1">
 				<h4
 					class="mb-1 text-sm font-semibold {status === 'validating'
-						? 'text-blue-300'
+						? 'text-blue-700 dark:text-blue-300'
 						: status === 'success'
-							? 'text-green-300'
-							: 'text-red-300'}"
+							? 'text-green-700 dark:text-green-300'
+							: 'text-red-700 dark:text-red-300'}"
 				>
 					{status === 'validating'
 						? 'Validating Solution...'
