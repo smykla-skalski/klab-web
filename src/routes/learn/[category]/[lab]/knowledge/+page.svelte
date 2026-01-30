@@ -21,7 +21,7 @@
 		</a>
 	</div>
 
-	<div class="mx-auto max-w-4xl rounded-lg border border-border bg-card p-8 shadow-sm">
+	<div class="mx-auto max-w-4xl rounded-lg border border-border bg-background p-8 shadow-sm">
 		<ArticleRenderer html={data.html} />
 	</div>
 </div>
