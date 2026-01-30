@@ -24,7 +24,23 @@ const server = createServer((req, res) => {
 			body += chunk;
 		});
 		req.on('end', () => {
-			const data = JSON.parse(body);
+			let data;
+			try {
+				if (!body) {
+					throw new Error('Empty request body');
+				}
+				data = JSON.parse(body);
+			} catch (err) {
+				console.error('Invalid JSON in validation request:', err?.message ?? err);
+				res.writeHead(400, { 'Content-Type': 'application/json' });
+				res.end(
+					JSON.stringify({
+						success: false,
+						message: 'Invalid JSON payload for validation request.'
+					})
+				);
+				return;
+			}
 			console.log('Validation request:', data);
 
 			// Random success/failure for demo

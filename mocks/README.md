@@ -4,7 +4,7 @@ Development mock servers for local testing.
 
 ## WebSocket Server (ws-server.js)
 
-- **Port:** 8080 (configurable via `WS_PORT`)
+- **Port:** 8080
 - **Purpose:** Mock terminal backend
 - **Features:**
   - Echoes terminal input
@@ -13,7 +13,7 @@ Development mock servers for local testing.
 
 ## API Server (api-server.js)
 
-- **Port:** 3001 (configurable via `API_PORT`)
+- **Port:** 3001
 - **Purpose:** Mock REST API for lab validation
 - **Endpoints:**
   - `POST /api/validate` - Random success/failure validation
