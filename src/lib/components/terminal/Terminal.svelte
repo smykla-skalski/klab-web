@@ -102,6 +102,12 @@
 			onData?.(data);
 		});
 
+		terminal.onResize(({ cols, rows }) => {
+			if (ws && ws.readyState === WebSocket.OPEN) {
+				ws.send(JSON.stringify({ type: 'resize', cols, rows }));
+			}
+		});
+
 		const resizeObserver = new ResizeObserver(() => {
 			fitAddon.fit();
 		});
