@@ -31,6 +31,10 @@ vi.mock('$app/navigation', () => ({
 	goto: vi.fn()
 }));
 
+vi.mock('$env/dynamic/public', () => ({
+	env: {}
+}));
+
 vi.mock('$lib/components/terminal/Terminal.svelte');
 
 Object.defineProperty(window, 'matchMedia', {
