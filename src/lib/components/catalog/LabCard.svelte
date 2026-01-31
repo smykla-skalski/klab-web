@@ -13,20 +13,20 @@
 	} = $props();
 
 	const difficultyColors = {
-		Beginner: 'bg-muted/50 text-green-800 dark:text-green-400',
-		Intermediate: 'bg-muted/50 text-yellow-800 dark:text-yellow-400',
-		Advanced: 'bg-muted/50 text-red-800 dark:text-red-400'
+		Beginner: 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
+		Intermediate: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
+		Advanced: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300'
 	};
 </script>
 
 <button
 	{onclick}
 	aria-label="Open {lab.title} lab"
-	class="group border-border bg-background hover:border-primary relative block w-full rounded-lg p-6 text-left shadow-sm transition-all hover:shadow-md"
+	class="group border border-border/60 bg-card hover:border-primary hover:bg-card/80 relative block w-full rounded-lg p-6 text-left shadow-md transition-all hover:shadow-lg dark:border-border dark:bg-card/50 dark:hover:bg-card/70"
 >
 	{#if isCompleted}
 		<div class="absolute top-4 right-4" aria-label="Completed">
-			<CheckCircle2 class="h-6 w-6 text-green-800 dark:text-green-400" />
+			<CheckCircle2 class="h-6 w-6 text-green-600 dark:text-green-400" />
 		</div>
 	{/if}
 
@@ -56,7 +56,7 @@
 
 		<div class="flex flex-wrap gap-1">
 			{#each lab.tags.slice(0, 3) as tag}
-				<span class="bg-muted text-muted-foreground rounded px-2 py-0.5 text-xs">
+				<span class="bg-muted/70 text-foreground/80 dark:bg-muted dark:text-foreground rounded px-2 py-0.5 text-xs">
 					{tag}
 				</span>
 			{/each}

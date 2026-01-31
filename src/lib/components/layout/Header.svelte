@@ -7,7 +7,7 @@
 </script>
 
 <header class="border-border bg-background border-b">
-	<div class="container mx-auto flex h-16 items-center justify-between px-4">
+	<div class="flex h-16 items-center justify-between px-4 w-full">
 		<a href="/" class="text-foreground text-xl font-bold">klab</a>
 
 		<!-- Desktop Navigation -->
