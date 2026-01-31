@@ -73,7 +73,8 @@ wss.on('connection', (ws) => {
 	// PTY output → WebSocket
 	ptyProcess.onData((data) => {
 		try {
-			if (ws.readyState === 1) { // WebSocket.OPEN
+			if (ws.readyState === 1) {
+				// WebSocket.OPEN
 				ws.send(data);
 			}
 		} catch (err) {
