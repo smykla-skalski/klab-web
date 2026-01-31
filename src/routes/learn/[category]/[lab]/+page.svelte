@@ -122,7 +122,7 @@
 		<div class="flex h-full flex-col">
 			<div class="flex-1 p-4">
 				{#if Terminal}
-					<Terminal bind:this={terminal} wsUrl={env.PUBLIC_WS_URL} fontSize={14} />
+					<Terminal bind:this={terminal} wsUrl={env.PUBLIC_WS_URL ?? 'ws://localhost:8080'} fontSize={14} />
 				{:else}
 					<div class="flex h-full flex-col gap-2">
 						<Skeleton width="100%" height="40px" />

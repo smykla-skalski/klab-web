@@ -31,12 +31,17 @@ const mockTerminal = {
 		mockTerminal._onDataCallback = callback;
 		return { dispose: vi.fn() };
 	}),
+	onResize: vi.fn((callback) => {
+		mockTerminal._onResizeCallback = callback;
+		return { dispose: vi.fn() };
+	}),
 	dispose: vi.fn(),
 	loadAddon: vi.fn(),
 	options: {
 		theme: null as any
 	},
 	_onDataCallback: null as ((data: string) => void) | null,
+	_onResizeCallback: null as ((event: { cols: number; rows: number }) => void) | null,
 	_options: null as any
 };
 
@@ -104,6 +109,7 @@ describe('Terminal', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 		mockTerminal._onDataCallback = null;
+		mockTerminal._onResizeCallback = null;
 		mockWebSocket.onopen = null;
 		mockWebSocket.onmessage = null;
 		mockWebSocket.onerror = null;
@@ -361,5 +367,37 @@ describe('Terminal', () => {
 		);
 
 		expect(disconnectMessages.length).toBe(0);
+	});
+
+	it('registers onResize callback on init', () => {
+		render(Terminal, {
+			props: {}
+		});
+		expect(mockTerminal.onResize).toHaveBeenCalled();
+	});
+
+	it('sends resize JSON to WebSocket when connected', () => {
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+		mockWebSocket.readyState = 1;
+		mockTerminal._onResizeCallback?.({ cols: 100, rows: 30 });
+		expect(mockWebSocket.send).toHaveBeenCalledWith(
+			JSON.stringify({ type: 'resize', cols: 100, rows: 30 })
+		);
+	});
+
+	it('does not send resize when WebSocket disconnected', () => {
+		render(Terminal, {
+			props: {
+				wsUrl: 'ws://localhost:8080'
+			}
+		});
+		mockWebSocket.readyState = 3;
+		vi.clearAllMocks();
+		mockTerminal._onResizeCallback?.({ cols: 100, rows: 30 });
+		expect(mockWebSocket.send).not.toHaveBeenCalled();
 	});
 });

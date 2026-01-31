@@ -4,7 +4,7 @@ import * as pty from 'node-pty';
 import * as fs from 'fs';
 
 const PORT = process.env.WS_PORT || 8080;
-const wss = new WebSocketServer({ port: PORT });
+const wss = new WebSocketServer({ port: PORT, host: '127.0.0.1' });
 
 console.log(`WebSocket server listening on ws://localhost:${PORT}`);
 
@@ -45,7 +45,7 @@ wss.on('connection', (ws) => {
 	// Spawn PTY with error handling
 	// Ensure PATH includes standard locations for better compatibility
 	const env = { ...process.env };
-	if (env.PATH && !env.PATH.includes('/usr/bin')) {
+	if (env.PATH && !env.PATH.split(':').includes('/usr/bin')) {
 		env.PATH = `/usr/bin:/bin:${env.PATH}`;
 	}
 
@@ -81,38 +81,6 @@ wss.on('connection', (ws) => {
 		}
 	});
 
-	// WebSocket input → PTY
-	ws.on('message', (data) => {
-		try {
-			const message = data.toString();
-
-			// Handle resize events
-			if (message.startsWith('{')) {
-				try {
-					const json = JSON.parse(message);
-					if (json.type === 'resize' && json.cols && json.rows) {
-						ptyProcess.resize(json.cols, json.rows);
-						console.log(`Resized terminal to ${json.cols}x${json.rows}`);
-						return;
-					}
-				} catch {
-					// Not JSON, treat as regular input
-				}
-			}
-
-			// Regular terminal input
-			ptyProcess.write(message);
-		} catch (err) {
-			console.error('Error writing to PTY:', err);
-		}
-	});
-
-	// Handle PTY exit
-	ptyProcess.onExit(({ exitCode, signal }) => {
-		console.log(`PTY process exited (code: ${exitCode}, signal: ${signal})`);
-		ws.close();
-	});
-
 	// Handle WebSocket close
 	ws.on('close', () => {
 		console.log('Client disconnected');
@@ -131,6 +99,36 @@ wss.on('connection', (ws) => {
 		} catch {
 			// Ignore kill errors
 		}
+	});
+
+	// WebSocket input → PTY
+	ws.on('message', (data) => {
+		try {
+			const message = data.toString();
+
+			// Handle control messages (JSON with type field)
+			try {
+				const json = JSON.parse(message);
+				if (json.type === 'resize' && json.cols && json.rows) {
+					ptyProcess.resize(json.cols, json.rows);
+					console.log(`Resized terminal to ${json.cols}x${json.rows}`);
+					return;
+				}
+			} catch {
+				// Not JSON, treat as regular input
+			}
+
+			// Regular terminal input
+			ptyProcess.write(message);
+		} catch (err) {
+			console.error('Error writing to PTY:', err);
+		}
+	});
+
+	// Handle PTY exit
+	ptyProcess.onExit(({ exitCode, signal }) => {
+		console.log(`PTY process exited (code: ${exitCode}, signal: ${signal})`);
+		ws.close();
 	});
 });
 

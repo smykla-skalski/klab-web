@@ -53,7 +53,7 @@ pnpm test:e2e
 
 Local development uses real terminal via `node-pty`:
 - **Server**: `mocks/ws-server.js` (WebSocket on port 8080)
-- **PTY**: Spawns actual shell (bash/zsh/powershell)
+- **PTY**: Spawns actual shell (bash/zsh)
 - **Features**: Real commands, interactive programs (vim, nano), colors, progress bars
 - **Security**: Localhost only, same user permissions
 - **Requirements**: Native compilation (Xcode CLI Tools on macOS)
