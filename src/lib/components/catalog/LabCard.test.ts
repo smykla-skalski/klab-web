@@ -54,7 +54,7 @@ describe('LabCard', () => {
 	it('applies correct difficulty color for Beginner', () => {
 		render(LabCard, { props: { lab: mockLab } });
 		const badge = screen.getByText('Beginner');
-		expect(badge.className).toContain('bg-muted/50');
+		expect(badge.className).toContain('bg-green-100');
 		expect(badge.className).toContain('text-green-800');
 	});
 
@@ -62,7 +62,7 @@ describe('LabCard', () => {
 		const intermediateLab = { ...mockLab, difficulty: 'Intermediate' as const };
 		render(LabCard, { props: { lab: intermediateLab } });
 		const badge = screen.getByText('Intermediate');
-		expect(badge.className).toContain('bg-muted/50');
+		expect(badge.className).toContain('bg-yellow-100');
 		expect(badge.className).toContain('text-yellow-800');
 	});
 
@@ -70,7 +70,7 @@ describe('LabCard', () => {
 		const advancedLab = { ...mockLab, difficulty: 'Advanced' as const };
 		render(LabCard, { props: { lab: advancedLab } });
 		const badge = screen.getByText('Advanced');
-		expect(badge.className).toContain('bg-muted/50');
+		expect(badge.className).toContain('bg-red-100');
 		expect(badge.className).toContain('text-red-800');
 	});
 

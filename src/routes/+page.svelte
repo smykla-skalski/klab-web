@@ -14,20 +14,20 @@
 <!-- Hero Section -->
 <section class="flex min-h-[80vh] flex-col items-center justify-center text-center">
 	<div class="container mx-auto px-4">
-	<h1 class="mb-6 text-5xl font-bold md:text-6xl">
-		Learn by <span class="text-primary">Doing</span>
-	</h1>
-	<p class="text-muted-foreground mb-8 max-w-2xl text-lg">
-		Master technical skills through interactive labs in real environments. No setup required,
-		start learning immediately.
-	</p>
-	<div class="flex gap-4">
-		<Button href="/learn" size="lg">
-			Browse Labs
-			<ArrowRight class="ml-2 h-4 w-4" />
-		</Button>
-		<Button href="/about" variant="outline" size="lg">Learn More</Button>
-	</div>
+		<h1 class="mb-6 text-5xl font-bold md:text-6xl">
+			Learn by <span class="text-primary">Doing</span>
+		</h1>
+		<p class="text-muted-foreground mb-8 max-w-2xl text-lg">
+			Master technical skills through interactive labs in real environments. No setup required,
+			start learning immediately.
+		</p>
+		<div class="flex gap-4">
+			<Button href="/learn" size="lg">
+				Browse Labs
+				<ArrowRight class="ml-2 h-4 w-4" />
+			</Button>
+			<Button href="/about" variant="outline" size="lg">Learn More</Button>
+		</div>
 	</div>
 </section>
 
