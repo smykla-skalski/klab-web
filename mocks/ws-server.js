@@ -2,6 +2,7 @@
 import { WebSocketServer } from 'ws';
 import * as pty from 'node-pty';
 import * as os from 'os';
+import * as fs from 'fs';
 
 const PORT = process.env.WS_PORT || 8080;
 const wss = new WebSocketServer({ port: PORT });
@@ -11,19 +12,64 @@ console.log(`WebSocket server listening on ws://localhost:${PORT}`);
 wss.on('connection', (ws) => {
 	console.log('Client connected');
 
-	// Determine shell based on platform
-	const shell = process.env.SHELL || (os.platform() === 'win32' ? 'powershell.exe' : 'bash');
+	// Determine shell with absolute path (required for posix_spawn)
+	// Try common shell locations in order of preference
+	const shellCandidates = [
+		'/run/current-system/sw/bin/bash',
+		'/bin/bash',
+		'/usr/bin/bash',
+		'/bin/zsh',
+		'/usr/bin/zsh',
+		'/bin/sh'
+	];
 
-	// Spawn PTY
-	const ptyProcess = pty.spawn(shell, [], {
-		name: 'xterm-256color',
-		cols: 80,
-		rows: 24,
-		cwd: process.env.HOME || process.cwd(),
-		env: process.env
+	let shell = shellCandidates.find((s) => {
+		try {
+			fs.accessSync(s, fs.constants.X_OK);
+			console.log(`Found executable shell: ${s}`);
+			return true;
+		} catch (err) {
+			console.log(`Shell not accessible: ${s} - ${err.message}`);
+			return false;
+		}
 	});
 
-	console.log(`Spawned shell: ${shell} (PID: ${ptyProcess.pid})`);
+	if (!shell) {
+		console.error('No usable shell found');
+		ws.send('\r\n*** Error: No usable shell found ***\r\n');
+		ws.close();
+		return;
+	}
+
+	console.log(`Attempting to spawn shell: ${shell}`);
+
+	// Spawn PTY with error handling
+	// Ensure PATH includes standard locations for better compatibility
+	const env = { ...process.env };
+	if (env.PATH && !env.PATH.includes('/usr/bin')) {
+		env.PATH = `/usr/bin:/bin:${env.PATH}`;
+	}
+
+	let ptyProcess;
+	try {
+		ptyProcess = pty.spawn(shell, [], {
+			name: 'xterm-256color',
+			cols: 80,
+			rows: 24,
+			cwd: process.env.HOME || process.cwd(),
+			env,
+			uid: undefined,
+			gid: undefined
+		});
+
+		console.log(`Spawned shell: ${shell} (PID: ${ptyProcess.pid})`);
+	} catch (err) {
+		console.error(`Failed to spawn shell ${shell}:`, err.message);
+		ws.send(`\r\n*** Error: Failed to spawn shell ${shell} ***\r\n`);
+		ws.send(`\r\n*** Error: ${err.message} ***\r\n`);
+		ws.close();
+		return;
+	}
 
 	// PTY output → WebSocket
 	ptyProcess.onData((data) => {

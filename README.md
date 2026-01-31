@@ -60,6 +60,16 @@ Local development uses real terminal via `node-pty`:
 
 ⚠️ **Never expose to internet** - runs at parent process permissions with full shell access.
 
+### First-time Setup (macOS/Nix)
+
+If terminal fails with "posix_spawnp failed", rebuild node-pty from source:
+
+```bash
+cd node_modules/.pnpm/node-pty@1.1.0/node_modules/node-pty
+npx node-gyp rebuild
+cd ../../../../..
+```
+
 ## Architecture
 
 See [gui-plan.md](./gui-plan.md) for detailed implementation plan.
