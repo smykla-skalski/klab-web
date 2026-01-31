@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 import { WebSocketServer } from 'ws';
 import * as pty from 'node-pty';
-import * as os from 'os';
 import * as fs from 'fs';
 
 const PORT = process.env.WS_PORT || 8080;
