@@ -11,6 +11,8 @@
 	/* Colors - Dark theme default */
 	--color-background: oklch(15% 0.02 240);
 	--color-foreground: oklch(91% 0.01 213);
+	--color-card: oklch(18% 0.02 240);
+	--color-card-foreground: oklch(91% 0.01 213);
 	--color-primary: oklch(98% 0.01 210);
 	--color-primary-foreground: oklch(11% 0.02 222);
 	--color-secondary: oklch(20% 0.02 223);
@@ -35,6 +37,8 @@
 :root:not(.dark) {
 	--color-background: oklch(98% 0.01 240);
 	--color-foreground: oklch(10% 0.02 240);
+	--color-card: oklch(100% 0 0);
+	--color-card-foreground: oklch(10% 0.02 240);
 	--color-primary: oklch(15% 0.02 240);
 	--color-primary-foreground: oklch(98% 0.01 210);
 	--color-secondary: oklch(95% 0.01 223);
@@ -55,8 +59,8 @@
 	--color-terminal-cursor: oklch(40% 0.25 220);
 }
 
-* {
-	@apply border-border;
+html {
+	@apply bg-background;
 }
 
 body {

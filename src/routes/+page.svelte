@@ -11,9 +11,9 @@
 	/>
 </svelte:head>
 
-<div class="container mx-auto px-4">
-	<!-- Hero Section -->
-	<section class="flex min-h-[80vh] flex-col items-center justify-center text-center">
+<!-- Hero Section -->
+<section class="flex min-h-[80vh] flex-col items-center justify-center text-center">
+	<div class="container mx-auto px-4">
 		<h1 class="mb-6 text-5xl font-bold md:text-6xl">
 			Learn by <span class="text-primary">Doing</span>
 		</h1>
@@ -28,10 +28,12 @@
 			</Button>
 			<Button href="/about" variant="outline" size="lg">Learn More</Button>
 		</div>
-	</section>
+	</div>
+</section>
 
-	<!-- Features Section -->
-	<section class="py-20">
+<!-- Features Section -->
+<section class="py-20">
+	<div class="container mx-auto px-4">
 		<h2 class="mb-12 text-center text-3xl font-bold">Why klab?</h2>
 		<div class="grid gap-8 md:grid-cols-3">
 			<div class="text-center">
@@ -70,5 +72,5 @@
 				</p>
 			</div>
 		</div>
-	</section>
-</div>
+	</div>
+</section>
