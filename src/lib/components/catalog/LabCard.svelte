@@ -22,7 +22,7 @@
 <button
 	{onclick}
 	aria-label="Open {lab.title} lab"
-	class="group border border-border/60 bg-card hover:border-primary hover:bg-card/80 relative block w-full rounded-lg p-6 text-left shadow-md transition-all hover:shadow-lg dark:border-border dark:bg-card/50 dark:hover:bg-card/70"
+	class="group border border-border/60 bg-card hover:border-primary hover:bg-card/80 relative block w-full rounded-lg p-6 text-left shadow-md transition-all hover:shadow-lg dark:border-border/60 dark:bg-card/50 dark:hover:bg-card/70"
 >
 	{#if isCompleted}
 		<div class="absolute top-4 right-4" aria-label="Completed">
@@ -56,7 +56,7 @@
 
 		<div class="flex flex-wrap gap-1">
 			{#each lab.tags.slice(0, 3) as tag}
-				<span class="bg-muted/70 text-foreground/80 dark:bg-muted dark:text-foreground rounded px-2 py-0.5 text-xs">
+				<span class="bg-muted/70 text-foreground/80 dark:bg-muted/70 dark:text-foreground rounded px-2 py-0.5 text-xs">
 					{tag}
 				</span>
 			{/each}
