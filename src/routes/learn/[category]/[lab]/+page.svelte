@@ -119,10 +119,10 @@
 	{/snippet}
 
 	{#snippet main()}
-		<div class="flex h-full min-h-0 flex-col overflow-hidden">
+		<div class="flex h-full flex-col overflow-hidden">
 			<div class="flex-1 min-h-0 overflow-hidden p-4">
 				{#if Terminal}
-					<div class="h-full max-h-full min-h-0 overflow-hidden">
+					<div class="h-full overflow-hidden">
 						<Terminal
 							bind:this={terminal}
 							wsUrl={env.PUBLIC_WS_URL ?? 'ws://localhost:8080'}
@@ -138,11 +138,17 @@
 					</div>
 				{/if}
 			</div>
-			{#if validationStatus !== 'idle'}
-				<div class="border-border border-t p-4">
+
+			<!-- Always-visible footer to constrain terminal size -->
+			<div class="border-border border-t p-4">
+				{#if validationStatus !== 'idle'}
 					<ValidationStatus status={validationStatus} message={validationMessage} />
-				</div>
-			{/if}
+				{:else}
+					<div class="text-muted-foreground text-sm">
+						Terminal ready. Type commands to interact with the lab environment.
+					</div>
+				{/if}
+			</div>
 		</div>
 	{/snippet}
 
