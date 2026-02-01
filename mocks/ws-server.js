@@ -49,6 +49,11 @@ wss.on('connection', (ws) => {
 		env.PATH = `/usr/bin:/bin:${env.PATH}`;
 	}
 
+	// Enable color output
+	env.COLORTERM = 'truecolor';
+	env.FORCE_COLOR = '1';
+	env.CLICOLOR = '1';
+
 	let ptyProcess;
 	try {
 		ptyProcess = pty.spawn(shell, [], {
