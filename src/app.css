@@ -28,9 +28,9 @@
 	--color-ring: oklch(25% 0.02 216);
 
 	/* Terminal */
-	--color-terminal-bg: oklch(0% 0 0);
-	--color-terminal-fg: oklch(60% 0.25 142);
-	--color-terminal-cursor: oklch(60% 0.25 142);
+	--color-terminal-bg: oklch(17% 0.01 120);
+	--color-terminal-fg: oklch(96% 0.005 120);
+	--color-terminal-cursor: oklch(96% 0.005 120);
 }
 
 /* Light theme (default - no .dark class) */
@@ -54,9 +54,9 @@
 	--color-ring: oklch(30% 0.02 215);
 
 	/* Terminal */
-	--color-terminal-bg: oklch(100% 0 0);
-	--color-terminal-fg: oklch(40% 0.25 142);
-	--color-terminal-cursor: oklch(40% 0.25 220);
+	--color-terminal-bg: oklch(98% 0.005 90);
+	--color-terminal-fg: oklch(20% 0.01 90);
+	--color-terminal-cursor: oklch(20% 0.01 90);
 }
 
 html {

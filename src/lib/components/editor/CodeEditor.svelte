@@ -80,11 +80,11 @@
 			inherit: true,
 			rules: [],
 			colors: {
-				'editor.background': '#000000',
-				'editor.foreground': '#7ade7a',
-				'editorLineNumber.foreground': '#4d4d4d',
-				'editor.selectionBackground': '#7ade7a4d',
-				'editor.inactiveSelectionBackground': '#7ade7a26'
+				'editor.background': '#272822',
+				'editor.foreground': '#f8f8f2',
+				'editorLineNumber.foreground': '#75715e',
+				'editor.selectionBackground': '#49483e',
+				'editor.inactiveSelectionBackground': '#3e3d32'
 			}
 		});
 
@@ -93,11 +93,11 @@
 			inherit: true,
 			rules: [],
 			colors: {
-				'editor.background': '#ffffff',
-				'editor.foreground': '#000000',
-				'editorLineNumber.foreground': '#999999',
-				'editor.selectionBackground': '#add6ff',
-				'editor.inactiveSelectionBackground': '#e5ebf1'
+				'editor.background': '#fafaf8',
+				'editor.foreground': '#2d2d2a',
+				'editorLineNumber.foreground': '#75715e',
+				'editor.selectionBackground': '#e0e0dd',
+				'editor.inactiveSelectionBackground': '#ededeb'
 			}
 		});
 
