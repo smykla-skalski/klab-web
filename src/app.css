@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 @theme {
 	/* Typography */
@@ -169,16 +170,18 @@ body {
 	font-weight: bold;
 }
 
-/* Dark theme syntax colors */
+/* Dark theme syntax colors - Enhanced for better vibrancy */
 .dark .hljs-comment,
 .dark .hljs-quote {
-	color: oklch(60% 0.01 215);
+	color: oklch(65% 0.05 150);
+	font-style: italic;
 }
 
 .dark .hljs-keyword,
 .dark .hljs-selector-tag,
 .dark .hljs-subst {
-	color: oklch(75% 0.15 330);
+	color: oklch(80% 0.18 330);
+	font-weight: 600;
 }
 
 .dark .hljs-number,
@@ -186,48 +189,50 @@ body {
 .dark .hljs-variable,
 .dark .hljs-template-variable,
 .dark .hljs-tag .hljs-attr {
-	color: oklch(75% 0.15 25);
+	color: oklch(78% 0.16 25);
 }
 
 .dark .hljs-string,
 .dark .hljs-doctag {
-	color: oklch(70% 0.12 142);
+	color: oklch(75% 0.15 142);
 }
 
 .dark .hljs-title,
 .dark .hljs-section,
 .dark .hljs-selector-id {
-	color: oklch(75% 0.15 260);
+	color: oklch(80% 0.18 260);
+	font-weight: 600;
 }
 
 .dark .hljs-type,
 .dark .hljs-class .hljs-title {
-	color: oklch(72% 0.12 85);
+	color: oklch(75% 0.14 85);
+	font-weight: 600;
 }
 
 .dark .hljs-tag,
 .dark .hljs-name,
 .dark .hljs-attribute {
-	color: oklch(70% 0.15 260);
+	color: oklch(75% 0.18 180);
 }
 
 .dark .hljs-regexp,
 .dark .hljs-link {
-	color: oklch(70% 0.12 180);
+	color: oklch(75% 0.15 180);
 }
 
 .dark .hljs-symbol,
 .dark .hljs-bullet {
-	color: oklch(72% 0.12 300);
+	color: oklch(75% 0.14 300);
 }
 
 .dark .hljs-built_in,
 .dark .hljs-builtin-name {
-	color: oklch(70% 0.12 220);
+	color: oklch(75% 0.15 200);
 }
 
 .dark .hljs-meta {
-	color: oklch(65% 0.08 215);
+	color: oklch(70% 0.12 215);
 }
 
 .dark .hljs-deletion {
@@ -236,4 +241,216 @@ body {
 
 .dark .hljs-addition {
 	background: oklch(25% 0.08 142);
+}
+
+/* Prose (Typography) Customization */
+.prose {
+	--tw-prose-body: oklch(10% 0.02 240);
+	--tw-prose-headings: oklch(10% 0.02 240);
+	--tw-prose-lead: oklch(30% 0.02 240);
+	--tw-prose-links: oklch(35% 0.15 260);
+	--tw-prose-bold: oklch(10% 0.02 240);
+	--tw-prose-counters: oklch(40% 0.02 240);
+	--tw-prose-bullets: oklch(50% 0.02 240);
+	--tw-prose-hr: oklch(85% 0.01 240);
+	--tw-prose-quotes: oklch(20% 0.02 240);
+	--tw-prose-quote-borders: oklch(85% 0.01 240);
+	--tw-prose-captions: oklch(40% 0.02 240);
+	--tw-prose-code: oklch(35% 0.15 330);
+	--tw-prose-pre-code: oklch(91% 0.01 213);
+	--tw-prose-pre-bg: oklch(15% 0.02 240);
+	--tw-prose-th-borders: oklch(75% 0.01 240);
+	--tw-prose-td-borders: oklch(85% 0.01 240);
+}
+
+.dark .prose {
+	--tw-prose-body: oklch(85% 0.01 213);
+	--tw-prose-headings: oklch(95% 0.01 213);
+	--tw-prose-lead: oklch(75% 0.01 213);
+	--tw-prose-links: oklch(75% 0.15 260);
+	--tw-prose-bold: oklch(95% 0.01 213);
+	--tw-prose-counters: oklch(70% 0.01 213);
+	--tw-prose-bullets: oklch(60% 0.01 213);
+	--tw-prose-hr: oklch(30% 0.02 240);
+	--tw-prose-quotes: oklch(80% 0.01 213);
+	--tw-prose-quote-borders: oklch(30% 0.02 240);
+	--tw-prose-captions: oklch(70% 0.01 213);
+	--tw-prose-code: oklch(75% 0.12 180);
+	--tw-prose-pre-code: oklch(91% 0.01 213);
+	--tw-prose-pre-bg: oklch(18% 0.02 240);
+	--tw-prose-th-borders: oklch(40% 0.02 240);
+	--tw-prose-td-borders: oklch(35% 0.02 240);
+}
+
+/* Enhanced prose styling for better readability */
+.prose h1 {
+	font-size: 2.25rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 1.5rem;
+}
+
+.prose h2 {
+	font-size: 1.875rem;
+	font-weight: 700;
+	margin-top: 2.5rem;
+	margin-bottom: 1.25rem;
+}
+
+.prose h3 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+
+.prose h4 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin-top: 1.75rem;
+	margin-bottom: 0.875rem;
+}
+
+.prose p {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+	line-height: 1.75;
+}
+
+.prose code {
+	background-color: oklch(93% 0.01 240);
+	padding: 0.2em 0.4em;
+	border-radius: 0.25rem;
+	font-size: 0.875em;
+	font-weight: 500;
+}
+
+.dark .prose code {
+	background-color: oklch(22% 0.02 240);
+	color: oklch(75% 0.12 180);
+}
+
+.prose pre {
+	background-color: oklch(98% 0.01 240);
+	padding: 1.25rem;
+	border-radius: 0.5rem;
+	overflow-x: auto;
+	margin-top: 2rem;
+	margin-bottom: 1.75rem;
+	border: 1px solid oklch(90% 0.01 240);
+	counter-reset: line;
+}
+
+.dark .prose pre {
+	background-color: oklch(18% 0.02 240);
+	border-color: oklch(28% 0.02 240);
+}
+
+.prose pre code {
+	background-color: transparent;
+	padding: 0;
+	font-size: 0.875rem;
+	line-height: 1;
+	display: block;
+}
+
+.prose pre code .code-line {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	line-height: 1.4;
+	margin: 0;
+	padding: 0;
+	min-height: 1.225rem;
+}
+
+.prose pre code .line-number {
+	display: inline-block;
+	text-align: right;
+	user-select: none;
+	color: oklch(60% 0.01 240);
+	border-right: 1px solid oklch(85% 0.01 240);
+	padding-right: 0.75rem;
+	margin-right: 1rem;
+	min-width: 2.5rem;
+	vertical-align: top;
+}
+
+.dark .prose pre code .line-number {
+	color: oklch(45% 0.01 240);
+	border-right-color: oklch(30% 0.02 240);
+}
+
+.prose pre code .line-content {
+	white-space: pre;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.prose pre code .line-content > * {
+	padding-top: 0.1rem;
+	padding-bottom: 0.1rem;
+}
+
+.prose table {
+	width: 100%;
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+	border-collapse: collapse;
+}
+
+.prose thead {
+	border-bottom: 2px solid oklch(75% 0.01 240);
+}
+
+.dark .prose thead {
+	border-bottom-color: oklch(40% 0.02 240);
+}
+
+.prose thead th {
+	padding: 0.75rem 1rem;
+	text-align: left;
+	font-weight: 600;
+	background-color: oklch(95% 0.01 240);
+}
+
+.dark .prose thead th {
+	background-color: oklch(22% 0.02 240);
+}
+
+.prose tbody tr {
+	border-bottom: 1px solid oklch(85% 0.01 240);
+}
+
+.dark .prose tbody tr {
+	border-bottom-color: oklch(30% 0.02 240);
+}
+
+.prose tbody td {
+	padding: 0.75rem 1rem;
+}
+
+.prose tbody tr:hover {
+	background-color: oklch(98% 0.01 240);
+}
+
+.dark .prose tbody tr:hover {
+	background-color: oklch(20% 0.02 240);
+}
+
+.prose ul,
+.prose ol {
+	margin-top: 1.25rem;
+	margin-bottom: 1.25rem;
+	padding-left: 1.75rem;
+}
+
+.prose li {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.prose strong {
+	font-weight: 700;
+	color: inherit;
 }
