@@ -99,9 +99,10 @@
 		// Prevent browser from capturing tab key
 		terminal.attachCustomKeyEventHandler((event) => {
 			if (event.type === 'keydown' && event.key === 'Tab') {
-				return false; // Let xterm handle it
+				event.preventDefault(); // Stop browser navigation
+				return true; // Let xterm handle it
 			}
-			return true; // Let browser handle other keys
+			return true; // Process normally
 		});
 
 		terminal.onData((data) => {
