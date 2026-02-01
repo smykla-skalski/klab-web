@@ -83,6 +83,10 @@ wss.on('connection', (ws) => {
 		try {
 			if (ws.readyState === 1) {
 				// WebSocket.OPEN
+				// Debug: log raw data to see if ANSI codes are present
+				if (data.includes('\x1b[')) {
+					console.log('ANSI codes detected in output');
+				}
 				ws.send(data);
 			}
 		} catch (err) {
