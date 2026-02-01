@@ -56,7 +56,10 @@ wss.on('connection', (ws) => {
 
 	let ptyProcess;
 	try {
-		ptyProcess = pty.spawn(shell, [], {
+		// Spawn as login shell to load user's shell config (colors, aliases, etc)
+		const shellArgs = shell.includes('bash') ? ['-l'] : shell.includes('zsh') ? ['-l'] : [];
+
+		ptyProcess = pty.spawn(shell, shellArgs, {
 			name: 'xterm-256color',
 			cols: 80,
 			rows: 24,
