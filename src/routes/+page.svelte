@@ -17,8 +17,8 @@
 		Learn by <span class="text-primary">Doing</span>
 	</h1>
 	<p class="text-muted-foreground mx-auto mb-8 max-w-2xl text-lg">
-		Master technical skills through interactive labs in real environments. No setup required,
-		start learning immediately.
+		Master technical skills through interactive labs in real environments. No setup required, start
+		learning immediately.
 	</p>
 	<div class="flex justify-center gap-4">
 		<Button href="/learn" size="lg">
