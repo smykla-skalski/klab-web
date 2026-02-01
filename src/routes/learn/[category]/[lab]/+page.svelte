@@ -119,10 +119,10 @@
 	{/snippet}
 
 	{#snippet main()}
-		<div class="flex h-full min-h-0 flex-col">
+		<div class="flex h-full min-h-0 flex-col overflow-hidden">
 			<div class="flex-1 min-h-0 overflow-hidden p-4">
 				{#if Terminal}
-					<div class="h-full min-h-0">
+					<div class="h-full max-h-full min-h-0 overflow-hidden">
 						<Terminal
 							bind:this={terminal}
 							wsUrl={env.PUBLIC_WS_URL ?? 'ws://localhost:8080'}

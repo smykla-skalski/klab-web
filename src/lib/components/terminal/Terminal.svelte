@@ -93,7 +93,13 @@
 		terminal.loadAddon(new WebLinksAddon());
 
 		terminal.open(container);
+
+		// Initial fit
 		fitAddon.fit();
+
+		// Fit again after layout settles
+		setTimeout(() => fitAddon.fit(), 100);
+
 		terminal.focus();
 
 		// Prevent browser from capturing tab key
@@ -118,8 +124,10 @@
 			}
 		});
 
+		let resizeTimeout: ReturnType<typeof setTimeout>;
 		const resizeObserver = new ResizeObserver(() => {
-			fitAddon.fit();
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(() => fitAddon.fit(), 50);
 		});
 		resizeObserver.observe(container);
 
