@@ -200,4 +200,4 @@
 	});
 </script>
 
-<div bind:this={container} class="h-full w-full"></div>
+<div bind:this={container} class="h-full w-full overflow-hidden"></div>

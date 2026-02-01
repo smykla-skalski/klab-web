@@ -120,13 +120,15 @@
 
 	{#snippet main()}
 		<div class="flex h-full flex-col">
-			<div class="flex-1 p-4">
+			<div class="flex-1 overflow-hidden p-4">
 				{#if Terminal}
-					<Terminal
-						bind:this={terminal}
-						wsUrl={env.PUBLIC_WS_URL ?? 'ws://localhost:8080'}
-						fontSize={14}
-					/>
+					<div class="h-full">
+						<Terminal
+							bind:this={terminal}
+							wsUrl={env.PUBLIC_WS_URL ?? 'ws://localhost:8080'}
+							fontSize={14}
+						/>
+					</div>
 				{:else}
 					<div class="flex h-full flex-col gap-2">
 						<Skeleton width="100%" height="40px" />
