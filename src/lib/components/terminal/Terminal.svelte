@@ -96,6 +96,14 @@
 		fitAddon.fit();
 		terminal.focus();
 
+		// Prevent browser from capturing tab key
+		terminal.attachCustomKeyEventHandler((event) => {
+			if (event.type === 'keydown' && event.key === 'Tab') {
+				return false; // Let xterm handle it
+			}
+			return true; // Let browser handle other keys
+		});
+
 		terminal.onData((data) => {
 			if (ws && ws.readyState === WebSocket.OPEN) {
 				ws.send(data);
