@@ -25,8 +25,13 @@
 </script>
 
 <div class="relative">
-	<Search class="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2" />
+	<label for="lab-search" class="sr-only">Search labs</label>
+	<Search
+		class="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2"
+		aria-hidden="true"
+	/>
 	<input
+		id="lab-search"
 		type="text"
 		bind:value={inputValue}
 		{placeholder}

@@ -1,15 +1,20 @@
 <script lang="ts">
 	import { X } from 'lucide-svelte';
+	import { createFocusTrap } from 'focus-trap';
 	import Button from './button.svelte';
 
 	let { open = $bindable(false) }: { open?: boolean } = $props();
+
+	let modalElement = $state<HTMLElement>(undefined!);
+	let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
+	let previousActiveElement: HTMLElement | null = null;
 
 	const shortcuts = [
 		{
 			category: 'Global',
 			items: [
 				{ key: 'Ctrl+Shift+T', description: 'Toggle theme' },
-				{ key: 'Shift+/', description: 'Show keyboard shortcuts' }
+				{ key: '? or Shift+/', description: 'Show keyboard shortcuts' }
 			]
 		},
 		{
@@ -34,11 +39,37 @@
 			open = false;
 		}
 	}
+
+	$effect(() => {
+		if (open && modalElement) {
+			previousActiveElement = document.activeElement as HTMLElement;
+			focusTrap = createFocusTrap(modalElement, {
+				initialFocus: modalElement,
+				escapeDeactivates: false,
+				allowOutsideClick: true
+			});
+			focusTrap.activate();
+		} else if (!open && focusTrap) {
+			focusTrap.deactivate();
+			focusTrap = null;
+			if (previousActiveElement) {
+				previousActiveElement.focus();
+				previousActiveElement = null;
+			}
+		}
+
+		return () => {
+			if (focusTrap) {
+				focusTrap.deactivate();
+			}
+		};
+	});
 </script>
 
 {#if open}
 	<!-- Backdrop container -->
 	<div
+		bind:this={modalElement}
 		class="fixed inset-0 z-40 flex items-center justify-center bg-black/50"
 		onclick={handleBackdropClick}
 		onkeydown={handleEscape}

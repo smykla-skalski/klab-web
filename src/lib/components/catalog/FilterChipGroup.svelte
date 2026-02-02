@@ -30,18 +30,19 @@
 		{#if selected.length > 0}
 			<button
 				onclick={clearAll}
-				class="text-primary hover:text-primary/80 flex items-center gap-1 text-xs"
+				class="text-primary hover:text-primary/80 active:scale-[0.98] flex items-center gap-1 text-xs transition-transform"
 			>
-				<X class="h-3 w-3" />
+				<X class="h-3 w-3" aria-hidden="true" />
 				Clear
 			</button>
 		{/if}
 	</div>
-	<div class="flex flex-wrap gap-2">
+	<div class="flex flex-wrap gap-2" role="group" aria-label={label}>
 		{#each options as option}
 			<button
 				onclick={() => toggleOption(option)}
-				class="rounded-full px-3 py-1 text-sm font-medium transition-colors {selected.includes(
+				aria-pressed={selected.includes(option)}
+				class="rounded-full px-3 py-1 text-sm font-medium transition-all active:scale-[0.98] {selected.includes(
 					option
 				)
 					? 'bg-primary text-primary-foreground'

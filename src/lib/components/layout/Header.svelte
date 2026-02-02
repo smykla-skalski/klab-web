@@ -33,14 +33,16 @@
 			class="md:hidden"
 			onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
 			aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+			aria-expanded={mobileMenuOpen}
+			aria-controls="mobile-nav"
 		>
-			<Menu class="h-5 w-5" />
+			<Menu class="h-5 w-5" aria-hidden="true" />
 		</Button>
 	</div>
 
 	<!-- Mobile Navigation -->
 	{#if mobileMenuOpen}
-		<nav class="border-border bg-background border-t px-4 py-4 md:hidden">
+		<nav id="mobile-nav" class="border-border bg-background border-t px-4 py-4 md:hidden">
 			<div class="flex flex-col gap-4">
 				<a
 					href="/learn"

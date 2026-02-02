@@ -22,7 +22,7 @@
 <button
 	{onclick}
 	aria-label="Open {lab.title} lab"
-	class="group border-border/60 bg-card hover:border-primary hover:bg-card/80 dark:border-border/60 dark:bg-card/50 dark:hover:bg-card/70 relative block w-full rounded-lg border p-6 text-left shadow-md transition-all hover:shadow-lg"
+	class="group border-border/60 bg-card hover:border-primary hover:bg-card/80 dark:border-border/60 dark:bg-card/50 dark:hover:bg-card/70 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.98] relative block w-full rounded-lg border p-6 text-left shadow-md transition-all hover:shadow-lg"
 >
 	{#if isCompleted}
 		<div class="absolute top-4 right-4" aria-label="Completed">

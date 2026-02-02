@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { X } from 'lucide-svelte';
+	import { createFocusTrap } from 'focus-trap';
 	import Button from './button.svelte';
 
 	interface Props {
@@ -22,6 +23,10 @@
 		onCancel
 	}: Props = $props();
 
+	let modalElement = $state<HTMLElement>(undefined!);
+	let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
+	let previousActiveElement: HTMLElement | null = null;
+
 	function handleConfirm() {
 		onConfirm();
 		open = false;
@@ -43,10 +48,36 @@
 			handleCancel();
 		}
 	}
+
+	$effect(() => {
+		if (open && modalElement) {
+			previousActiveElement = document.activeElement as HTMLElement;
+			focusTrap = createFocusTrap(modalElement, {
+				initialFocus: modalElement,
+				escapeDeactivates: false,
+				allowOutsideClick: true
+			});
+			focusTrap.activate();
+		} else if (!open && focusTrap) {
+			focusTrap.deactivate();
+			focusTrap = null;
+			if (previousActiveElement) {
+				previousActiveElement.focus();
+				previousActiveElement = null;
+			}
+		}
+
+		return () => {
+			if (focusTrap) {
+				focusTrap.deactivate();
+			}
+		};
+	});
 </script>
 
 {#if open}
 	<div
+		bind:this={modalElement}
 		class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
 		onclick={handleBackdropClick}
 		onkeydown={handleKeydown}
