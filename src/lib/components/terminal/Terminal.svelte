@@ -22,13 +22,6 @@
 	let ws: WebSocket | null = null;
 	let connectionError = $state(false);
 
-	// Update theme when mode changes
-	$effect(() => {
-		if (terminal) {
-			terminal.options.theme = mode.current === 'light' ? lightTheme : darkTheme;
-		}
-	});
-
 	const darkTheme = {
 		background: '#2e3440',
 		foreground: '#d8dee9',
@@ -79,11 +72,21 @@
 		brightWhite: '#2e3440'
 	};
 
+	// Derive terminal theme from current mode
+	let terminalTheme = $derived(mode.current === 'dark' ? darkTheme : lightTheme);
+
+	// Update theme when mode changes
+	$effect(() => {
+		if (terminal) {
+			terminal.options.theme = terminalTheme;
+		}
+	});
+
 	onMount(() => {
 		terminal = new Terminal({
 			fontSize,
 			fontFamily: "var(--font-family-mono), 'Courier New', monospace",
-			theme: mode.current === 'light' ? lightTheme : darkTheme,
+			theme: terminalTheme,
 			cursorBlink: true,
 			allowProposedApi: true
 		});
