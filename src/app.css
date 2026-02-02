@@ -17,8 +17,8 @@
 	--color-primary: oklch(76% 0.055 210);
 	--color-primary-foreground: oklch(24% 0.024 254);
 	--color-secondary: oklch(39% 0.018 248);
-	--color-secondary-foreground: oklch(92% 0.010 252);
-	--color-muted: oklch(33% 0.020 250);
+	--color-secondary-foreground: oklch(92% 0.01 252);
+	--color-muted: oklch(33% 0.02 250);
 	--color-muted-foreground: oklch(88% 0.012 250);
 	--color-accent: oklch(55% 0.065 240);
 	--color-accent-foreground: oklch(95% 0.008 254);
@@ -42,11 +42,11 @@
 	--color-card-foreground: oklch(29% 0.022 250);
 	--color-primary: oklch(55% 0.065 240);
 	--color-primary-foreground: oklch(95% 0.008 254);
-	--color-secondary: oklch(92% 0.010 252);
+	--color-secondary: oklch(92% 0.01 252);
 	--color-secondary-foreground: oklch(29% 0.022 250);
 	--color-muted: oklch(88% 0.012 250);
 	--color-muted-foreground: oklch(39% 0.018 248);
-	--color-accent: oklch(90% 0.010 230);
+	--color-accent: oklch(90% 0.01 230);
 	--color-accent-foreground: oklch(29% 0.022 250);
 	--color-destructive: oklch(50% 0.125 15);
 	--color-destructive-foreground: oklch(95% 0.008 254);
@@ -60,18 +60,18 @@
 	--color-terminal-cursor: oklch(24% 0.024 254);
 
 	/* Status colors - Light theme */
-	--color-success: oklch(55% 0.090 135);
+	--color-success: oklch(55% 0.09 135);
 	--color-error: oklch(50% 0.125 15);
-	--color-warning: oklch(65% 0.110 85);
-	--color-info: oklch(58% 0.070 230);
+	--color-warning: oklch(65% 0.11 85);
+	--color-info: oklch(58% 0.07 230);
 }
 
 /* Dark theme status colors (Nord) */
 .dark {
-	--color-success: oklch(75% 0.080 135);
+	--color-success: oklch(75% 0.08 135);
 	--color-error: oklch(58% 0.115 15);
-	--color-warning: oklch(82% 0.100 85);
-	--color-info: oklch(66% 0.060 230);
+	--color-warning: oklch(82% 0.1 85);
+	--color-info: oklch(66% 0.06 230);
 }
 
 html {
@@ -124,7 +124,7 @@ body {
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-	color: oklch(55% 0.070 230);
+	color: oklch(55% 0.07 230);
 }
 
 .hljs-number,
@@ -132,12 +132,12 @@ body {
 .hljs-variable,
 .hljs-template-variable,
 .hljs-tag .hljs-attr {
-	color: oklch(58% 0.080 320);
+	color: oklch(58% 0.08 320);
 }
 
 .hljs-string,
 .hljs-doctag {
-	color: oklch(58% 0.090 135);
+	color: oklch(58% 0.09 135);
 }
 
 .hljs-title,
@@ -164,7 +164,7 @@ body {
 
 .hljs-symbol,
 .hljs-bullet {
-	color: oklch(58% 0.080 320);
+	color: oklch(58% 0.08 320);
 }
 
 .hljs-built_in,
@@ -173,7 +173,7 @@ body {
 }
 
 .hljs-meta {
-	color: oklch(65% 0.110 85);
+	color: oklch(65% 0.11 85);
 }
 
 .hljs-deletion {
@@ -202,7 +202,7 @@ body {
 .dark .hljs-keyword,
 .dark .hljs-selector-tag,
 .dark .hljs-subst {
-	color: oklch(66% 0.060 230);
+	color: oklch(66% 0.06 230);
 }
 
 .dark .hljs-number,
@@ -210,12 +210,12 @@ body {
 .dark .hljs-variable,
 .dark .hljs-template-variable,
 .dark .hljs-tag .hljs-attr {
-	color: oklch(69% 0.070 320);
+	color: oklch(69% 0.07 320);
 }
 
 .dark .hljs-string,
 .dark .hljs-doctag {
-	color: oklch(75% 0.080 135);
+	color: oklch(75% 0.08 135);
 }
 
 .dark .hljs-title,
@@ -242,7 +242,7 @@ body {
 
 .dark .hljs-symbol,
 .dark .hljs-bullet {
-	color: oklch(69% 0.070 320);
+	color: oklch(69% 0.07 320);
 }
 
 .dark .hljs-built_in,
@@ -251,7 +251,7 @@ body {
 }
 
 .dark .hljs-meta {
-	color: oklch(82% 0.100 85);
+	color: oklch(82% 0.1 85);
 }
 
 .dark .hljs-deletion {
@@ -272,7 +272,7 @@ body {
 	--tw-prose-counters: oklch(39% 0.018 248);
 	--tw-prose-bullets: oklch(39% 0.018 248);
 	--tw-prose-hr: oklch(75% 0.012 250);
-	--tw-prose-quotes: oklch(33% 0.020 250);
+	--tw-prose-quotes: oklch(33% 0.02 250);
 	--tw-prose-quote-borders: oklch(75% 0.012 250);
 	--tw-prose-captions: oklch(39% 0.018 248);
 	--tw-prose-code: oklch(58% 0.055 195);
@@ -290,15 +290,15 @@ body {
 	--tw-prose-bold: oklch(95% 0.008 254);
 	--tw-prose-counters: oklch(88% 0.012 250);
 	--tw-prose-bullets: oklch(88% 0.012 250);
-	--tw-prose-hr: oklch(33% 0.020 250);
-	--tw-prose-quotes: oklch(92% 0.010 252);
-	--tw-prose-quote-borders: oklch(33% 0.020 250);
+	--tw-prose-hr: oklch(33% 0.02 250);
+	--tw-prose-quotes: oklch(92% 0.01 252);
+	--tw-prose-quote-borders: oklch(33% 0.02 250);
 	--tw-prose-captions: oklch(88% 0.012 250);
 	--tw-prose-code: oklch(74% 0.045 195);
 	--tw-prose-pre-code: oklch(88% 0.012 250);
 	--tw-prose-pre-bg: oklch(24% 0.024 254);
-	--tw-prose-th-borders: oklch(33% 0.020 250);
-	--tw-prose-td-borders: oklch(33% 0.020 250);
+	--tw-prose-th-borders: oklch(33% 0.02 250);
+	--tw-prose-td-borders: oklch(33% 0.02 250);
 }
 
 /* Enhanced prose styling for better readability */
@@ -361,7 +361,7 @@ body {
 
 .dark .prose pre {
 	background-color: oklch(24% 0.024 254);
-	border-color: oklch(33% 0.020 250);
+	border-color: oklch(33% 0.02 250);
 }
 
 .prose pre code {
@@ -395,7 +395,7 @@ body {
 
 .dark .prose pre code .line-number {
 	color: oklch(39% 0.018 248);
-	border-right-color: oklch(33% 0.020 250);
+	border-right-color: oklch(33% 0.02 250);
 }
 
 .prose pre code .line-content {
@@ -420,7 +420,7 @@ body {
 }
 
 .dark .prose thead {
-	border-bottom-color: oklch(33% 0.020 250);
+	border-bottom-color: oklch(33% 0.02 250);
 }
 
 .prose thead th {
@@ -439,7 +439,7 @@ body {
 }
 
 .dark .prose tbody tr {
-	border-bottom-color: oklch(33% 0.020 250);
+	border-bottom-color: oklch(33% 0.02 250);
 }
 
 .prose tbody td {
@@ -447,7 +447,7 @@ body {
 }
 
 .prose tbody tr:hover {
-	background-color: oklch(92% 0.010 252);
+	background-color: oklch(92% 0.01 252);
 }
 
 .dark .prose tbody tr:hover {

@@ -32,7 +32,10 @@
 					aria-hidden="true"
 				/>
 			{:else}
-				<XCircle class="mt-0.5 h-5 w-5 text-[oklch(50%_0.125_15)] dark:text-[oklch(58%_0.115_15)]" aria-hidden="true" />
+				<XCircle
+					class="mt-0.5 h-5 w-5 text-[oklch(50%_0.125_15)] dark:text-[oklch(58%_0.115_15)]"
+					aria-hidden="true"
+				/>
 			{/if}
 			<div class="flex-1">
 				<h4
