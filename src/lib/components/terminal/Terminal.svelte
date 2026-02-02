@@ -17,73 +17,90 @@
 	let { wsUrl, fontSize = 14, onData }: Props = $props();
 
 	let container: HTMLDivElement = undefined!;
-	let terminal: Terminal = undefined!;
+	let terminal = $state<Terminal | undefined>(undefined);
 	let fitAddon: FitAddon = undefined!;
 	let ws: WebSocket | null = null;
 	let connectionError = $state(false);
 
-	// Update theme when mode changes
-	$effect(() => {
-		if (terminal) {
-			terminal.options.theme = mode.current === 'dark' ? darkTheme : lightTheme;
-		}
-	});
-
 	const darkTheme = {
-		background: '#272822',
-		foreground: '#f8f8f2',
-		cursor: '#f8f8f0',
-		cursorAccent: '#272822',
-		selectionBackground: 'rgba(255, 255, 255, 0.1)',
-		selectionForeground: '#f8f8f2',
-		black: '#48483e',
-		red: '#f92672',
-		green: '#a6e22e',
-		yellow: '#e6db74',
-		blue: '#66d9ef',
-		magenta: '#ae81ff',
-		cyan: '#a1efe4',
-		white: '#f8f8f2',
-		brightBlack: '#75715e',
-		brightRed: '#ff669d',
-		brightGreen: '#c1f161',
-		brightYellow: '#feed6c',
-		brightBlue: '#92e7f7',
-		brightMagenta: '#d2a6ff',
-		brightCyan: '#bef4f5',
-		brightWhite: '#f9f8f5'
+		background: '#2e3440',
+		foreground: '#d8dee9',
+		cursor: '#d8dee9',
+		cursorAccent: '#2e3440',
+		selectionBackground: 'rgba(76, 86, 106, 0.3)',
+		selectionForeground: '#d8dee9',
+		black: '#3b4252',
+		red: '#bf616a',
+		green: '#a3be8c',
+		yellow: '#ebcb8b',
+		blue: '#81a1c1',
+		magenta: '#b48ead',
+		cyan: '#88c0d0',
+		white: '#e5e9f0',
+		brightBlack: '#4c566a',
+		brightRed: '#bf616a',
+		brightGreen: '#a3be8c',
+		brightYellow: '#ebcb8b',
+		brightBlue: '#81a1c1',
+		brightMagenta: '#b48ead',
+		brightCyan: '#8fbcbb',
+		brightWhite: '#eceff4'
 	};
 
 	const lightTheme = {
-		background: '#fafaf8',
-		foreground: '#2d2d2a',
-		cursor: '#2d2d2a',
-		cursorAccent: '#fafaf8',
-		selectionBackground: 'rgba(0, 0, 0, 0.15)',
-		selectionForeground: '#2d2d2a',
-		black: '#48483e',
-		red: '#c82829',
-		green: '#718c00',
-		yellow: '#a89c14',
-		blue: '#4271ae',
-		magenta: '#8959a8',
-		cyan: '#3e999f',
-		white: '#75715e',
-		brightBlack: '#5e5c56',
-		brightRed: '#e83a3a',
-		brightGreen: '#8ca61a',
-		brightYellow: '#c9af23',
-		brightBlue: '#5489d6',
-		brightMagenta: '#a471c4',
-		brightCyan: '#4eb5ba',
-		brightWhite: '#2d2d2a'
+		background: '#eceff4',
+		foreground: '#2e3440',
+		cursor: '#2e3440',
+		cursorAccent: '#eceff4',
+		selectionBackground: 'rgba(216, 222, 233, 0.3)',
+		selectionForeground: '#2e3440',
+		black: '#3b4252',
+		red: '#bf616a',
+		green: '#a3be8c',
+		yellow: '#ebcb8b',
+		blue: '#5e81ac',
+		magenta: '#b48ead',
+		cyan: '#88c0d0',
+		white: '#4c566a',
+		brightBlack: '#434c5e',
+		brightRed: '#bf616a',
+		brightGreen: '#a3be8c',
+		brightYellow: '#ebcb8b',
+		brightBlue: '#81a1c1',
+		brightMagenta: '#b48ead',
+		brightCyan: '#8fbcbb',
+		brightWhite: '#2e3440'
 	};
 
+	// Update theme when dark mode class changes
+	$effect(() => {
+		if (!terminal) return;
+
+		const updateTheme = () => {
+			if (!terminal) return;
+			const isDark = document.documentElement.classList.contains('dark');
+			terminal.options.theme = isDark ? darkTheme : lightTheme;
+		};
+
+		// Set initial theme
+		updateTheme();
+
+		// Watch for class changes on html element
+		const observer = new MutationObserver(updateTheme);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['class']
+		});
+
+		return () => observer.disconnect();
+	});
+
 	onMount(() => {
+		const isDark = document.documentElement.classList.contains('dark');
 		terminal = new Terminal({
 			fontSize,
 			fontFamily: "var(--font-family-mono), 'Courier New', monospace",
-			theme: mode.current === 'dark' ? darkTheme : lightTheme,
+			theme: isDark ? darkTheme : lightTheme,
 			cursorBlink: true,
 			allowProposedApi: true
 		});
@@ -137,7 +154,7 @@
 
 		return () => {
 			resizeObserver.disconnect();
-			terminal.dispose();
+			terminal?.dispose();
 			if (ws) {
 				ws.close();
 			}
@@ -151,18 +168,18 @@
 		ws.onopen = () => {
 			connectionError = false;
 			terminalSession.set({ id: url, connected: true, url });
-			terminal.write('\r\n*** Connected to lab terminal ***\r\n\r\n');
-			terminal.focus();
+			terminal?.write('\r\n*** Connected to lab terminal ***\r\n\r\n');
+			terminal?.focus();
 		};
 
 		ws.onmessage = (event) => {
-			terminal.write(event.data);
+			terminal?.write(event.data);
 		};
 
 		ws.onerror = (error) => {
 			console.error('WebSocket error:', error);
 			connectionError = true;
-			terminal.write('\r\n*** Connection error ***\r\n');
+			terminal?.write('\r\n*** Connection error ***\r\n');
 			toast.error('Terminal disconnected', {
 				description: 'Click reconnect to try again',
 				action: {
@@ -175,7 +192,7 @@
 		ws.onclose = () => {
 			terminalSession.set({ id: url, connected: false, url });
 			if (!connectionError) {
-				terminal.write('\r\n*** Disconnected from lab terminal ***\r\n');
+				terminal?.write('\r\n*** Disconnected from lab terminal ***\r\n');
 			}
 		};
 	}

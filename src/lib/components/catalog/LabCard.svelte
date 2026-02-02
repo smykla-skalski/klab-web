@@ -12,10 +12,17 @@
 		onclick?: () => void;
 	} = $props();
 
+	// Nord color mapping (OKLCH values):
+	// Beginner (hue 135) → nord14 (green)
+	// Intermediate (hue 85) → nord13 (yellow)
+	// Advanced (hue 15) → nord11 (red)
 	const difficultyColors = {
-		Beginner: 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
-		Intermediate: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
-		Advanced: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300'
+		Beginner:
+			'bg-[oklch(85%_0.06_135)] text-[oklch(40%_0.08_135)] dark:bg-[oklch(35%_0.06_135)] dark:text-[oklch(75%_0.08_135)]',
+		Intermediate:
+			'bg-[oklch(90%_0.08_85)] text-[oklch(50%_0.10_85)] dark:bg-[oklch(40%_0.08_85)] dark:text-[oklch(82%_0.10_85)]',
+		Advanced:
+			'bg-[oklch(85%_0.08_15)] text-[oklch(40%_0.10_15)] dark:bg-[oklch(35%_0.08_15)] dark:text-[oklch(58%_0.115_15)]'
 	};
 </script>
 
