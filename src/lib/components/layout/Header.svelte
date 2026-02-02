@@ -6,7 +6,7 @@
 	let mobileMenuOpen = $state(false);
 </script>
 
-<header class="border-border bg-background border-b">
+<header class="border-border bg-background">
 	<div class="flex h-16 w-full items-center justify-between px-4">
 		<a href="/" class="text-foreground text-xl font-bold">klab</a>
 
