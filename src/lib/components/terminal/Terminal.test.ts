@@ -35,6 +35,7 @@ const mockTerminal = {
 		mockTerminal._onResizeCallback = callback;
 		return { dispose: vi.fn() };
 	}),
+	attachCustomKeyEventHandler: vi.fn(),
 	dispose: vi.fn(),
 	loadAddon: vi.fn(),
 	options: {
@@ -151,8 +152,8 @@ describe('Terminal', () => {
 			props: {}
 		});
 		expect(mockTerminal._options.theme).toMatchObject({
-			background: '#000000',
-			foreground: '#7ade7a'
+			background: '#272822',
+			foreground: '#f8f8f2'
 		});
 	});
 
