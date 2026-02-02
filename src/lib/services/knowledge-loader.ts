@@ -2,14 +2,27 @@ import { marked } from 'marked';
 import hljs from 'highlight.js';
 import { markedHighlight } from 'marked-highlight';
 
-// Configure marked with syntax highlighting
+// Configure marked with syntax highlighting and line numbers
 marked.use(
 	markedHighlight({
 		highlight(code: string, lang: string) {
+			let highlighted: string;
+
 			if (lang && hljs.getLanguage(lang)) {
-				return hljs.highlight(code, { language: lang }).value;
+				highlighted = hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
+			} else {
+				highlighted = hljs.highlightAuto(code).value;
 			}
-			return hljs.highlightAuto(code).value;
+
+			const lines = highlighted.split('\n');
+			const highlightedLines = lines.map((line, index) => {
+				const lineNum = index + 1;
+				const lineContent = line === '' ? '&nbsp;' : line;
+
+				return `<span class="code-line"><span class="line-number">${lineNum}</span><span class="line-content">${lineContent}</span></span>`;
+			});
+
+			return highlightedLines.join('');
 		}
 	})
 );

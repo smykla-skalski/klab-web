@@ -120,7 +120,17 @@
 
 	{#snippet main()}
 		<div class="flex h-full flex-col overflow-hidden">
-			<div class="flex-1 min-h-0 overflow-hidden p-4">
+			{#if validationStatus !== 'idle'}
+				<div class="px-4 pt-4">
+					<ValidationStatus status={validationStatus} message={validationMessage} />
+				</div>
+			{/if}
+
+			<div
+				class="min-h-0 flex-1 overflow-hidden px-4 pb-4 {validationStatus !== 'idle'
+					? 'pt-2'
+					: 'pt-4'}"
+			>
 				{#if Terminal}
 					<div class="h-full overflow-hidden">
 						<Terminal
@@ -141,13 +151,9 @@
 
 			<!-- Always-visible footer to constrain terminal size -->
 			<div class="border-border border-t p-4">
-				{#if validationStatus !== 'idle'}
-					<ValidationStatus status={validationStatus} message={validationMessage} />
-				{:else}
-					<div class="text-muted-foreground text-sm">
-						Terminal ready. Type commands to interact with the lab environment.
-					</div>
-				{/if}
+				<div class="text-muted-foreground text-sm">
+					Terminal ready. Type commands to interact with the lab environment.
+				</div>
 			</div>
 		</div>
 	{/snippet}
