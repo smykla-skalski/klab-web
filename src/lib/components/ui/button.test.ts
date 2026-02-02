@@ -131,7 +131,7 @@ describe('Button', () => {
 			}
 		});
 		const button = screen.getByRole('button');
-		expect(button.className).toContain('h-8');
+		expect(button.className).toContain('h-11');
 	});
 
 	it('applies large size', () => {
@@ -145,7 +145,7 @@ describe('Button', () => {
 			}
 		});
 		const button = screen.getByRole('button');
-		expect(button.className).toContain('h-10');
+		expect(button.className).toContain('h-12');
 	});
 
 	it('applies icon size', () => {
@@ -159,8 +159,8 @@ describe('Button', () => {
 			}
 		});
 		const button = screen.getByRole('button');
-		expect(button.className).toContain('h-9');
-		expect(button.className).toContain('w-9');
+		expect(button.className).toContain('h-11');
+		expect(button.className).toContain('w-11');
 	});
 
 	it('applies custom class', () => {

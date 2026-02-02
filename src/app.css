@@ -58,6 +58,20 @@
 	--color-terminal-bg: oklch(98% 0.005 90);
 	--color-terminal-fg: oklch(20% 0.01 90);
 	--color-terminal-cursor: oklch(20% 0.01 90);
+
+	/* Status colors - Light theme */
+	--color-success: oklch(55% 0.15 145);
+	--color-error: oklch(50% 0.15 25);
+	--color-warning: oklch(65% 0.15 85);
+	--color-info: oklch(55% 0.15 240);
+}
+
+/* Dark theme status colors */
+.dark {
+	--color-success: oklch(65% 0.15 145);
+	--color-error: oklch(60% 0.15 25);
+	--color-warning: oklch(75% 0.15 85);
+	--color-info: oklch(65% 0.15 240);
 }
 
 html {
@@ -67,6 +81,18 @@ html {
 body {
 	@apply bg-background text-foreground transition-colors duration-200;
 	font-family: var(--font-family-sans);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
 }
 
 /* Enhanced focus indicators */

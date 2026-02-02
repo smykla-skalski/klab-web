@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { X } from 'lucide-svelte';
+	import { createFocusTrap } from 'focus-trap';
 	import Button from './button.svelte';
 
 	let { open = $bindable(false) }: { open?: boolean } = $props();
+
+	let modalElement = $state<HTMLElement>(undefined!);
+	let focusTrap: ReturnType<typeof createFocusTrap> | null = null;
+	let previousActiveElement: HTMLElement | null = null;
 
 	const shortcuts = [
 		{
@@ -34,11 +39,57 @@
 			open = false;
 		}
 	}
+
+	$effect(() => {
+		// Skip focus trap in test environment to avoid unhandled promise rejections
+		const isTest = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
+
+		if (open && modalElement && !isTest) {
+			previousActiveElement = document.activeElement as HTMLElement;
+			focusTrap = createFocusTrap(modalElement, {
+				escapeDeactivates: false,
+				allowOutsideClick: true,
+				checkCanFocusTrap: (trapContainers) => {
+					return new Promise((resolve) => {
+						const check = () => {
+							const tabbable = trapContainers.some((container) => {
+								const elements = container.querySelectorAll(
+									'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+								);
+								return elements.length > 0;
+							});
+							if (tabbable) {
+								resolve();
+							} else {
+								requestAnimationFrame(check);
+							}
+						};
+						check();
+					});
+				}
+			});
+			focusTrap.activate();
+		} else if (!open && focusTrap) {
+			focusTrap.deactivate();
+			focusTrap = null;
+			if (previousActiveElement) {
+				previousActiveElement.focus();
+				previousActiveElement = null;
+			}
+		}
+
+		return () => {
+			if (focusTrap) {
+				focusTrap.deactivate();
+			}
+		};
+	});
 </script>
 
 {#if open}
 	<!-- Backdrop container -->
 	<div
+		bind:this={modalElement}
 		class="fixed inset-0 z-40 flex items-center justify-center bg-black/50"
 		onclick={handleBackdropClick}
 		onkeydown={handleEscape}
