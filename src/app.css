@@ -338,7 +338,6 @@ body {
 	margin-top: 2rem;
 	margin-bottom: 1.75rem;
 	border: 1px solid oklch(90% 0.01 240);
-	counter-reset: line;
 }
 
 .dark .prose pre {
@@ -350,7 +349,7 @@ body {
 	background-color: transparent;
 	padding: 0;
 	font-size: 0.875rem;
-	line-height: 1;
+	line-height: 1.4;
 	display: block;
 }
 
@@ -373,7 +372,6 @@ body {
 	padding-right: 0.75rem;
 	margin-right: 1rem;
 	min-width: 2.5rem;
-	vertical-align: top;
 }
 
 .dark .prose pre code .line-number {
@@ -384,7 +382,6 @@ body {
 .prose pre code .line-content {
 	white-space: pre;
 	display: inline-block;
-	vertical-align: top;
 }
 
 .prose pre code .line-content > * {

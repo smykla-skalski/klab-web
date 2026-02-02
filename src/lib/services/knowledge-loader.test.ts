@@ -126,4 +126,43 @@ describe('knowledge-loader', () => {
 			expect(hasLanguage).toBeUndefined();
 		});
 	});
+
+	describe('line numbering', () => {
+		it('generates correct line numbers for multi-line code', async () => {
+			const markdown = '```js\nline1\nline2\nline3\n```';
+			const { marked } = await import('marked');
+			const html = await marked.parse(markdown);
+
+			expect(html).toContain('line-number">1</span>');
+			expect(html).toContain('line-number">2</span>');
+			expect(html).toContain('line-number">3</span>');
+		});
+
+		it('generates correct HTML structure with classes', async () => {
+			const markdown = '```js\nconst x = 1;\n```';
+			const { marked } = await import('marked');
+			const html = await marked.parse(markdown);
+
+			expect(html).toContain('class="code-line"');
+			expect(html).toContain('class="line-number"');
+			expect(html).toContain('class="line-content"');
+		});
+
+		it('handles empty lines correctly', async () => {
+			const markdown = '```js\nline1\n\nline3\n```';
+			const { marked } = await import('marked');
+			const html = await marked.parse(markdown);
+
+			expect(html).toContain('&nbsp;'); // Empty line placeholder
+		});
+
+		it('maintains syntax highlighting across multi-line constructs', async () => {
+			const markdown = '```js\nconst multiline = `\nline1\nline2\n`;\n```';
+			const { marked } = await import('marked');
+			const html = await marked.parse(markdown);
+
+			// Should preserve template literal highlighting
+			expect(html).toMatch(/hljs-/); // Contains hljs classes
+		});
+	});
 });

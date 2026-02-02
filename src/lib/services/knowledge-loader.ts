@@ -6,18 +6,20 @@ import { markedHighlight } from 'marked-highlight';
 marked.use(
 	markedHighlight({
 		highlight(code: string, lang: string) {
-			const lines = code.split('\n');
+			let highlighted: string;
+
+			if (lang && hljs.getLanguage(lang)) {
+				highlighted = hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
+			} else {
+				highlighted = hljs.highlightAuto(code, { ignoreIllegals: true }).value;
+			}
+
+			const lines = highlighted.split('\n');
 			const highlightedLines = lines.map((line, index) => {
 				const lineNum = index + 1;
-				let highlighted: string;
+				const lineContent = line === '' ? '&nbsp;' : line;
 
-				if (lang && hljs.getLanguage(lang)) {
-					highlighted = hljs.highlight(line, { language: lang, ignoreIllegals: true }).value;
-				} else {
-					highlighted = hljs.highlightAuto(line).value;
-				}
-
-				return `<span class="code-line"><span class="line-number">${lineNum}</span><span class="line-content">${highlighted}</span></span>`;
+				return `<span class="code-line"><span class="line-number">${lineNum}</span><span class="line-content">${lineContent}</span></span>`;
 			});
 
 			return highlightedLines.join('');
