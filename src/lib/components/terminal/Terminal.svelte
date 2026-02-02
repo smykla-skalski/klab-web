@@ -72,21 +72,34 @@
 		brightWhite: '#2e3440'
 	};
 
-	// Derive terminal theme from current mode
-	let terminalTheme = $derived(mode.current === 'dark' ? darkTheme : lightTheme);
-
-	// Update theme when mode changes
+	// Update theme when dark mode class changes
 	$effect(() => {
-		if (terminal) {
-			terminal.options.theme = terminalTheme;
-		}
+		if (!terminal) return;
+
+		const updateTheme = () => {
+			const isDark = document.documentElement.classList.contains('dark');
+			terminal.options.theme = isDark ? darkTheme : lightTheme;
+		};
+
+		// Set initial theme
+		updateTheme();
+
+		// Watch for class changes on html element
+		const observer = new MutationObserver(updateTheme);
+		observer.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['class']
+		});
+
+		return () => observer.disconnect();
 	});
 
 	onMount(() => {
+		const isDark = document.documentElement.classList.contains('dark');
 		terminal = new Terminal({
 			fontSize,
 			fontFamily: "var(--font-family-mono), 'Courier New', monospace",
-			theme: terminalTheme,
+			theme: isDark ? darkTheme : lightTheme,
 			cursorBlink: true,
 			allowProposedApi: true
 		});
