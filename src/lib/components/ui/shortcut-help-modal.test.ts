@@ -41,7 +41,7 @@ describe('ShortcutHelpModal', () => {
 		expect(screen.getByText('Toggle theme')).toBeTruthy();
 		expect(screen.getByText('Show keyboard shortcuts')).toBeTruthy();
 		expect(screen.getByText('Ctrl+Shift+T')).toBeTruthy();
-		expect(screen.getByText('Shift+/')).toBeTruthy();
+		expect(screen.getByText('? or Shift+/')).toBeTruthy();
 	});
 
 	it('displays lab shortcuts', () => {

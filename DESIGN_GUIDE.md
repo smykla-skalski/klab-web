@@ -5,22 +5,27 @@ Design principles extracted from leading interactive learning platforms (Codecad
 ## Core Philosophy
 
 ### Speed Over Aesthetics
+
 > "Prioritize productivity and movement over aesthetics, with speed and responsiveness being far more important than legibility and whitespace." — [Terminal Design Philosophy](https://brandur.org/interfaces)
 
 **Application:**
+
 - Fast page loads, instant interactions
 - Minimal animations (200ms max)
 - Immediate feedback on all actions
 - Terminal responsiveness is critical
 
 ### Learn-by-Doing First
+
 **Key Principles:**
+
 - Zero setup barriers (no installations, immediate access)
 - Real environments, not simulations
 - Instant validation and feedback
 - Progressive disclosure of complexity
 
 ### User-Centered Experience
+
 - Natural navigation patterns
 - Clear information hierarchy
 - Accessibility-first approach
@@ -31,15 +36,18 @@ Design principles extracted from leading interactive learning platforms (Codecad
 ### 1. Modularity & Flexibility
 
 **From 2026 Trends:**
+
 > "Modular design - smaller, flexible chunks of learning allow students to move at their own pace, revisit tricky concepts, and interact with content in ways that suit their needs."
 
 **Implementation:**
+
 - Bite-sized labs (5-15 min focused sessions)
 - Self-contained learning modules
 - Reusable UI components
 - Flexible layouts that adapt to content
 
 **Component Examples:**
+
 ```svelte
 <!-- ✓ Good: Modular, self-contained -->
 <LabCard lab={data} />
@@ -51,11 +59,13 @@ Design principles extracted from leading interactive learning platforms (Codecad
 ### 2. Gamification & Engagement
 
 **From Successful Platforms:**
+
 - **Sololearn:** Progress tracking, badges, rankings
 - **Mimo:** Duolingo-style streaks and achievements
 - **UXCEL:** Interactive quizzes with sounds/feedback
 
 **Implementation:**
+
 - Visual progress indicators
 - Completion badges
 - Difficulty levels (color-coded)
@@ -66,9 +76,11 @@ Design principles extracted from leading interactive learning platforms (Codecad
 ### 3. Immediate Feedback
 
 **Interactive Learning Best Practice:**
+
 > "5-minute focused lessons with instant validation"
 
 **Implementation:**
+
 - Real-time validation status
 - Clear success/error states
 - Contextual hints
@@ -78,9 +90,11 @@ Design principles extracted from leading interactive learning platforms (Codecad
 ### 4. Clean, Focused Interface
 
 **Terminal Design Philosophy:**
+
 > "Neither a terminal nor today's web apps represent the ideal future, but the terminal is closer."
 
 **Implementation:**
+
 - Minimal visual noise
 - High information density without clutter
 - Clear focus states
@@ -90,6 +104,7 @@ Design principles extracted from leading interactive learning platforms (Codecad
 ### 5. Accessibility & Inclusion
 
 **Requirements:**
+
 - WCAG 2.1 AA compliance minimum
 - Keyboard navigation for all features
 - Screen reader support
@@ -106,36 +121,37 @@ Design principles extracted from leading interactive learning platforms (Codecad
 #### Semantic Colors
 
 **Dark Theme (Default):**
+
 ```css
---color-background: oklch(15% 0.02 240)    /* Deep blue-gray */
---color-foreground: oklch(91% 0.01 213)    /* Near white */
---color-primary: oklch(98% 0.01 210)       /* Bright accent */
---color-card: oklch(18% 0.02 240)          /* Elevated surface */
---color-muted: oklch(20% 0.02 223)         /* Subdued elements */
---color-accent: oklch(25% 0.02 216)        /* Interactive hover */
---color-destructive: oklch(40% 0.15 25)    /* Error/danger */
+--color-background: oklch(15% 0.02 240) /* Deep blue-gray */ --color-foreground: oklch(91% 0.01 213)
+	/* Near white */ --color-primary: oklch(98% 0.01 210) /* Bright accent */
+	--color-card: oklch(18% 0.02 240) /* Elevated surface */ --color-muted: oklch(20% 0.02 223)
+	/* Subdued elements */ --color-accent: oklch(25% 0.02 216) /* Interactive hover */
+	--color-destructive: oklch(40% 0.15 25) /* Error/danger */;
 ```
 
 **Light Theme:**
+
 ```css
---color-background: oklch(98% 0.01 240)    /* Off-white */
---color-foreground: oklch(10% 0.02 240)    /* Near black */
---color-primary: oklch(15% 0.02 240)       /* Dark accent */
---color-card: oklch(100% 0 0)              /* Pure white */
+--color-background: oklch(98% 0.01 240) /* Off-white */ --color-foreground: oklch(10% 0.02 240)
+	/* Near black */ --color-primary: oklch(15% 0.02 240) /* Dark accent */
+	--color-card: oklch(100% 0 0) /* Pure white */;
 ```
 
 #### Difficulty Level Colors
 
 **From LabCard Component:**
+
 ```ts
 difficultyColors = {
-  Beginner: 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
-  Intermediate: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
-  Advanced: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300'
-}
+	Beginner: 'bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300',
+	Intermediate: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-950 dark:text-yellow-300',
+	Advanced: 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300'
+};
 ```
 
 **Usage:**
+
 - Green: Encouraging, safe for beginners
 - Yellow: Caution, requires existing knowledge
 - Red: Advanced, expertise required
@@ -144,27 +160,37 @@ difficultyColors = {
 
 ```css
 /* Success */
-.success { color: oklch(65% 0.15 142); }
+.success {
+	color: oklch(65% 0.15 142);
+}
 
 /* Error */
-.error { color: oklch(50% 0.15 25); }
+.error {
+	color: oklch(50% 0.15 25);
+}
 
 /* Warning */
-.warning { color: oklch(55% 0.15 85); }
+.warning {
+	color: oklch(55% 0.15 85);
+}
 
 /* Info */
-.info { color: oklch(60% 0.15 220); }
+.info {
+	color: oklch(60% 0.15 220);
+}
 ```
 
 ### Typography
 
 **Font Stack:**
+
 ```css
 --font-family-sans: 'Inter', system-ui, sans-serif;
 --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
 ```
 
 **Type Scale:**
+
 ```css
 /* Headings */
 h1: 2.25rem (36px) - font-weight: 700
@@ -179,6 +205,7 @@ xs: 0.75rem (12px)
 ```
 
 **Code Typography:**
+
 ```css
 /* Terminal */
 font-size: 14px (configurable)
@@ -195,6 +222,7 @@ border-radius: 0.25rem
 ### Spacing System
 
 **Consistent 4px baseline:**
+
 ```
 2   = 0.125rem = 2px
 4   = 0.25rem  = 4px
@@ -209,6 +237,7 @@ border-radius: 0.25rem
 ```
 
 **Component Spacing:**
+
 - **Cards:** p-6 (24px padding)
 - **Buttons:** px-4 py-2 (16px/8px)
 - **Sections:** py-20 (80px vertical)
@@ -217,20 +246,15 @@ border-radius: 0.25rem
 ### Border Radius
 
 ```css
---radius: 0.5rem (8px)
-
-/* Variants */
-rounded-sm: 0.125rem (2px)
-rounded: 0.25rem (4px)
-rounded-md: 0.375rem (6px)
-rounded-lg: 0.5rem (8px)
-rounded-xl: 0.75rem (12px)
-rounded-full: 9999px (pills/badges)
+--radius: 0.5rem (8px) /* Variants */ rounded-sm: 0.125rem (2px) rounded: 0.25rem (4px)
+	rounded-md: 0.375rem (6px) rounded-lg: 0.5rem (8px) rounded-xl: 0.75rem (12px)
+	rounded-full: 9999px (pills/badges);
 ```
 
 ### Shadows
 
 **Elevation system:**
+
 ```css
 /* Cards at rest */
 shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1)
@@ -269,6 +293,7 @@ shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1)
 ```
 
 **Design Rules:**
+
 - Max 3 buttons per context
 - Primary action = rightmost position
 - Destructive actions require confirmation
@@ -281,27 +306,28 @@ shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1)
 
 ```svelte
 <Card>
-  <!-- Status indicator (top-right) -->
-  {#if completed}<CheckCircle />{/if}
+	<!-- Status indicator (top-right) -->
+	{#if completed}<CheckCircle />{/if}
 
-  <!-- Badge (difficulty/category) -->
-  <Badge>{difficulty}</Badge>
+	<!-- Badge (difficulty/category) -->
+	<Badge>{difficulty}</Badge>
 
-  <!-- Title (large, semibold) -->
-  <h3>{title}</h3>
+	<!-- Title (large, semibold) -->
+	<h3>{title}</h3>
 
-  <!-- Description (muted, 2-line clamp) -->
-  <p class="line-clamp-2">{description}</p>
+	<!-- Description (muted, 2-line clamp) -->
+	<p class="line-clamp-2">{description}</p>
 
-  <!-- Footer (metadata + tags) -->
-  <Footer>
-    <Duration />
-    <Tags />
-  </Footer>
+	<!-- Footer (metadata + tags) -->
+	<Footer>
+		<Duration />
+		<Tags />
+	</Footer>
 </Card>
 ```
 
 **Design Rules:**
+
 - Hover: lift shadow + border accent
 - Focus: ring-2 ring-primary
 - Completed: visual indicator
@@ -335,18 +361,16 @@ disabled:opacity-50 disabled:pointer-events-none
 
 ```svelte
 <!-- States -->
-idle     → Hidden
-validating → Blue, spinner
-success  → Green, checkmark
-error    → Red, X icon
+idle → Hidden validating → Blue, spinner success → Green, checkmark error → Red, X icon
 
 <!-- Always include message -->
-<ValidationStatus status={status} message={message} />
+<ValidationStatus {status} {message} />
 ```
 
 ### Progress Indicators
 
 **Loading States:**
+
 ```svelte
 <!-- Skeleton for async content -->
 <Skeleton width="100%" height="40px" />
@@ -382,6 +406,7 @@ error    → Red, X icon
 ```
 
 **Design Rules:**
+
 - Sidebar: 320-480px width, collapsible (Ctrl+B)
 - Main: flex-1, min-h-0 (prevents overflow)
 - Footer: always visible (constrains terminal)
@@ -394,13 +419,14 @@ error    → Red, X icon
 ```svelte
 <!-- Responsive grid -->
 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-  {#each labs as lab}
-    <LabCard {lab} />
-  {/each}
+	{#each labs as lab}
+		<LabCard {lab} />
+	{/each}
 </div>
 ```
 
 **Breakpoints:**
+
 - sm: 640px (mobile landscape)
 - md: 768px (tablet)
 - lg: 1024px (desktop)
@@ -424,6 +450,7 @@ error    → Red, X icon
 ### Terminal
 
 **Design Requirements:**
+
 - Monospace font (JetBrains Mono)
 - High contrast (WCAG AA)
 - Cursor visibility
@@ -432,6 +459,7 @@ error    → Red, X icon
 - Responsive text sizing
 
 **UX Patterns:**
+
 - Auto-focus on load
 - Keyboard shortcut (Ctrl+\\)
 - Clear input affordance
@@ -441,6 +469,7 @@ error    → Red, X icon
 ### Code Editor (Monaco)
 
 **Design Requirements:**
+
 - Syntax highlighting
 - Line numbers
 - Minimap (optional)
@@ -451,6 +480,7 @@ error    → Red, X icon
 ### Hints Panel
 
 **Progressive Disclosure:**
+
 ```
 Hint 1 (free)     → Always visible
 Hint 2 (revealed) → Click to reveal
@@ -459,6 +489,7 @@ Solution          → Requires confirmation
 ```
 
 **Design:**
+
 - Accordion-style expansion
 - Blur effect on unrevealed hints
 - Keyboard shortcut (Ctrl+H)
@@ -469,12 +500,14 @@ Solution          → Requires confirmation
 ### Animation Principles
 
 **Speed:**
+
 - Micro-interactions: 100-200ms
 - Page transitions: 200-300ms
 - Complex animations: 300-500ms
 - Never exceed 500ms
 
 **Easing:**
+
 ```css
 /* Default transitions */
 transition-colors duration-200
@@ -493,10 +526,10 @@ ease-in-out
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+	* {
+		animation-duration: 0.01ms !important;
+		transition-duration: 0.01ms !important;
+	}
 }
 ```
 
@@ -518,6 +551,7 @@ ease-in-out
 ### Keyboard Navigation
 
 **Global Shortcuts:**
+
 ```
 Ctrl+Enter → Validate solution
 Ctrl+\     → Focus terminal
@@ -527,6 +561,7 @@ Ctrl+H     → Reveal hint
 ```
 
 **Component Shortcuts:**
+
 - Tab: Navigate focusable elements
 - Enter/Space: Activate buttons/links
 - Escape: Close modals/dropdowns
@@ -535,6 +570,7 @@ Ctrl+H     → Reveal hint
 ### Focus Management
 
 **Requirements:**
+
 - Visible focus indicators (ring-2)
 - Logical tab order
 - Skip links for main content
@@ -562,12 +598,14 @@ Ctrl+H     → Reveal hint
 ### Color Contrast
 
 **Minimum Ratios:**
+
 - Normal text: 4.5:1 (WCAG AA)
 - Large text (18px+): 3:1
 - UI components: 3:1
 - Target: WCAG AAA where possible
 
 **Testing:**
+
 ```bash
 # Use contrast checker
 https://webaim.org/resources/contrastchecker/
@@ -591,6 +629,7 @@ https://webaim.org/resources/contrastchecker/
 ### Breakpoint Strategy
 
 **Mobile (< 768px):**
+
 - Single column layout
 - Collapsible sidebar → drawer
 - Stacked navigation
@@ -598,11 +637,13 @@ https://webaim.org/resources/contrastchecker/
 - Large touch targets (44px min)
 
 **Tablet (768px - 1024px):**
+
 - 2-column grids
 - Side-by-side content
 - Persistent sidebar (optional)
 
 **Desktop (> 1024px):**
+
 - 3-column grids
 - Full split-view
 - Persistent sidebar
@@ -611,6 +652,7 @@ https://webaim.org/resources/contrastchecker/
 ### Touch Targets
 
 **Minimum sizes:**
+
 - Buttons: 44x44px (iOS)
 - Links: 48x48px (Android)
 - Icons: 24x24px minimum
@@ -621,6 +663,7 @@ https://webaim.org/resources/contrastchecker/
 ### Loading Strategy
 
 **Critical Path:**
+
 1. HTML + inline CSS (< 14KB)
 2. JS for interactivity
 3. Fonts (preload)
@@ -628,6 +671,7 @@ https://webaim.org/resources/contrastchecker/
 5. Terminal/Editor (code split)
 
 **Code Splitting:**
+
 ```ts
 // Lazy load heavy components
 const Terminal = await import('$lib/components/terminal');
@@ -638,13 +682,7 @@ const Monaco = await import('$lib/components/editor');
 
 ```svelte
 <!-- Responsive images -->
-<img
-  src="image.webp"
-  alt="Description"
-  loading="lazy"
-  width="800"
-  height="600"
-/>
+<img src="image.webp" alt="Description" loading="lazy" width="800" height="600" />
 
 <!-- Avoid images where possible -->
 <!-- Use SVG icons, CSS gradients -->
@@ -655,9 +693,9 @@ const Monaco = await import('$lib/components/editor');
 ```svelte
 <!-- Show structure while loading -->
 {#if loading}
-  <Skeleton />
+	<Skeleton />
 {:else}
-  <Content />
+	<Content />
 {/if}
 ```
 
@@ -666,6 +704,7 @@ const Monaco = await import('$lib/components/editor');
 ### Microcopy
 
 **Tone:**
+
 - Encouraging, not condescending
 - Clear, not clever
 - Concise, not terse
@@ -674,11 +713,13 @@ const Monaco = await import('$lib/components/editor');
 **Examples:**
 
 ✓ **Good:**
+
 - "Check Solution" (action-oriented)
 - "All checks passed!" (celebratory)
 - "Try adjusting the replicas count" (specific hint)
 
 ✗ **Avoid:**
+
 - "Click here" (vague)
 - "Oops! Something went wrong" (unhelpful)
 - "Are you sure you want to do this?" (obvious)
@@ -686,11 +727,13 @@ const Monaco = await import('$lib/components/editor');
 ### Error Messages
 
 **Structure:**
+
 1. What happened
 2. Why it happened (if known)
 3. How to fix it
 
 **Example:**
+
 ```
 ❌ Validation failed
 Your deployment has 2 replicas, but 3 are required.
@@ -701,6 +744,7 @@ Your deployment has 2 replicas, but 3 are required.
 ### Success Messages
 
 **Celebrate achievements:**
+
 ```
 ✓ Lab completed!
 You've mastered [Lab Title]
@@ -713,25 +757,26 @@ You've mastered [Lab Title]
 ### Theme Toggle
 
 **Behavior:**
+
 - System preference by default
 - User override persists
 - Smooth transitions (200ms)
 - No flash of wrong theme
 
 **Implementation:**
+
 ```svelte
 <script>
-  import { mode, setMode } from 'mode-watcher';
+	import { mode, setMode } from 'mode-watcher';
 </script>
 
-<button onclick={() => setMode($mode === 'dark' ? 'light' : 'dark')}>
-  Toggle Theme
-</button>
+<button onclick={() => setMode($mode === 'dark' ? 'light' : 'dark')}> Toggle Theme </button>
 ```
 
 ### Color Adjustments
 
 **Dark mode considerations:**
+
 - Reduce pure whites (use 91% lightness)
 - Avoid pure blacks (use 15% lightness)
 - Increase color saturation slightly
@@ -788,18 +833,21 @@ When creating new components:
 ## Resources
 
 ### Design Inspiration
+
 - [Codecademy](https://www.codecademy.com/) - Browser-based learning
 - [Killercoda](https://killercoda.com/) - Terminal-based scenarios
 - [Mimo](https://mimo.org/) - Gamification approach
 - [shadcn/ui Examples](https://www.shadcn.io/template)
 
 ### Tools
+
 - [OKLCH Color Picker](https://oklch.com/)
 - [Contrast Checker](https://webaim.org/resources/contrastchecker/)
 - [Lucide Icons](https://lucide.dev/)
 - [Tailwind CSS Docs](https://tailwindcss.com/)
 
 ### References
+
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
 - [Inclusive Components](https://inclusive-components.design/)
 - [Material Design Motion](https://m2.material.io/design/motion/)

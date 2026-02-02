@@ -13,6 +13,7 @@ Fast lookup for common patterns and values.
 ## Colors
 
 ### Semantic (Dark)
+
 ```css
 background: oklch(15% 0.02 240)
 foreground: oklch(91% 0.01 213)
@@ -22,13 +23,15 @@ muted: oklch(20% 0.02 223)
 ```
 
 ### Difficulty
+
 ```ts
-Beginner: green-100/800
-Intermediate: yellow-100/800
-Advanced: red-100/800
+Beginner: green - 100 / 800;
+Intermediate: yellow - 100 / 800;
+Advanced: red - 100 / 800;
 ```
 
 ### Status
+
 ```ts
 Success: oklch(65% 0.15 142)
 Error: oklch(50% 0.15 25)
@@ -94,10 +97,7 @@ Ctrl+H     → Reveal hint
 ## Responsive
 
 ```svelte
-sm:  640px   (mobile landscape)
-md:  768px   (tablet)
-lg:  1024px  (desktop)
-xl:  1280px  (large)
+sm: 640px (mobile landscape) md: 768px (tablet) lg: 1024px (desktop) xl: 1280px (large)
 ```
 
 Mobile-first: `class="flex-col md:flex-row lg:grid"`
@@ -109,9 +109,7 @@ Mobile-first: `class="flex-col md:flex-row lg:grid"`
 <!-- Touch targets: 44x44px -->
 <!-- Focus: ring-2 ring-primary -->
 
-aria-label="Action description"
-role="status" aria-live="polite"
-aria-busy="true"
+aria-label="Action description" role="status" aria-live="polite" aria-busy="true"
 ```
 
 ## Animation
@@ -128,29 +126,26 @@ Easing: ease-out (enter) | ease-in (exit)
 
 ```svelte
 {#if loading}
-  <Skeleton width="100%" height="40px" />
+	<Skeleton width="100%" height="40px" />
 {:else}
-  <Content />
+	<Content />
 {/if}
 ```
 
 ## Validation
 
 ```svelte
-idle       → Hidden
-validating → Blue + spinner
-success    → Green + checkmark
-error      → Red + X + message
+idle → Hidden validating → Blue + spinner success → Green + checkmark error → Red + X + message
 ```
 
 ## Card Pattern
 
 ```svelte
-<Card class="p-6 rounded-lg shadow-md hover:shadow-lg">
-  <Badge>{difficulty}</Badge>
-  <h3 class="text-lg font-semibold">{title}</h3>
-  <p class="text-muted-foreground line-clamp-2">{desc}</p>
-  <Footer />
+<Card class="rounded-lg p-6 shadow-md hover:shadow-lg">
+	<Badge>{difficulty}</Badge>
+	<h3 class="text-lg font-semibold">{title}</h3>
+	<p class="text-muted-foreground line-clamp-2">{desc}</p>
+	<Footer />
 </Card>
 ```
 
@@ -158,9 +153,9 @@ error      → Red + X + message
 
 ```svelte
 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-  {#each items as item}
-    <Item {item} />
-  {/each}
+	{#each items as item}
+		<Item {item} />
+	{/each}
 </div>
 ```
 

@@ -30,7 +30,7 @@
 		{#if selected.length > 0}
 			<button
 				onclick={clearAll}
-				class="text-primary hover:text-primary/80 active:scale-[0.98] flex items-center gap-1 text-xs transition-transform"
+				class="text-primary hover:text-primary/80 flex items-center gap-1 text-xs transition-transform active:scale-[0.98]"
 			>
 				<X class="h-3 w-3" aria-hidden="true" />
 				Clear
