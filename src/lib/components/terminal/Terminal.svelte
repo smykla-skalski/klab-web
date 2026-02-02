@@ -17,7 +17,7 @@
 	let { wsUrl, fontSize = 14, onData }: Props = $props();
 
 	let container: HTMLDivElement = undefined!;
-	let terminal: Terminal = undefined!;
+	let terminal = $state<Terminal | undefined>(undefined);
 	let fitAddon: FitAddon = undefined!;
 	let ws: WebSocket | null = null;
 	let connectionError = $state(false);
@@ -77,6 +77,7 @@
 		if (!terminal) return;
 
 		const updateTheme = () => {
+			if (!terminal) return;
 			const isDark = document.documentElement.classList.contains('dark');
 			terminal.options.theme = isDark ? darkTheme : lightTheme;
 		};
@@ -153,7 +154,7 @@
 
 		return () => {
 			resizeObserver.disconnect();
-			terminal.dispose();
+			terminal?.dispose();
 			if (ws) {
 				ws.close();
 			}
@@ -167,18 +168,18 @@
 		ws.onopen = () => {
 			connectionError = false;
 			terminalSession.set({ id: url, connected: true, url });
-			terminal.write('\r\n*** Connected to lab terminal ***\r\n\r\n');
-			terminal.focus();
+			terminal?.write('\r\n*** Connected to lab terminal ***\r\n\r\n');
+			terminal?.focus();
 		};
 
 		ws.onmessage = (event) => {
-			terminal.write(event.data);
+			terminal?.write(event.data);
 		};
 
 		ws.onerror = (error) => {
 			console.error('WebSocket error:', error);
 			connectionError = true;
-			terminal.write('\r\n*** Connection error ***\r\n');
+			terminal?.write('\r\n*** Connection error ***\r\n');
 			toast.error('Terminal disconnected', {
 				description: 'Click reconnect to try again',
 				action: {
@@ -191,7 +192,7 @@
 		ws.onclose = () => {
 			terminalSession.set({ id: url, connected: false, url });
 			if (!connectionError) {
-				terminal.write('\r\n*** Disconnected from lab terminal ***\r\n');
+				terminal?.write('\r\n*** Disconnected from lab terminal ***\r\n');
 			}
 		};
 	}
