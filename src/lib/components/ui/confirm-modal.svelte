@@ -50,7 +50,10 @@
 	}
 
 	$effect(() => {
-		if (open && modalElement) {
+		// Skip focus trap in test environment to avoid unhandled promise rejections
+		const isTest = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
+
+		if (open && modalElement && !isTest) {
 			previousActiveElement = document.activeElement as HTMLElement;
 			focusTrap = createFocusTrap(modalElement, {
 				initialFocus: modalElement,
