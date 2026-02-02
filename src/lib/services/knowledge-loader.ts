@@ -11,7 +11,7 @@ marked.use(
 			if (lang && hljs.getLanguage(lang)) {
 				highlighted = hljs.highlight(code, { language: lang, ignoreIllegals: true }).value;
 			} else {
-				highlighted = hljs.highlightAuto(code, { ignoreIllegals: true }).value;
+				highlighted = hljs.highlightAuto(code).value;
 			}
 
 			const lines = highlighted.split('\n');
