@@ -56,7 +56,6 @@
 		if (open && modalElement && !isTest) {
 			previousActiveElement = document.activeElement as HTMLElement;
 			focusTrap = createFocusTrap(modalElement, {
-				initialFocus: modalElement,
 				escapeDeactivates: false,
 				allowOutsideClick: true,
 				checkCanFocusTrap: (trapContainers) => {

@@ -14,7 +14,7 @@
 			category: 'Global',
 			items: [
 				{ key: 'Ctrl+Shift+T', description: 'Toggle theme' },
-				{ key: '? or Shift+/', description: 'Show keyboard shortcuts' }
+				{ key: 'Shift+/', description: 'Show keyboard shortcuts' }
 			]
 		},
 		{
@@ -47,7 +47,6 @@
 		if (open && modalElement && !isTest) {
 			previousActiveElement = document.activeElement as HTMLElement;
 			focusTrap = createFocusTrap(modalElement, {
-				initialFocus: modalElement,
 				escapeDeactivates: false,
 				allowOutsideClick: true,
 				checkCanFocusTrap: (trapContainers) => {

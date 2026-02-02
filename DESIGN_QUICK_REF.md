@@ -33,9 +33,12 @@ Advanced: red - 100 / 800;
 ### Status
 
 ```ts
-Success: oklch(65% 0.15 142)
-Error: oklch(50% 0.15 25)
-Warning: oklch(55% 0.15 85)
+Success (dark): oklch(65% 0.15 145)
+Success (light): oklch(55% 0.15 145)
+Error (dark): oklch(60% 0.15 25)
+Error (light): oklch(50% 0.15 25)
+Warning (dark): oklch(75% 0.15 85)
+Warning (light): oklch(65% 0.15 85)
 ```
 
 ## Typography
@@ -91,7 +94,7 @@ Ctrl+Enter → Validate
 Ctrl+\     → Focus terminal
 Ctrl+B     → Toggle sidebar
 Ctrl+H     → Reveal hint
-?          → Help
+Shift+/    → Help
 ```
 
 ## Responsive

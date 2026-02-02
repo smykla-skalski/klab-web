@@ -160,18 +160,27 @@ difficultyColors = {
 
 ```css
 /* Success */
-.success {
-	color: oklch(65% 0.15 142);
+.success-dark {
+	color: oklch(65% 0.15 145);
+}
+.success-light {
+	color: oklch(55% 0.15 145);
 }
 
 /* Error */
-.error {
+.error-dark {
+	color: oklch(60% 0.15 25);
+}
+.error-light {
 	color: oklch(50% 0.15 25);
 }
 
 /* Warning */
-.warning {
-	color: oklch(55% 0.15 85);
+.warning-dark {
+	color: oklch(75% 0.15 85);
+}
+.warning-light {
+	color: oklch(65% 0.15 85);
 }
 
 /* Info */
@@ -557,7 +566,7 @@ Ctrl+Enter → Validate solution
 Ctrl+\     → Focus terminal
 Ctrl+B     → Toggle sidebar
 Ctrl+H     → Reveal hint
-?          → Show help modal
+Shift+/    → Show help modal
 ```
 
 **Component Shortcuts:**

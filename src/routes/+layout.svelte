@@ -14,8 +14,7 @@
 	onMount(() => {
 		const cleanups = [
 			registerShortcut('ctrl+shift+t', toggleMode),
-			registerShortcut('shift+/', () => (showShortcutsHelp = true), { preventDefault: true }),
-			registerShortcut('?', () => (showShortcutsHelp = true), { preventDefault: true })
+			registerShortcut('shift+/', () => (showShortcutsHelp = true), { preventDefault: true })
 		];
 
 		return () => {
