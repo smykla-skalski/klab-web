@@ -25,7 +25,7 @@
 	// Update theme when mode changes
 	$effect(() => {
 		if (terminal) {
-			terminal.options.theme = mode.current === 'dark' ? darkTheme : lightTheme;
+			terminal.options.theme = mode.current === 'dark' ? lightTheme : darkTheme;
 		}
 	});
 
@@ -83,7 +83,7 @@
 		terminal = new Terminal({
 			fontSize,
 			fontFamily: "var(--font-family-mono), 'Courier New', monospace",
-			theme: mode.current === 'dark' ? darkTheme : lightTheme,
+			theme: mode.current === 'dark' ? lightTheme : darkTheme,
 			cursorBlink: true,
 			allowProposedApi: true
 		});
