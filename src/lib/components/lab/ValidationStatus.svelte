@@ -12,10 +12,10 @@
 {#if status !== 'idle'}
 	<div
 		class="rounded-lg border p-4 {status === 'validating'
-			? 'border-[oklch(66%_0.06_230)]/50 bg-[oklch(66%_0.06_230)]/10 dark:bg-[oklch(35%_0.06_230)]/20'
+			? 'border-[oklch(58%_0.070_230)]/50 bg-[oklch(58%_0.070_230)]/10 dark:bg-[oklch(35%_0.06_230)]/20'
 			: status === 'success'
-				? 'border-[oklch(75%_0.08_135)]/50 bg-[oklch(75%_0.08_135)]/10 dark:bg-[oklch(35%_0.06_135)]/20'
-				: 'border-[oklch(58%_0.115_15)]/50 bg-[oklch(58%_0.115_15)]/10 dark:bg-[oklch(30%_0.08_15)]/20'}"
+				? 'border-[oklch(55%_0.090_135)]/50 bg-[oklch(55%_0.090_135)]/10 dark:bg-[oklch(35%_0.06_135)]/20'
+				: 'border-[oklch(50%_0.125_15)]/50 bg-[oklch(50%_0.125_15)]/10 dark:bg-[oklch(30%_0.08_15)]/20'}"
 		role="status"
 		aria-live="polite"
 		aria-atomic="true"
@@ -23,23 +23,23 @@
 		<div class="flex items-start gap-3">
 			{#if status === 'validating'}
 				<Loader2
-					class="mt-0.5 h-5 w-5 animate-spin text-[oklch(60%_0.065_230)] dark:text-[oklch(66%_0.06_230)]"
+					class="mt-0.5 h-5 w-5 animate-spin text-[oklch(58%_0.070_230)] dark:text-[oklch(66%_0.060_230)]"
 					aria-hidden="true"
 				/>
 			{:else if status === 'success'}
 				<CheckCircle2
-					class="mt-0.5 h-5 w-5 text-[oklch(65%_0.085_135)] dark:text-[oklch(75%_0.08_135)]"
+					class="mt-0.5 h-5 w-5 text-[oklch(55%_0.090_135)] dark:text-[oklch(75%_0.080_135)]"
 					aria-hidden="true"
 				/>
 			{:else}
-				<XCircle class="mt-0.5 h-5 w-5 text-[oklch(52%_0.12_15)] dark:text-[oklch(58%_0.115_15)]" aria-hidden="true" />
+				<XCircle class="mt-0.5 h-5 w-5 text-[oklch(50%_0.125_15)] dark:text-[oklch(58%_0.115_15)]" aria-hidden="true" />
 			{/if}
 			<div class="flex-1">
 				<h4
 					class="mb-1 text-sm font-semibold {status === 'validating'
-						? 'text-[oklch(55%_0.070_230)] dark:text-[oklch(66%_0.06_230)]'
+						? 'text-[oklch(58%_0.070_230)] dark:text-[oklch(66%_0.060_230)]'
 						: status === 'success'
-							? 'text-[oklch(60%_0.090_135)] dark:text-[oklch(75%_0.08_135)]'
+							? 'text-[oklch(55%_0.090_135)] dark:text-[oklch(75%_0.080_135)]'
 							: 'text-[oklch(50%_0.125_15)] dark:text-[oklch(58%_0.115_15)]'}"
 				>
 					{status === 'validating'
