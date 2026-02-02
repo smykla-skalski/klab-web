@@ -29,7 +29,7 @@
 	}
 </script>
 
-<div class="border-border bg-secondary rounded-lg border p-4">
+<div class="border-muted bg-secondary rounded-lg border p-4">
 	<div class="mb-3 flex items-center justify-between">
 		<h3
 			class="text-muted-foreground flex items-center gap-2 text-sm font-semibold tracking-wide uppercase"

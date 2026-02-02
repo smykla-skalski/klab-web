@@ -8,7 +8,7 @@
 	let { lab }: Props = $props();
 </script>
 
-<div class="border-border bg-secondary rounded-lg border p-4">
+<div class="border-muted bg-secondary rounded-lg border p-4">
 	<h3 class="text-muted-foreground mb-2 text-sm font-semibold tracking-wide uppercase">
 		Objective
 	</h3>
