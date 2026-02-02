@@ -131,7 +131,7 @@ describe('Button', () => {
 			}
 		});
 		const button = screen.getByRole('button');
-		expect(button.className).toContain('h-10');
+		expect(button.className).toContain('h-11');
 	});
 
 	it('applies large size', () => {
