@@ -83,7 +83,7 @@ describe('ValidationStatus', () => {
 				status: 'validating'
 			}
 		});
-		const wrapper = container.querySelector('.border-blue-500\\/50');
+		const wrapper = container.querySelector('[class*="border-[oklch(58%_0.070_230)]\\/50"]');
 		expect(wrapper).toBeTruthy();
 	});
 
@@ -93,7 +93,7 @@ describe('ValidationStatus', () => {
 				status: 'success'
 			}
 		});
-		const wrapper = container.querySelector('.border-green-500\\/50');
+		const wrapper = container.querySelector('[class*="border-[oklch(55%_0.090_135)]\\/50"]');
 		expect(wrapper).toBeTruthy();
 	});
 
@@ -103,7 +103,7 @@ describe('ValidationStatus', () => {
 				status: 'error'
 			}
 		});
-		const wrapper = container.querySelector('.border-red-500\\/50');
+		const wrapper = container.querySelector('[class*="border-[oklch(50%_0.125_15)]\\/50"]');
 		expect(wrapper).toBeTruthy();
 	});
 });

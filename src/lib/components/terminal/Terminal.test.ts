@@ -148,13 +148,15 @@ describe('Terminal', () => {
 	});
 
 	it('applies dark theme by default', () => {
+		document.documentElement.classList.add('dark');
 		render(Terminal, {
 			props: {}
 		});
 		expect(mockTerminal._options.theme).toMatchObject({
-			background: '#272822',
-			foreground: '#f8f8f2'
+			background: '#2e3440',
+			foreground: '#d8dee9'
 		});
+		document.documentElement.classList.remove('dark');
 	});
 
 	it('fits terminal to container', () => {
