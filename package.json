@@ -27,7 +27,7 @@
 		"marked": "^17.0.1",
 		"marked-highlight": "^2.2.3",
 		"monaco-editor": "0.55.1",
-		"motion": "12.30.0",
+		"motion": "12.33.0",
 		"zod": "4.3.6"
 	},
 	"devDependencies": {
